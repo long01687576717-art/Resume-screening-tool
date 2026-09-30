@@ -26,6 +26,13 @@
 }
 .rs-footer a { color: #6B7280; text-decoration: none; }
 
+/* ---------- 原简历「放大查看」 ----------
+   Streamlit 会把图片限制在容器宽度以内；放大时把图片区域设成容器的 2 倍宽，框（st.container 固定高度）里上下左右滚动。
+   只改外观、不增删页面元素；以后 Streamlit 改了内部结构，这条样式失效也只是退回"适应宽度"。 */
+.st-key-original_zoom { overflow: auto !important; container-type: inline-size; }
+/* 图片外面几层的宽度由内容决定，百分比宽度算不出来会被忽略，所以用框宽度的单位 cqw（1cqw = 框宽的 1%） */
+.st-key-original_zoom [data-testid="stImage"] img { width: 200cqw !important; max-width: none !important; }
+
 /* ---------- 窄屏（手机、分屏） ---------- */
 @media (max-width: 720px) {
   .st-key-rs_hero { padding: 32px 0 16px; }

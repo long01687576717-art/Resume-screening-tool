@@ -70,6 +70,7 @@ DECISIONS = ("通过", "待定", "淘汰")
 DECISION_BADGE = {"通过": ":green-badge[✓ 通过]", "待定": ":blue-badge[待定]", "淘汰": ":gray-badge[✕ 淘汰]"}
 VIEWS = ("阅读队列", "总览")
 NO_ORIGINAL = "没有原文件，重新上传后可以查看"   # 原简历页和"查看原简历"按钮共用同一句
+ZOOM_BOX_HEIGHT = 600                          # 「放大查看」框的高度（像素），框里上下左右滚动；700 在 768p 屏幕上会占满整屏
 
 
 @st.cache_resource
@@ -732,23 +733,45 @@ def _original(analysis):
         st.caption(NO_ORIGINAL)
         return
     suffix = Path(name).suffix.lower()
-    # 要看最清楚的：图片右上角的全屏按钮，或下载原文件用本机软件打开（文件在内存里，不写硬盘）
-    st.download_button("下载原文件", data, file_name=name, key=f"download_{name}", on_click="ignore",
-                       mime=mimetypes.guess_type(name)[0] or "application/octet-stream",
+    is_picture = suffix == ".pdf" or suffix in IMAGE_SUFFIXES
+    # 弹窗里的图片没有全屏按钮（Streamlit 只给主页面图片），所以放大靠「放大查看」或下载原文件
+    c1, c2, _ = st.columns([1, 1, 3], vertical_alignment="center")
+    c1.download_button("下载原文件", data, file_name=name, key=f"download_{name}", on_click="ignore",
+                       mime=mimetypes.guess_type(name)[0] or "application/octet-stream", width="stretch",
                        icon=":material/download:", help="看原始清晰度：用本机的 PDF / 图片 / Word 软件打开")
+    zoom = is_picture and c2.toggle("放大查看", key=f"zoom_{name}", help="按 2 倍大小显示，在框里上下左右拖动查看")
     try:
-        # 宽度传图片实际像素数：不传的话 Streamlit 会先把图缩到 1460 像素，2 倍图就白做了；
-        # 浏览器再按弹窗宽度缩小显示（只缩不放）。PDF 页面用 PNG，JPEG 压缩会让文字边缘发虚
-        if suffix == ".pdf":
-            for page in pdf_pages(data):
-                st.image(page, width=page.width, output_format="PNG")
-        elif suffix in IMAGE_SUFFIXES:
-            width = Image.open(io.BytesIO(data)).width
-            st.image(data, width=min(width, PAGE_IMAGE_WIDTH))     # 手机拍的大图按 2 倍图宽度封顶
-        else:
+        if not is_picture:
             st.code(read_bytes(name, data), language=None, wrap_lines=True)
+            return
+        # 放大时装进固定高度、可上下左右滚动的框；放大本身由 ui/theme.css 里 .st-key-original_zoom 的样式完成
+        # （只改外观，不增删页面元素）。样式失效时只会退回"适应宽度"，不影响使用
+        with st.container(key="original_zoom", height=ZOOM_BOX_HEIGHT) if zoom else st.container():
+            for png, width in _page_images(name, data, suffix):
+                # 宽度传图片实际像素数：不传的话 Streamlit 会先把图缩到 1460 像素，2 倍图就白做了；
+                # 浏览器再按弹窗宽度缩小显示（只缩不放）
+                st.image(png, width=width)
     except Exception as e:
         st.caption(f"原文件无法显示：{e}")
+
+
+def _page_images(name, data, suffix):
+    """原简历要显示的图片 [(PNG / 原图字节, 宽度)]。PDF 每页渲染约 0.2 秒，切换「放大查看」、点决定按钮都会重新运行弹窗，
+    所以渲染结果存在这次打开的网页里复用（不用 st.cache_data：那是所有访客共用的，公开模式下会把别人的简历图留在服务器内存里）。
+    PDF 页面存成 PNG（JPEG 压缩会让文字边缘发虚）；上传的图片保持原格式，宽度按 2 倍图封顶（手机拍的大图）。"""
+    store = st.session_state.setdefault("page_images", {})
+    key = hashlib.sha1(data).hexdigest()
+    if key not in store:
+        if suffix == ".pdf":
+            pages = []
+            for page in pdf_pages(data):
+                buf = io.BytesIO()
+                page.save(buf, format="PNG")
+                pages.append((buf.getvalue(), page.width))
+            store[key] = pages
+        else:
+            store[key] = [(data, min(Image.open(io.BytesIO(data)).width, PAGE_IMAGE_WIDTH))]
+    return store[key]
 
 
 def _is_explanation(note):
