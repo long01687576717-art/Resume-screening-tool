@@ -32,7 +32,8 @@ Python 命令行工具，目标：**给一份 JD 和一批简历，告诉 HR 先
 ## 目录结构
 
 ```
-app.py                  网页版（streamlit run app.py）：①岗位要求（可选）②上传简历 ③总览排序 / 阅读队列；只做展示，判断复用命令行代码
+app.py                  网页版（streamlit run app.py）：①岗位要求（可选）②上传简历 ③总览排序 / 阅读队列；只做展示，判断复用命令行代码；
+                        PUBLIC_DEMO=1 为公开部署模式（只用访客的 Key、不写硬盘）；"看演示"读 demo/
 main.py                 简历分析入口；MODULES 列表里注册模块；run_modules() 返回模块结果和候选人画像
 screen.py               筛选入口：导入 JD、检查 HR 改过的岗位要求、筛选（分队列 + 理由 + CSV）
 setup_key.py            API Key 配置窗口（写入 .env）；网页侧边栏也能填写
@@ -67,6 +68,7 @@ python screen.py 导入 samples/jd/数据分析工程师.txt   # 解析 JD，生
 python screen.py 检查 jobs/数据分析工程师.txt         # 读取 HR 改过的文件，显示理解和看不懂的行
 python screen.py 筛选 jobs/数据分析工程师.txt samples samples/test/dev   # 分队列、写理由，生成 jobs/xxx_筛选结果.csv
 python screen.py 总览 samples samples/test/dev --排序 实习经历,项目经历,技能   # 不需要 JD 的总览分层
+python tools/build_demo.py                    # 重新生成"看演示"用的虚构简历结果（规则改了以后要跑）
 python tools/crawl_jd.py [--only 岗位]         # 爬取校招 JD（有缓存，可断点续爬）
 python tools/build_job_profiles.py            # 用 flash 提取 JD 并统计岗位画像（有缓存）
 python setup_key.py                            # 配置 API Key 和模型

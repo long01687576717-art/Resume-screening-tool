@@ -66,6 +66,7 @@ streamlit run app.py        # 浏览器访问 http://localhost:8501
 ```
 
 页面按 ① 岗位要求（可选）→ ② 上传简历 → ③ 总览排序 / 阅读队列 的顺序操作，内置虚构样例简历和测试 JD 可直接试用。
+没有 API Key 也可以点页面上方的 **🎬 看演示**：载入 11 份虚构简历的分析结果和一份岗位要求，不调用 AI、不花钱。
 
 **命令行版**：
 
@@ -81,9 +82,20 @@ python screen.py 导入 samples/jd/数据分析工程师.txt
 python screen.py 筛选 jobs/数据分析工程师.txt samples samples/test/dev
 ```
 
+## 公开部署
+
+可以部署到 Streamlit Community Cloud（从 GitHub 仓库直接部署）。部署时在 Secrets 里设置 `PUBLIC_DEMO = "1"` 打开**公开模式**：
+
+- 只用访客自己在侧边栏填的 API Key，不能保存；**不要**在服务器上配置 `DEEPSEEK_API_KEY`（否则所有访客都在用你的额度）
+- 不写硬盘缓存、不保存岗位要求文件：访客之间互相看不到，关掉页面就消失
+- 一次最多分析 20 份简历
+- `packages.txt` 让平台安装图片识别需要的系统库
+
+演示数据在 `demo/`，分析规则改了以后运行 `python tools/build_demo.py` 重新生成（只用虚构简历）。
+
 ## 隐私
 
-- 网页上传的简历文件分析完立即删除，分析结果只保存在浏览器会话里。
+- 网页上传的简历文件分析完立即删除，分析结果只保存在浏览器会话里；公开模式下服务器不保存任何简历内容。
 - AI 从简历提取的内容缓存在本机 `.cache/resumes/`，**30 天后自动删除**，网页侧边栏可一键清除。
 - 手机号、邮箱、身份证号在发送给 AI 之前先脱敏。
 - 仓库里只有虚构简历（`samples/`），不存放任何真实简历。
@@ -102,6 +114,7 @@ app.py              网页版：只做展示，判断复用命令行代码
 main.py             单份简历分析入口（7 个模块并行）
 screen.py           筛选入口：导入 JD、检查岗位要求、筛选、总览
 setup_key.py        API Key 配置窗口
+demo/               "看演示"用的虚构简历分析结果（tools/build_demo.py 生成）
 parser/             读取文件、图片识别、脱敏
 llm/                DeepSeek 调用和结果缓存
 modules/            7 个分析模块

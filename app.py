@@ -2,8 +2,14 @@
 
 运行：streamlit run app.py
 页面只负责展示和收集 HR 的修改，判断全部复用命令行版的代码（matching/、modules/），两边结果一致。
+
+公开部署时设置环境变量 PUBLIC_DEMO=1（公开模式）：
+- 只用访客自己填的 API Key（不读服务器上的 .env / 环境变量，否则所有访客都在花部署者的钱），不能保存
+- 不写硬盘缓存、不保存岗位要求文件：访客之间互相看不到，关掉页面就消失
+- "看演示"读 demo/ 里预先生成的虚构简历结果，不需要 Key、不调用 AI（python tools/build_demo.py 生成）
 """
 import hashlib
+import json
 import os
 import tempfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -18,11 +24,25 @@ from knowledge.kb import KnowledgeBase
 from llm.client import BASE_URL, RESUME_CACHE_DAYS, LLMClient, clear_resume_cache, read_env_file, save_env
 from matching import jd, match, overview
 from matching.jd_extract import QUALITIES, RESUME_JUDGEABLE
+from modules.base import ModuleResult
 from modules.experience import LEVEL_NAMES
 from report import screening
 from report.formatter import DISCLAIMER, format_report
 
 ROOT = Path(__file__).resolve().parent
+def _public_mode():
+    """部署平台上用环境变量或 Streamlit secrets 设置 PUBLIC_DEMO=1；本机没有 secrets 文件时读取会报错，当作本机模式。"""
+    if os.environ.get("PUBLIC_DEMO") == "1":
+        return True
+    try:
+        return str(st.secrets.get("PUBLIC_DEMO", "")) == "1"
+    except Exception:
+        return False
+
+
+PUBLIC = _public_mode()
+MAX_PUBLIC_UPLOADS = 20          # 公开模式下一次最多分析的份数（占用的是公共服务器）
+DEMO_DIR = ROOT / "demo"
 JOBS_DIR = ROOT / "jobs"
 JD_SAMPLES = sorted((ROOT / "samples" / "jd").glob("*.txt"))
 # 示例简历只用虚构的（resumes/ 里是真实简历，不在网页里提供）
@@ -43,15 +63,38 @@ GRADE_MARK = {"实证": "●", "自述 / 课程": "◐", "没体现": "○"}
 
 
 @st.cache_resource
-def services(api_key):
-    """知识库 + 两个 AI 客户端：简历用的（缓存 30 天删除）、JD 用的（缓存长期保留）。"""
-    return KnowledgeBase(), LLMClient(api_key=api_key), LLMClient(cache="jd", api_key=api_key)
+def knowledge():
+    return KnowledgeBase()
+
+
+@st.cache_resource
+def _local_clients(api_key):
+    """本机：简历用的客户端（缓存 30 天删除）、JD 用的（缓存长期保留）。"""
+    return LLMClient(api_key=api_key), LLMClient(cache="jd", api_key=api_key)
+
+
+def _clients(api_key):
+    """返回 (简历用, JD 用) 两个 AI 客户端；没有 Key 时返回 (None, None)。"""
+    if not PUBLIC:
+        try:
+            return _local_clients(api_key)
+        except RuntimeError:
+            return None, None
+    # 公开模式：只用访客自己的 Key，不写硬盘缓存；客户端只存在这个访客的页面里
+    if not api_key:
+        return None, None
+    state = st.session_state
+    if state.get("_clients_key") != api_key:
+        state._clients = (LLMClient(use_cache=False, api_key=api_key),
+                          LLMClient(use_cache=False, cache="jd", api_key=api_key))
+        state._clients_key = api_key
+    return state._clients
 
 
 def _sidebar():
     """AI 服务设置和隐私操作。返回网页里输入的 API Key（没有输入则为 None，用本机 .env 里的）。"""
     state = st.session_state
-    saved = bool(read_env_file().get("DEEPSEEK_API_KEY") or os.environ.get("DEEPSEEK_API_KEY"))
+    saved = not PUBLIC and bool(read_env_file().get("DEEPSEEK_API_KEY") or os.environ.get("DEEPSEEK_API_KEY"))
     with st.sidebar:
         st.header("⚙️ 设置")
         st.subheader("AI 服务（DeepSeek）")
@@ -60,11 +103,11 @@ def _sidebar():
         elif saved:
             st.success("正在使用本机保存的 API Key", icon="🔑")
         else:
-            st.warning("还没有 API Key，请在下面填写", icon="🔑")
+            st.warning("还没有 API Key，请在下面填写" + ("；没有 Key 也可以先看演示" if PUBLIC else ""), icon="🔑")
         with st.expander("填写 / 更换 API Key", expanded=not (saved or state.get("api_key"))):
             key = st.text_input("API Key", type="password", placeholder="sk-…", key="key_input",
                                 help="在 DeepSeek 开放平台（platform.deepseek.com）创建")
-            remember = st.checkbox("保存到本机（写入 .env，下次不用再填）", key="key_remember")
+            remember = False if PUBLIC else st.checkbox("保存到本机（写入 .env，下次不用再填）", key="key_remember")
             if st.button("测试并使用", disabled=not key.strip()):
                 try:
                     OpenAI(api_key=key.strip(), base_url=BASE_URL, timeout=20).models.list()
@@ -77,17 +120,27 @@ def _sidebar():
                         save_env({"DEEPSEEK_API_KEY": key.strip()})
                     state.pop("key_input", None)
                     st.rerun()
-            st.caption("默认只在这次打开的页面里使用，关闭页面就会忘记；勾选才会保存到本机。Key 不会显示在页面上。")
+            st.caption("只在这次打开的页面里使用，关闭页面就会忘记，不会保存到服务器。" if PUBLIC else
+                       "默认只在这次打开的页面里使用，关闭页面就会忘记；勾选才会保存到本机。Key 不会显示在页面上。")
 
         st.subheader("隐私")
-        st.caption(f"上传的简历文件分析完立即删除；AI 从简历里提取的内容缓存在本机，**{RESUME_CACHE_DAYS} 天后自动删除**。"
-                   "手机号、邮箱、身份证号在发送给 AI 前已去掉。")
-        if st.button("立即清除所有简历缓存"):
-            n = clear_resume_cache()
-            st.cache_resource.clear()        # 内存里的分析结果也一起清掉
-            for k in ("analyses", "selected"):
-                state.pop(k, None)
-            st.success(f"已清除 {n} 份简历缓存和本页的分析结果")
+        if PUBLIC:
+            st.caption("本站不保存简历和分析结果：上传的文件分析完立即删除，结果只在你这个页面里，关掉就消失。"
+                       "简历会用你的 Key 发送给 DeepSeek 提取信息，手机号、邮箱、身份证号发送前已去掉。"
+                       "**请不要上传未经本人同意的简历。**")
+            if st.button("清除本页的分析结果"):
+                for k in ("analyses", "selected", "req", "draft"):
+                    state.pop(k, None)
+                st.success("已清除")
+        else:
+            st.caption(f"上传的简历文件分析完立即删除；AI 从简历里提取的内容缓存在本机，**{RESUME_CACHE_DAYS} 天后自动删除**。"
+                       "手机号、邮箱、身份证号在发送给 AI 前已去掉。")
+            if st.button("立即清除所有简历缓存"):
+                n = clear_resume_cache()
+                st.cache_resource.clear()        # 内存里的分析结果也一起清掉
+                for k in ("analyses", "selected"):
+                    state.pop(k, None)
+                st.success(f"已清除 {n} 份简历缓存和本页的分析结果")
     return state.get("api_key")
 
 
@@ -96,15 +149,14 @@ def main():
     st.title("📋 简历初筛助手")
     st.caption("上传一批简历，按你关心的几项排序，快速决定**先看谁**；有岗位 JD 的话，还能看出谁做过这个岗位要做的事。"
                "工具只决定阅读顺序，不打分、不替你做录用决定。")
+    kb = knowledge()
     api_key = _sidebar()
-    try:
-        kb, llm, jd_llm = services(api_key)
-    except RuntimeError:
-        st.info("请先在左侧「设置」里填写 DeepSeek 的 API Key。", icon="👈")
-        st.stop()
-
+    llm, jd_llm = _clients(api_key)
     state = st.session_state
     state.setdefault("analyses", {})
+    _demo_bar(kb)
+    if not llm:
+        st.info("在左侧「设置」里填写 DeepSeek 的 API Key 后，可以分析自己的简历和 JD；没有 Key 可以先点上面的「看演示」。", icon="👈")
     _progress_bar()
     st.divider()
     step_job(kb, jd_llm)
@@ -112,6 +164,27 @@ def main():
     step_resumes(kb, llm)
     st.divider()
     step_results(kb)
+
+
+def _demo_bar(kb):
+    """看演示：载入预先生成的虚构简历分析结果和一份确认好的岗位要求，不需要 Key、不调用 AI。"""
+    if not (DEMO_DIR / "analyses.json").exists():
+        return
+    c1, c2 = st.columns([1, 3], vertical_alignment="center")
+    if c1.button("🎬 看演示", help="11 份虚构简历 + 一份数据分析岗位要求，不需要 API Key、不花钱"):
+        state = st.session_state
+        analyses = json.loads((DEMO_DIR / "analyses.json").read_text(encoding="utf-8"))
+        for a in analyses:
+            a["results"] = [ModuleResult(r["title"], [tuple(i) for i in r["items"]], r["notes"]) for r in a["results"]]
+            state.analyses[f"demo:{a['name']}"] = a
+        state.selected = [f"demo:{a['name']}" for a in analyses]
+        job = json.loads((DEMO_DIR / "job.json").read_text(encoding="utf-8"))
+        _set_draft(job, [])
+        state.req = job
+        state.demo_loaded = True
+    c2.caption("✅ 已载入演示：11 份虚构简历 + 岗位要求「数据分析工程师」，直接看下面第 ③ 步。"
+               if st.session_state.get("demo_loaded") else
+               "没有简历或 API Key？载入 11 份虚构简历的分析结果和一份岗位要求，完整体验总览分层、阅读队列和完整分析。")
 
 
 def _progress_bar():
@@ -145,7 +218,9 @@ def step_job(kb, llm):
         title = c1.text_input("职位名称", key="jd_title", placeholder="例如：数据分析工程师")
         text = st.text_area("岗位 JD（岗位职责 + 任职要求）", key="jd_text", height=200,
                             placeholder="把招聘网站上的岗位描述整段粘贴进来")
-        if st.button("解析 JD", type="primary", disabled=not (title.strip() and text.strip())):
+        if not llm:
+            st.caption("解析新的 JD 需要 API Key；也可以在上面选「打开已保存的岗位」看示例岗位。")
+        if st.button("解析 JD", type="primary", disabled=not (llm and title.strip() and text.strip())):
             with st.spinner("正在理解 JD（首次约 20 秒）……"):
                 req = jd.parse(text, title.strip(), kb, llm)
             _save_job(req, original=True)
@@ -234,7 +309,7 @@ def _edit_form(kb):
         if st.button("确认岗位要求", type="primary", disabled=not req["最看重"]):
             _save_job(req, original=False)
             state.req = req
-            st.toast("岗位要求已确认，并保存到 jobs/ 文件夹")
+            st.toast("岗位要求已确认" if PUBLIC else "岗位要求已确认，并保存到 jobs/ 文件夹")
         if not req["最看重"]:
             st.caption("请至少选择 1 项「最看重」")
         elif state.get("req") == req:
@@ -269,7 +344,10 @@ def _form_to_req(base, degree, duties, reqs, top, majors, majors_must, certs, ce
 
 
 def _save_job(req, original):
-    """和命令行版用同一套文件：json 是工具的原始理解，txt 是 HR 改过的版本。"""
+    """和命令行版用同一套文件：json 是工具的原始理解，txt 是 HR 改过的版本。
+    公开模式不保存（否则访客之间能互相看到），只留在这个页面里。"""
+    if PUBLIC:
+        return
     JOBS_DIR.mkdir(exist_ok=True)
     path = JOBS_DIR / f"{_safe(req['岗位'])}.json"
     if original or not path.exists():
@@ -291,16 +369,23 @@ def step_resumes(kb, llm):
                                help="支持 PDF、Word（.docx）、TXT 和图片")
     with c2:
         use_samples = st.toggle(f"加入示例简历（虚构，{len(RESUME_SAMPLES)} 份）")
-        st.caption(f"隐私：发送给 AI 前会去掉手机号、邮箱、身份证号；上传的文件分析完即删除，"
+        st.caption("隐私：本站不保存简历和分析结果，关掉页面就消失；请不要上传未经本人同意的简历。" if PUBLIC else
+                   f"隐私：发送给 AI 前会去掉手机号、邮箱、身份证号；上传的文件分析完即删除，"
                    f"AI 提取的结果缓存在本机，{RESUME_CACHE_DAYS} 天后自动删除（左侧可随时清除）。")
     items = [(f.name, f.getvalue()) for f in uploads or []]
     if use_samples:
         items += [(p.name, p.read_bytes()) for p in RESUME_SAMPLES]
 
-    if st.button(f"开始分析 {len(items)} 份简历" if items else "开始分析", type="primary", disabled=not items):
+    too_many = PUBLIC and len(items) > MAX_PUBLIC_UPLOADS
+    if st.button(f"开始分析 {len(items)} 份简历" if items else "开始分析", type="primary",
+                 disabled=not (items and llm) or too_many):
         state.selected = _analyze(items, kb, llm)
-    if not items:
+    if not llm:
+        st.caption("分析简历需要 API Key（在左侧填写）；没有 Key 可以点页面上方的「看演示」。")
+    elif not items:
         st.caption("请上传简历，或打开「加入示例简历」。")
+    elif too_many:
+        st.caption(f"在线版一次最多分析 {MAX_PUBLIC_UPLOADS} 份；份数多时请下载代码在自己电脑上运行。")
 
 
 def _analyze(items, kb, llm):
