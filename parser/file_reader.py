@@ -38,11 +38,28 @@ def read_file(path):
     else:
         raise ValueError(f"不支持的文件格式：{suffix}")
 
+    return _clean(text), note
+
+
+def read_bytes(name, data):
+    """从内存里的文件内容读文字（网页"原简历"显示用，不写临时文件）。只支持 TXT 和 Word；
+    和 read_file 共用同一套解码、Word 遍历和收尾处理，结果与读同一个文件完全一致。"""
+    suffix = Path(name).suffix.lower()
+    if suffix == ".txt":
+        text = _decode_txt(data)
+    elif suffix == ".docx":
+        text = _read_docx(io.BytesIO(data))      # python-docx 可以直接读内存里的文件
+    else:
+        raise ValueError(f"read_bytes 目前只支持 .txt 和 .docx，不支持：{suffix}")
+    return _clean(text)
+
+
+def _clean(text):
+    """统一收尾：部首字符换成正常汉字，去掉每行首尾空白和空行。"""
     text = "\n".join(line.strip() for line in normalize_chars(text).splitlines() if line.strip())
     if not text:
         raise ValueError("文件中没有识别到文字")
-    return text, note
-
+    return text
 
 
 def pdf_pages(data, resolution=110):
@@ -95,7 +112,11 @@ def _ocr_note(prefix, confidences):
 
 
 def _read_txt(path):
-    raw = path.read_bytes()
+    return _decode_txt(path.read_bytes())
+
+
+def _decode_txt(raw):
+    """先按 UTF-8（自动去掉 BOM），再按 GBK；都不行就按 UTF-8 把认不出的字节换成 �。"""
     for encoding in ("utf-8-sig", "gbk"):
         try:
             return raw.decode(encoding)

@@ -26,7 +26,7 @@ from matching import jd, match, overview
 from matching.jd_extract import QUALITIES, RESUME_JUDGEABLE
 from modules.base import ModuleResult
 from modules.experience import LEVEL_NAMES
-from parser.file_reader import IMAGE_SUFFIXES, pdf_pages, read_file
+from parser.file_reader import IMAGE_SUFFIXES, pdf_pages, read_bytes
 from report import screening
 from report.formatter import DISCLAIMER, format_report
 from ui import style as ui
@@ -66,6 +66,7 @@ GRADE_MARK = {"实证": "●", "自述 / 课程": "◐", "没体现": "○"}
 DECISIONS = ("通过", "待定", "淘汰")
 DECISION_BADGE = {"通过": ":green-badge[✓ 通过]", "待定": ":blue-badge[待定]", "淘汰": ":gray-badge[✕ 淘汰]"}
 VIEWS = ("阅读队列", "总览")
+NO_ORIGINAL = "没有原文件，重新上传后可以查看"   # 原简历页和"查看原简历"按钮共用同一句
 
 
 @st.cache_resource
@@ -521,8 +522,16 @@ def _overview(profiles, reports, kb):
         with st.expander(f":orange[硬性要求不符 {len(failed)} 人]"):
             for r in failed:
                 st.markdown(f"- **{Path(r['文件']).stem}**：{'；'.join(r['不符'])}")
+    # 需人工查看的人不参与分层，没有表格行可点，所以在提示旁边放"查看原简历"，看完可以直接标记决定
     for r in abnormal:
-        st.warning(f"{r['文件']}：{'；'.join(r['解析异常'])}，请直接打开原文件查看", icon="⚠️")
+        name = r["文件"]
+        has_file = bool(reports.get(name, {}).get("data"))
+        marked = f"（已标记：{decisions[name]}）" if name in decisions else ""
+        c1, c2 = st.columns([6, 1], vertical_alignment="center")
+        c1.warning(f"{name}：{'；'.join(r['解析异常'])}，请查看原简历{marked}", icon="⚠️")
+        if c2.button("查看原简历", key=f"original_{name}", disabled=not has_file, width="stretch",
+                     help=None if has_file else NO_ORIGINAL):
+            _original_dialog(name, reports[name], r["解析异常"])
     st.download_button("导出 CSV", screening.overview_csv(ranked, failed, abnormal, decisions).encode("utf-8-sig"),
                        file_name="简历总览.csv", mime="text/csv", key="ov_csv", icon=":material/download:")
     return [r["文件"] for r in ranked], {r["文件"]: ("总览", r) for r in ranked}
@@ -625,6 +634,23 @@ def _report_dialog(name, analysis, order, why):
     _render_report(analysis, why)
 
 
+@st.dialog("原简历", width="large", on_dismiss="rerun")
+def _original_dialog(name, analysis, reasons):
+    """需人工查看的人：只看原简历并标记决定。这类简历没有排序结果，完整分析里的模块可能是空的，
+    所以不进完整分析；也不在阅读顺序里，没有"下一份"。关闭（Esc / 点外部 / ×）后刷新，更新已处理人数。"""
+    state = st.session_state
+    current = state.decisions.get(name)
+    cols = st.columns([4, 1, 1, 1], vertical_alignment="center")
+    cols[0].subheader(Path(name).stem)
+    for col, decision in zip(cols[1:], DECISIONS):
+        if col.button(decision, type="primary" if current == decision else "secondary", width="stretch",
+                      key=f"original_decide_{decision}"):
+            state.decisions[name] = decision
+            st.rerun()
+    st.warning("需人工查看：" + "；".join(reasons), icon="⚠️")
+    _original(analysis)
+
+
 def _open_next(name, order):
     """打开当前列表里、排在这个人后面的下一位还没处理的人；后面没有了就从头找。"""
     state = st.session_state
@@ -695,10 +721,12 @@ def _render_report(analysis, why=None):
 
 
 def _original(analysis):
-    """原简历：PDF 逐页显示成图片，图片直接显示，Word / TXT 显示读出来的文字。只在内存里处理。"""
+    """原简历：PDF 逐页显示成图片，图片直接显示，Word / TXT 显示读出来的文字。
+    全部在内存里处理，不写临时文件（服务器进程被强行中断也不会留下简历内容）。
+    「完整分析」的原简历页和「需人工查看」的查看原简历弹窗共用这个函数。"""
     data, name = analysis.get("data"), analysis["name"]
     if not data:
-        st.caption("没有原文件，重新上传后可以查看")
+        st.caption(NO_ORIGINAL)
         return
     suffix = Path(name).suffix.lower()
     try:
@@ -708,11 +736,7 @@ def _original(analysis):
         elif suffix in IMAGE_SUFFIXES:
             st.image(data, width="stretch")
         else:
-            with tempfile.TemporaryDirectory() as tmp:
-                path = Path(tmp) / name
-                path.write_bytes(data)
-                text, _ = read_file(path)
-            st.code(text, language=None, wrap_lines=True)
+            st.code(read_bytes(name, data), language=None, wrap_lines=True)
     except Exception as e:
         st.caption(f"原文件无法显示：{e}")
 
