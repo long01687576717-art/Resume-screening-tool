@@ -1,0 +1,10024 @@
+{
+ "说明": "通用岗位画像，由 tools/build_job_profiles.py 根据国家大学生就业服务平台的真实校招 JD 统计生成。share = 提到这项要求的 JD 占比；tier：核心 ≥50%，常见 ≥20%，个别 <20%。",
+ "profiles": {
+  "数据分析": {
+   "group": "技术",
+   "jd_count": 47,
+   "jd_with_requirements": 35,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.57
+    },
+    {
+     "value": "不限",
+     "share": 0.26
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.11
+    },
+    {
+     "value": "博士及以上",
+     "share": 0.06
+    }
+   ],
+   "majors": [
+    {
+     "value": "统计学",
+     "share": 0.31
+    },
+    {
+     "value": "计算机",
+     "share": 0.17
+    },
+    {
+     "value": "统计",
+     "share": 0.11
+    },
+    {
+     "value": "经济学",
+     "share": 0.11
+    },
+    {
+     "value": "商业分析",
+     "share": 0.11
+    },
+    {
+     "value": "数据分析",
+     "share": 0.11
+    },
+    {
+     "value": "应用数学",
+     "share": 0.09
+    },
+    {
+     "value": "经管类",
+     "share": 0.09
+    },
+    {
+     "value": "数学",
+     "share": 0.09
+    },
+    {
+     "value": "数据科学",
+     "share": 0.09
+    }
+   ],
+   "certificates": [
+    {
+     "value": "CFA",
+     "share": 0.06
+    },
+    {
+     "value": "基金从业资格",
+     "share": 0.06
+    },
+    {
+     "value": "英语四级",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "数据处理与分析",
+     "share": 0.54,
+     "tier": "核心",
+     "required_share": 0.79,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "数据分析",
+      "数据清洗",
+      "ETL",
+      "数据建模",
+      "AI数据分析"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.51,
+     "tier": "核心",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "SQL",
+      "数据库",
+      "MySQL",
+      "SQLServer",
+      "hivesql"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.43,
+     "tier": "常见",
+     "required_share": 0.53,
+     "typical_level": "掌握",
+     "top": [
+      "Tableau",
+      "数据可视化",
+      "Power BI",
+      "帆软BI",
+      "BI看板开发",
+      "BI"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.34,
+     "tier": "常见",
+     "required_share": 0.5,
+     "typical_level": "掌握",
+     "top": [
+      "Python",
+      "python"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.34,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "PPT",
+      "PPT制作",
+      "Office",
+      "office系列办公软件",
+      "常用办公软件",
+      "Think-cell"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 0.75,
+     "typical_level": "熟悉",
+     "top": [
+      "AI工具",
+      "Codex",
+      "大模型",
+      "Claude Code",
+      "AI",
+      "ClaudeCode"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "视频剪辑",
+      "图片创作"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语",
+      "自媒体创作",
+      "小红书创作"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "行业研究",
+     "share": 0.57,
+     "tier": "核心",
+     "required_share": 0.65,
+     "typical_level": "了解",
+     "top": [
+      "商业分析",
+      "行业研究",
+      "信息收集",
+      "业务理解",
+      "信息搜集整合",
+      "医疗行业基本术语和业务流程"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.4,
+     "tier": "常见",
+     "required_share": 0.86,
+     "typical_level": "了解",
+     "top": [
+      "数据分析",
+      "指标梳理",
+      "报表设计",
+      "数据口径统一",
+      "数据提取、清洗与加工",
+      "业务洞察"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.29,
+     "tier": "常见",
+     "required_share": 0.4,
+     "typical_level": "了解",
+     "top": [
+      "咨询",
+      "课程研发",
+      "制造企业业务流程",
+      "企业咨询",
+      "战略部门工作经验",
+      "结构化思维"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 0.62,
+     "typical_level": "",
+     "top": [
+      "电商业务逻辑",
+      "商业敏感度",
+      "运营管理",
+      "商业意识",
+      "市场营销",
+      "用户调研"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 0.83,
+     "typical_level": "熟悉",
+     "top": [
+      "数据可视化",
+      "可视化呈现",
+      "可视化能力",
+      "数据可视化呈现",
+      "BI系统开发流程"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "",
+     "top": [
+      "自媒体创作",
+      "小红书创作",
+      "中英文读写",
+      "文字校对",
+      "文字撰写",
+      "报告编制"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语",
+      "英文阅读及沟通",
+      "课件制作"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 0.33,
+     "typical_level": "",
+     "top": [
+      "边缘硬件、边缘盒子、终端设备、AI-agent、智能算法项目相关数据处理、项目经验",
+      "AI智能体赛道调研",
+      "AI技术研究",
+      "AIGC工具使用经验"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "熟悉",
+     "top": [
+      "物流业务",
+      "供应链管理"
+     ]
+    },
+    {
+     "domain": "金融投资",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "金融分析"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "财务知识"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "了解",
+     "top": [
+      "ERP数据结构"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "AI使用过程中的信息保密要求"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "逻辑思维",
+     "share": 0.6,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.51,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.49,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.46,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.34,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.17,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.09,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "后端开发": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 32,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.72
+    },
+    {
+     "value": "不限",
+     "share": 0.12
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.09
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.06
+    }
+   ],
+   "majors": [
+    {
+     "value": "软件工程",
+     "share": 0.34
+    },
+    {
+     "value": "计算机科学与技术",
+     "share": 0.19
+    },
+    {
+     "value": "计算机",
+     "share": 0.19
+    },
+    {
+     "value": "人工智能",
+     "share": 0.09
+    },
+    {
+     "value": "电子信息",
+     "share": 0.09
+    },
+    {
+     "value": "相关专业",
+     "share": 0.09
+    },
+    {
+     "value": "计算机科学",
+     "share": 0.06
+    },
+    {
+     "value": "网络工程",
+     "share": 0.06
+    },
+    {
+     "value": "计算机及相关专业",
+     "share": 0.06
+    },
+    {
+     "value": "通信",
+     "share": 0.06
+    }
+   ],
+   "certificates": [
+    {
+     "value": "软考中级及以上证书",
+     "share": 0.03
+    },
+    {
+     "value": "英语四级及以上",
+     "share": 0.03
+    },
+    {
+     "value": "大学英语四级",
+     "share": 0.03
+    },
+    {
+     "value": "CET-4",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "编程开发",
+     "share": 1.0,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "Java",
+      "Linux",
+      "Redis",
+      "Git",
+      "Docker",
+      "JavaScript"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.75,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "MySQL",
+      "SQL",
+      "Oracle",
+      "PostgreSQL",
+      "数据库",
+      "Elasticsearch"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.69,
+     "tier": "核心",
+     "required_share": 0.91,
+     "typical_level": "熟悉",
+     "top": [
+      "Spring Boot",
+      "Spring",
+      "SpringBoot",
+      "MyBatis",
+      "SpringCloud",
+      "HTML"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.22,
+     "tier": "常见",
+     "required_share": 0.71,
+     "typical_level": "熟练",
+     "top": [
+      "Cursor",
+      "Claude Code",
+      "AI工具",
+      "AI平台",
+      "AI辅助编程工具（如Cursor、Trae等）",
+      "AI 编码工具"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "了解",
+     "top": [
+      "ELK",
+      "Kafka",
+      "Fluentd",
+      "Flink"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟悉",
+     "top": [
+      "PostGIS",
+      "GIS开发",
+      "GeoServer",
+      "GDAL",
+      "GeoTools"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "了解",
+     "top": [
+      "Grafana",
+      "Prometheus"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AI相关技术和工具"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "编程开发",
+     "share": 0.47,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "数据结构",
+      "面向对象编程",
+      "操作系统",
+      "设计模式",
+      "集合",
+      "数据结构与算法"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.22,
+     "tier": "常见",
+     "required_share": 0.86,
+     "typical_level": "了解",
+     "top": [
+      "SQL优化",
+      "事务处理",
+      "SQL 优化",
+      "数据库设计与开发",
+      "索引",
+      "事务基础概念"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "AI 辅助研发",
+      "AI大模型相关技术"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "日语学习",
+      "机器视觉"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟悉",
+     "top": [
+      "制造业系统（MES/ERP）业务",
+      "ERP",
+      "PLM",
+      "APS",
+      "MES",
+      "WMS"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语资料阅读能力",
+      "文档编写"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "工业自动化",
+      "钢材制造等流程制造数字化工厂方案"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "大数据处理相关技术栈"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "B/S结构软件开发"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "需求分析",
+      "问题解决"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "了解",
+     "top": [
+      "GIS / 遥感 / 水利气象业务",
+      "投影坐标系",
+      "OGC 服务",
+      "主流空间数据格式",
+      "GIS 开源组件"
+     ]
+    },
+    {
+     "domain": "经济学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "高等数学",
+      "线性代数"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "学习成长",
+     "share": 0.47,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.28,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.09,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.09,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "前端开发": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 47,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.64
+    },
+    {
+     "value": "不限",
+     "share": 0.28
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.09
+    }
+   ],
+   "majors": [
+    {
+     "value": "计算机",
+     "share": 0.3
+    },
+    {
+     "value": "计算机相关专业",
+     "share": 0.19
+    },
+    {
+     "value": "软件工程",
+     "share": 0.17
+    },
+    {
+     "value": "电子",
+     "share": 0.11
+    },
+    {
+     "value": "计算机科学",
+     "share": 0.11
+    },
+    {
+     "value": "软件",
+     "share": 0.09
+    },
+    {
+     "value": "相关专业",
+     "share": 0.09
+    },
+    {
+     "value": "软件相关专业",
+     "share": 0.04
+    },
+    {
+     "value": "人工智能",
+     "share": 0.04
+    },
+    {
+     "value": "网络工程",
+     "share": 0.04
+    }
+   ],
+   "certificates": [
+    {
+     "value": "软考中级证书",
+     "share": 0.02
+    }
+   ],
+   "skills": [
+    {
+     "domain": "编程开发",
+     "share": 0.91,
+     "tier": "核心",
+     "required_share": 0.98,
+     "typical_level": "了解",
+     "top": [
+      "JavaScript",
+      "TypeScript",
+      "HTTP",
+      "Git",
+      "Java",
+      "C#"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.85,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "CSS",
+      "HTML",
+      "React",
+      "Vue",
+      "HTML5",
+      "Webpack"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "Unity",
+      "Canvas",
+      "Konva",
+      "Konva.js",
+      "three.js三维呈现",
+      "Three.js"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "MCP",
+      "Prompt Engineering",
+      "AI工具",
+      "Cursor",
+      "Codex",
+      "Claude Code"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "地图服务",
+      "ionic",
+      "H5混合式APP开发",
+      "Bootstrap",
+      "Ant Design Pro",
+      "ElementUI"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "UI设计",
+      "Axure",
+      "摹客",
+      "墨刀"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "精通",
+     "top": [
+      "空间数据处理"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "精通",
+     "top": [
+      "矢量/栅格数据应用及可视化技术"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "GIS呈现"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "编程开发",
+     "share": 0.51,
+     "tier": "核心",
+     "required_share": 0.92,
+     "typical_level": "熟悉",
+     "top": [
+      "数据结构",
+      "网络协议",
+      "代码规范",
+      "操作系统",
+      "数据结构与算法",
+      "面向对象编程思想"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.49,
+     "tier": "常见",
+     "required_share": 0.74,
+     "typical_level": "熟悉",
+     "top": [
+      "前端性能优化",
+      "Web产品研发经验",
+      "后端开发语言",
+      "前后端交互流程",
+      "接口联调",
+      "基础组件封装"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "英文读写能力",
+      "文档整理",
+      "技术文档编写",
+      "文档编写能力"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "",
+     "top": [
+      "用户体验",
+      "交互设计/用户体验",
+      "用户体验意识",
+      "产品思维"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.33,
+     "typical_level": "",
+     "top": [
+      "AI Agent",
+      "AI Native 开发",
+      "AI原生开发与增量开发"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "了解",
+     "top": [
+      "可用性",
+      "可访问性",
+      "网页页面排版设计",
+      "交互操作流程"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.33,
+     "typical_level": "熟悉",
+     "top": [
+      "地图编辑",
+      "遥感平台开发",
+      "GIS基础理论",
+      "二维/三维GIS地图开发流程"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "了解",
+     "top": [
+      "互联网行业",
+      "能源电力行业",
+      "智能家居行业"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "自动驾驶可视化平台",
+      "数据可视化开发"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据库开发"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "系统工程落地与项目全流程交付"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "水文系统开发",
+      "水文模型模拟"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.51,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.49,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.45,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.13,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.11,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.02,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "算法工程师": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 37,
+   "degree": [
+    {
+     "value": "硕士及以上",
+     "share": 0.46
+    },
+    {
+     "value": "本科及以上",
+     "share": 0.24
+    },
+    {
+     "value": "不限",
+     "share": 0.22
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.05
+    },
+    {
+     "value": "博士及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "自动化",
+     "share": 0.43
+    },
+    {
+     "value": "计算机",
+     "share": 0.43
+    },
+    {
+     "value": "人工智能",
+     "share": 0.35
+    },
+    {
+     "value": "数学",
+     "share": 0.3
+    },
+    {
+     "value": "机器人",
+     "share": 0.14
+    },
+    {
+     "value": "控制工程",
+     "share": 0.11
+    },
+    {
+     "value": "机械电子",
+     "share": 0.08
+    },
+    {
+     "value": "工程类交叉学科",
+     "share": 0.08
+    },
+    {
+     "value": "电子信息",
+     "share": 0.08
+    },
+    {
+     "value": "电子",
+     "share": 0.05
+    }
+   ],
+   "certificates": [],
+   "skills": [
+    {
+     "domain": "编程开发",
+     "share": 0.81,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Python",
+      "C++",
+      "Linux",
+      "ROS/ROS2",
+      "python",
+      "ROS"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.65,
+     "tier": "核心",
+     "required_share": 0.96,
+     "typical_level": "熟悉",
+     "top": [
+      "PyTorch",
+      "TensorFlow",
+      "Claude Code",
+      "Cursor",
+      "MuJoCo",
+      "PPO"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.3,
+     "tier": "常见",
+     "required_share": 0.82,
+     "typical_level": "熟悉",
+     "top": [
+      "MATLAB",
+      "MATLAB/Simulink",
+      "Spark",
+      "Hive",
+      "NumPy",
+      "Pandas"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "了解",
+     "top": [
+      "向量数据库",
+      "数据库",
+      "Neo4j",
+      "SQL"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "FastAPI",
+      "前端设计"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "强化学习（PPO/SAC）",
+      "模仿学习（BC/Diffusion Policy）",
+      "Halcon",
+      "Vision pro",
+      "VM"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "3DGS",
+      "NeRF",
+      "SVG"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "GIS",
+      "ArcGIS",
+      "ENVI"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "CAD"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "AI 应用",
+     "share": 0.57,
+     "tier": "核心",
+     "required_share": 0.76,
+     "typical_level": "熟悉",
+     "top": [
+      "深度学习",
+      "计算机视觉",
+      "模仿学习",
+      "运动规划",
+      "控制",
+      "机器学习"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.35,
+     "tier": "常见",
+     "required_share": 0.92,
+     "typical_level": "掌握",
+     "top": [
+      "数据结构",
+      "算法",
+      "自动控制原理",
+      "电机拖动理论",
+      "异步电机、永磁同步电机的控制策略（如FOC、DTC等）",
+      "机器人运动学与动力学"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.27,
+     "tier": "常见",
+     "required_share": 0.9,
+     "typical_level": "掌握",
+     "top": [
+      "数据分析",
+      "数学基础",
+      "非线性规划",
+      "数值仿真",
+      "数学建模",
+      "概率统计"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 0.2,
+     "typical_level": "",
+     "top": [
+      "智能控制系统",
+      "航天轨道动力学理论",
+      "弹道计算",
+      "控制律",
+      "建筑、土木等工程学科交叉背景",
+      "工程规范体系"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.33,
+     "typical_level": "",
+     "top": [
+      "产品开发经验",
+      "项目实施",
+      "海外项目协作"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "精通",
+     "top": [
+      "图形学",
+      "三维几何",
+      "多视图几何理论",
+      "4D/动态重建",
+      "3D 坐标空间变换原理"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "了解",
+     "top": [
+      "CAD/BIM"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文档编写",
+      "科研课题申报书编写",
+      "英文文献阅读能力"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "暖通空调（HVAC）节能技术"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "VLA模型",
+      "机器人任务规划"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "企业运营管理建模"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据可视化"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "遥感基础理论",
+      "遥感影像原理和特征"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "主动性",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.14,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.14,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.14,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.08,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.03,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "软件测试": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 33,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.61
+    },
+    {
+     "value": "不限",
+     "share": 0.27
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.09
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "自动化",
+     "share": 0.27
+    },
+    {
+     "value": "计算机",
+     "share": 0.21
+    },
+    {
+     "value": "软件工程",
+     "share": 0.18
+    },
+    {
+     "value": "通信工程",
+     "share": 0.15
+    },
+    {
+     "value": "电子",
+     "share": 0.15
+    },
+    {
+     "value": "电子信息",
+     "share": 0.15
+    },
+    {
+     "value": "测控",
+     "share": 0.09
+    },
+    {
+     "value": "通信",
+     "share": 0.09
+    },
+    {
+     "value": "计算机科学与技术",
+     "share": 0.09
+    },
+    {
+     "value": "机电",
+     "share": 0.06
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语 CET-4 及以上",
+     "share": 0.03
+    },
+    {
+     "value": "全国计算机等级二级C语言程序设计",
+     "share": 0.03
+    },
+    {
+     "value": "英语四级及以上",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "编程开发",
+     "share": 0.45,
+     "tier": "常见",
+     "required_share": 0.8,
+     "typical_level": "熟悉",
+     "top": [
+      "Python",
+      "Linux",
+      "C++",
+      "Java",
+      "C#",
+      "ADB命令"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "万用表",
+      "示波器",
+      "Office",
+      "稳压源",
+      "Word",
+      "PPT"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "常见测试仪器",
+      "数据处理方法",
+      "Excel",
+      "数据处理分析软件"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "SQL",
+      "数据库"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "了解",
+     "top": [
+      "AI工具",
+      "机器视觉"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "探针台设备",
+      "矢量网络分析仪",
+      "频谱仪",
+      "信号源"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "Jira"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "编程开发",
+     "share": 0.55,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "测试流程",
+      "软件测试理论与方法",
+      "测试用例设计",
+      "缺陷分析与问题定位",
+      "软件测试理论",
+      "软件测试用例的编制"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.21,
+     "tier": "常见",
+     "required_share": 0.71,
+     "typical_level": "了解",
+     "top": [
+      "设备测试基础认知",
+      "机器人竞赛",
+      "测试岗实习",
+      "毕设涉及机器人可靠性",
+      "高低温振动测试",
+      "光纤、光缆、光器件测试"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "",
+     "top": [
+      "文档编辑能力",
+      "英文读写",
+      "英语听写能力",
+      "编写测试用例、测试操作指导书",
+      "输出规范完整的测试报告"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "AI大模型相关技术",
+      "机械臂、轮式机器人、IMU/视觉传感器基础原理"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据整理、现象记录",
+      "数据分析"
+     ]
+    },
+    {
+     "domain": "经济学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "高等数学",
+      "线性代数"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "机器视觉",
+      "工业自动化"
+     ]
+    },
+    {
+     "domain": "金融投资",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "支付或金融业务"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "光机电设备相关项目经验"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.52,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.42,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.3,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.3,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.18,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.15,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.09,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "嵌入式与硬件": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 36,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.58
+    },
+    {
+     "value": "不限",
+     "share": 0.22
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.17
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "计算机",
+     "share": 0.47
+    },
+    {
+     "value": "自动化",
+     "share": 0.39
+    },
+    {
+     "value": "电子信息",
+     "share": 0.33
+    },
+    {
+     "value": "通信工程",
+     "share": 0.22
+    },
+    {
+     "value": "通信",
+     "share": 0.22
+    },
+    {
+     "value": "软件工程",
+     "share": 0.22
+    },
+    {
+     "value": "电子",
+     "share": 0.14
+    },
+    {
+     "value": "电子工程",
+     "share": 0.11
+    },
+    {
+     "value": "电子信息工程",
+     "share": 0.08
+    },
+    {
+     "value": "网络",
+     "share": 0.08
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语六级",
+     "share": 0.03
+    },
+    {
+     "value": "CET-4",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "编程开发",
+     "share": 0.97,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "C/C++",
+      "UART",
+      "SPI",
+      "Linux",
+      "CAN",
+      "示波器"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "Altium Designer",
+      "Cadence",
+      "LVGL",
+      "Qt for Embedded",
+      "TouchGFX"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "Altium Designer",
+      "原理图设计",
+      "PCB Layout",
+      "DC/DC",
+      "LDO",
+      "MOSFET"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AI工具"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "示波器",
+      "逻辑分析仪",
+      "万用表"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "RESTful API"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "MATLAB"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "编程开发",
+     "share": 0.47,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "面向对象编程",
+      "硬件调试",
+      "信号与系统",
+      "通信原理",
+      "布局布线规范",
+      "嵌入式软件/FPGA开发"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文档编写",
+      "英文阅读能力"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "项目管理"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "模拟电路",
+      "数字电路",
+      "电路分析",
+      "信号完整性",
+      "电源完整性",
+      "EMC/EMI 设计原则"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AI服务器/交换机研发"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据分析"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "团队协作",
+     "share": 0.44,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.33,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.31,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.28,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.22,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.17,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.14,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "影响力",
+     "share": 0.06,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.03,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "机械工程师": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 30,
+   "degree": [
+    {
+     "value": "不限",
+     "share": 0.37
+    },
+    {
+     "value": "本科及以上",
+     "share": 0.3
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.2
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.13
+    }
+   ],
+   "majors": [
+    {
+     "value": "自动化",
+     "share": 0.2
+    },
+    {
+     "value": "机械工程",
+     "share": 0.2
+    },
+    {
+     "value": "机械",
+     "share": 0.17
+    },
+    {
+     "value": "机械设计",
+     "share": 0.13
+    },
+    {
+     "value": "机械设计制造及其自动化",
+     "share": 0.13
+    },
+    {
+     "value": "机电一体化",
+     "share": 0.1
+    },
+    {
+     "value": "机电",
+     "share": 0.07
+    },
+    {
+     "value": "智能制造",
+     "share": 0.07
+    },
+    {
+     "value": "机械制造",
+     "share": 0.07
+    },
+    {
+     "value": "机械电子",
+     "share": 0.07
+    }
+   ],
+   "certificates": [
+    {
+     "value": "CET-4",
+     "share": 0.03
+    },
+    {
+     "value": "英语4级",
+     "share": 0.03
+    },
+    {
+     "value": "CET4",
+     "share": 0.03
+    },
+    {
+     "value": "CET-6",
+     "share": 0.03
+    },
+    {
+     "value": "托福60+",
+     "share": 0.03
+    },
+    {
+     "value": "雅思5.0+",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "三维与图形",
+     "share": 0.6,
+     "tier": "核心",
+     "required_share": 0.89,
+     "typical_level": "熟练",
+     "top": [
+      "UG",
+      "三维制图软件",
+      "电机",
+      "气缸",
+      "导轨",
+      "Ansys"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.5,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "SolidWorks",
+      "CAD",
+      "AutoCAD",
+      "solidworks",
+      "Solidworks",
+      "AD"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "办公软件",
+      "OFFICE",
+      "Office",
+      "Office办公软件",
+      "office"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "BOM表"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "PDM系统"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "行业研究",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 0.71,
+     "typical_level": "掌握",
+     "top": [
+      "半导体设备设计开发",
+      "晶圆搬送传输",
+      "EFEM框架选型设计",
+      "机器人或水下机械产品相关行业经验",
+      "机械设计",
+      "冶金工艺"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "精通",
+     "top": [
+      "常规机械标准件设计选型",
+      "机械设计",
+      "理论力学",
+      "材料力学",
+      "机械结构仿真",
+      "结构优化"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "机械设计理论",
+      "材料学",
+      "理论力学",
+      "原理图及PCB设计",
+      "关联产品设计的相关规定",
+      "机械设计"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "电机选型计算",
+      "材料选型",
+      "铝合金、钣金、注塑等常用材料与加工工艺",
+      "气动、液压及电机选型",
+      "米思米相关标准件选型",
+      "机加工艺"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "整机产品从概念设计到量产交付的完整项目经验",
+      "产品开发全生命周期流程",
+      "机械原理",
+      "理论力学",
+      "材料力学",
+      "常用金属材料（铝合金、不锈钢等）及非金属材料特性"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "机械原理",
+      "机械基础知识",
+      "机械专业基础知识"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "机械加工工艺",
+      "机械结构设计原理",
+      "气路液路设计原理",
+      "方案设计",
+      "产品调试和优化改进",
+      "结构设计"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "文字撰写",
+      "技术资料",
+      "翻译英文技术资料、文献知识"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "海洋环境下的材料腐蚀机理与防护措施",
+      "流体力学"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "面向制造的设计理念和成本控制意识",
+      "成本评估"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "数电",
+      "模电",
+      "元器件原理",
+      "电源开发",
+      "传感器信号处理",
+      "电气控制原理"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语读写能力"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "项目统筹"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.2,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.17,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.17,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.13,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.13,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.13,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.13,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.1,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.1,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.03,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "电气工程师": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 38,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.37
+    },
+    {
+     "value": "不限",
+     "share": 0.32
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.18
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.13
+    }
+   ],
+   "majors": [
+    {
+     "value": "电气工程及其自动化",
+     "share": 0.24
+    },
+    {
+     "value": "自动化",
+     "share": 0.24
+    },
+    {
+     "value": "电气工程",
+     "share": 0.21
+    },
+    {
+     "value": "机电一体化",
+     "share": 0.13
+    },
+    {
+     "value": "电气",
+     "share": 0.08
+    },
+    {
+     "value": "控制工程",
+     "share": 0.05
+    },
+    {
+     "value": "高电压与绝缘技术",
+     "share": 0.05
+    },
+    {
+     "value": "电气自动化相关专业",
+     "share": 0.05
+    },
+    {
+     "value": "电力电子",
+     "share": 0.05
+    },
+    {
+     "value": "控制",
+     "share": 0.03
+    }
+   ],
+   "certificates": [
+    {
+     "value": "高压电工证",
+     "share": 0.03
+    },
+    {
+     "value": "CET4",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "设计",
+     "share": 0.61,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "CAD",
+      "EPLAN",
+      "AutoCAD",
+      "绘图软件",
+      "设计绘图软件",
+      "EPlan"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.47,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "PLC",
+      "PLC编程",
+      "触摸屏",
+      "PLC程序",
+      "C++",
+      "PLC编程软件"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.24,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Office",
+      "OFFICE",
+      "常用办公软件",
+      "WORD",
+      "PPT",
+      "通用办公软件"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Eplan",
+      "COMSOL",
+      "EPLAN",
+      "天正电气"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "EXCEL"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "示波器"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "编程开发",
+     "share": 0.21,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "自动控制原理",
+      "程序调试",
+      "伺服控制系统",
+      "自动化控制系统集成与优化",
+      "电路理论基础",
+      "模电"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.21,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "电气专业系统的原理及设计和施工规范",
+      "电气相关施工及验收规范",
+      "电气系统原理",
+      "电气技术方案编制",
+      "技术交底",
+      "常用电气元件特性"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "熟悉",
+     "top": [
+      "BOM表",
+      "设备及材料选型",
+      "元器件选型",
+      "低压器件选型"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "",
+     "top": [
+      "电气原理图设计",
+      "电气装配图设计",
+      "电气相关设计调试项目或课题经验",
+      "工程设计"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "仿真设计科研项目",
+      "专业理论知识"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "现场管理",
+      "项目控制流程/工艺流程理解能力"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "专业基础知识",
+      "电路原理",
+      "高电压技术",
+      "电气设备设计",
+      "电气行业国标、国网相关设计规范"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "现场管理协调"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "SCI论文发表"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "GIS设备基本结构与工作原理"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.29,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.29,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.18,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.18,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.16,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.11,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.05,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "土木建筑": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 33,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.61
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.12
+    },
+    {
+     "value": "不限",
+     "share": 0.12
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.09
+    },
+    {
+     "value": "博士及以上",
+     "share": 0.06
+    }
+   ],
+   "majors": [
+    {
+     "value": "土木工程",
+     "share": 0.27
+    },
+    {
+     "value": "给排水科学与工程",
+     "share": 0.12
+    },
+    {
+     "value": "水利水电工程",
+     "share": 0.12
+    },
+    {
+     "value": "电气工程及其自动化",
+     "share": 0.12
+    },
+    {
+     "value": "机械",
+     "share": 0.09
+    },
+    {
+     "value": "焊接",
+     "share": 0.09
+    },
+    {
+     "value": "电气",
+     "share": 0.09
+    },
+    {
+     "value": "结构工程",
+     "share": 0.09
+    },
+    {
+     "value": "机械设计制造及其自动化",
+     "share": 0.09
+    },
+    {
+     "value": "工程力学",
+     "share": 0.09
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语六级",
+     "share": 0.09
+    },
+    {
+     "value": "英语四级",
+     "share": 0.09
+    },
+    {
+     "value": "英语四六级",
+     "share": 0.06
+    },
+    {
+     "value": "技能等级证书",
+     "share": 0.03
+    },
+    {
+     "value": "建筑八大员相关培训证书",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.36,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "办公软件",
+      "计算机操作",
+      "Office办公软件",
+      "Office",
+      "电脑基本操作",
+      "基础办公软件"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.21,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "CAD",
+      "中望CAD",
+      "识图"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "精通",
+     "top": [
+      "BIM",
+      "BIM技术",
+      "PKPM",
+      "BIM5D",
+      "Abaqus",
+      "ANSYS"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟练",
+     "top": [
+      "测量仪器",
+      "测量实操",
+      "DSC",
+      "DMA",
+      "FTIR",
+      "万能试验机"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "计算机操作系统",
+      "UMAT/VUMAT子程序",
+      "Python"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "云平台资料软件",
+      "综项系统",
+      "施工管理软件"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "广联达"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "施工及测试工具"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Matlab"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "AI/机器学习"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "地质",
+     "share": 0.18,
+     "tier": "个别",
+     "required_share": 0.83,
+     "typical_level": "掌握",
+     "top": [
+      "土建专业基础理论知识",
+      "识图",
+      "技术交底",
+      "工程测量",
+      "土木建筑专业知识",
+      "土木工程专业知识"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "建筑施工基本流程",
+      "建筑施工工艺流程",
+      "施工规范",
+      "施工安全规范和操作规程",
+      "质量控制",
+      "电力施工规范"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "光纤熔接",
+      "网络布线",
+      "通信设备",
+      "PON网络",
+      "数据中心",
+      "安防系统"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟练",
+     "top": [
+      "外语表达能力",
+      "丙烯酸胶粘剂开发",
+      "胶粘结构多场耦合（热-湿-力）仿真",
+      "工程问题独立解决"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "施工现场组织协调"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "管理施工工人经验"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "造价管理"
+     ]
+    },
+    {
+     "domain": "人力资源",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "人力资源管理"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "大型建筑设计单位结构专业实习经验"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "抗压能力",
+     "share": 0.64,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.48,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.42,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.39,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.33,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.33,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.09,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.09,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.03,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "化工与材料": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 35,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.4
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.26
+    },
+    {
+     "value": "不限",
+     "share": 0.23
+    },
+    {
+     "value": "博士及以上",
+     "share": 0.09
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "化学工程与工艺",
+     "share": 0.2
+    },
+    {
+     "value": "应用化学",
+     "share": 0.2
+    },
+    {
+     "value": "高分子材料",
+     "share": 0.17
+    },
+    {
+     "value": "化学工程",
+     "share": 0.14
+    },
+    {
+     "value": "生物相关专业",
+     "share": 0.09
+    },
+    {
+     "value": "高分子",
+     "share": 0.09
+    },
+    {
+     "value": "材料成型及控制工程",
+     "share": 0.09
+    },
+    {
+     "value": "材料科学与工程",
+     "share": 0.09
+    },
+    {
+     "value": "化学",
+     "share": 0.06
+    },
+    {
+     "value": "制药工程",
+     "share": 0.06
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语四级",
+     "share": 0.06
+    },
+    {
+     "value": "大学英语六级（CET-6）",
+     "share": 0.06
+    },
+    {
+     "value": "英语六级",
+     "share": 0.06
+    },
+    {
+     "value": "CET-6",
+     "share": 0.03
+    },
+    {
+     "value": "大学英语4级以上或同等水平",
+     "share": 0.03
+    },
+    {
+     "value": "大学六级",
+     "share": 0.03
+    },
+    {
+     "value": "大学四级",
+     "share": 0.03
+    },
+    {
+     "value": "CET-4",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.31,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Word",
+      "PowerPoint",
+      "Office办公软件（Word、Excel、PowerPoint）",
+      "Office",
+      "Office办公软件"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.26,
+     "tier": "常见",
+     "required_share": 0.78,
+     "typical_level": "熟练",
+     "top": [
+      "CAD",
+      "AutoCAD",
+      "AutoCAD制图软件",
+      "SolidWorks",
+      "高分子成型模具设计"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "JMP",
+      "AKTA",
+      "SPC",
+      "红外",
+      "热重"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 0.38,
+     "typical_level": "熟悉",
+     "top": [
+      "Aspen",
+      "蛋白柱层析",
+      "过滤",
+      "超滤",
+      "ProⅡ",
+      "Aspen Plus"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "国内文献数据库"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "医学英语"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "BIM",
+      "CAE"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "相关测试仪器",
+      "金相",
+      "硬度",
+      "拉伸"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AKTA"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "行业研究",
+     "share": 0.37,
+     "tier": "常见",
+     "required_share": 0.92,
+     "typical_level": "熟悉",
+     "top": [
+      "生物制药类基础知识",
+      "扎实的理论基础",
+      "研发能力",
+      "蛋白纯化技术",
+      "阅读英文技术文献及规范",
+      "精细化工基本理论"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.2,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "HSE知识",
+      "化工原理",
+      "层析",
+      "过滤"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "报告编制",
+      "英语文献阅读",
+      "文字功底",
+      "医学英语",
+      "英语基础"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "DOE实验设计",
+      "层析",
+      "过滤",
+      "数据分析",
+      "统计能力"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "通用法律法规"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "装配工艺流程设计",
+      "SOP编制",
+      "工装夹具设计",
+      "现场问题解决"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "蛋白纯化技术"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "金属材料",
+      "材料科学基础"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.37,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.34,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.31,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.2,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.17,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.14,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.11,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.11,
+     "tier": "个别",
+     "judge": "简历可判断"
+    }
+   ]
+  },
+  "GIS与测绘": {
+   "group": "技术",
+   "jd_count": 60,
+   "jd_with_requirements": 48,
+   "degree": [
+    {
+     "value": "硕士及以上",
+     "share": 0.38
+    },
+    {
+     "value": "本科及以上",
+     "share": 0.31
+    },
+    {
+     "value": "不限",
+     "share": 0.19
+    },
+    {
+     "value": "博士及以上",
+     "share": 0.1
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.02
+    }
+   ],
+   "majors": [
+    {
+     "value": "地理信息",
+     "share": 0.27
+    },
+    {
+     "value": "遥感",
+     "share": 0.27
+    },
+    {
+     "value": "计算机",
+     "share": 0.25
+    },
+    {
+     "value": "遥感科学与技术",
+     "share": 0.21
+    },
+    {
+     "value": "测绘工程",
+     "share": 0.17
+    },
+    {
+     "value": "摄影测量与遥感",
+     "share": 0.17
+    },
+    {
+     "value": "测绘",
+     "share": 0.15
+    },
+    {
+     "value": "测绘科学与技术",
+     "share": 0.12
+    },
+    {
+     "value": "信号处理",
+     "share": 0.12
+    },
+    {
+     "value": "软件工程",
+     "share": 0.08
+    }
+   ],
+   "certificates": [
+    {
+     "value": "测量员证",
+     "share": 0.02
+    },
+    {
+     "value": "无人机驾驶证",
+     "share": 0.02
+    },
+    {
+     "value": "同等英语水平证明材料",
+     "share": 0.02
+    },
+    {
+     "value": "英语六级（CET6）425分及以上",
+     "share": 0.02
+    },
+    {
+     "value": "英语四级（CET4）445分及以上",
+     "share": 0.02
+    },
+    {
+     "value": "测绘相关职业技能等级证书",
+     "share": 0.02
+    }
+   ],
+   "skills": [
+    {
+     "domain": "GIS 遥感",
+     "share": 0.62,
+     "tier": "核心",
+     "required_share": 0.87,
+     "typical_level": "掌握",
+     "top": [
+      "ArcGIS",
+      "ENVI",
+      "QGIS",
+      "GDAL",
+      "ERDAS",
+      "GeoServer"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.48,
+     "tier": "常见",
+     "required_share": 0.96,
+     "typical_level": "熟悉",
+     "top": [
+      "Python",
+      "python",
+      "Java",
+      "JavaScript",
+      "C++11",
+      "C++"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.38,
+     "tier": "常见",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "pytorch",
+      "Pytorch",
+      "caffe",
+      "TensorFlow",
+      "OpenCV",
+      "tensorflow"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.31,
+     "tier": "常见",
+     "required_share": 0.8,
+     "typical_level": "熟悉",
+     "top": [
+      "proj",
+      "3dtiles",
+      "Google Earth Engine (GEE)",
+      "Scikit-learn",
+      "地图服务",
+      "SuperMap"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 0.78,
+     "typical_level": "熟悉",
+     "top": [
+      "cgal",
+      "osg",
+      "glm",
+      "3dgs",
+      "cesium",
+      "unity"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "SpringBoot",
+      "SpringCloud",
+      "CSS3",
+      "React",
+      "HTML",
+      "CSS"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 0.86,
+     "typical_level": "熟练",
+     "top": [
+      "Pandas",
+      "空间数据处理",
+      "Matlab",
+      "Spark",
+      "南方平差易",
+      "大气实测数据处理"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 0.86,
+     "typical_level": "精通",
+     "top": [
+      "CAD",
+      "AutoCAD",
+      "Axure",
+      "Adobe photoshop",
+      "Adobe illustrator"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "办公软件",
+      "计算机及信息系统技能",
+      "网络基础类知识",
+      "Windows",
+      "Unix",
+      "APP软件"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Oracle",
+      "MongoDB",
+      "PostgreSQL",
+      "MySQL",
+      "Greenplum",
+      "mongoDB"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "精通",
+     "top": [
+      "矢量/栅格数据应用及可视化技术",
+      "Echart"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "WOFOST",
+      "DSSAT"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "全站仪",
+      "RTK",
+      "水准仪"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "GIS 遥感",
+     "share": 0.48,
+     "tier": "常见",
+     "required_share": 0.78,
+     "typical_level": "了解",
+     "top": [
+      "遥感基础理论",
+      "遥感影像处理流程",
+      "卫星数据格式（GeoTIFF、HDF 等）",
+      "坐标投影转换",
+      "遥感影像处理、目标识别或变化检测相关项目经历",
+      "SAR、多光谱、高光谱等载荷数据特性"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "SAR/InSAR相关理论",
+      "电路原理",
+      "高电压技术",
+      "电气设备设计",
+      "电气行业国标、国网相关设计规范",
+      "坐标系与投影转换"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 0.44,
+     "typical_level": "熟悉",
+     "top": [
+      "机器学习",
+      "计算机视觉",
+      "物体检测",
+      "实例分割",
+      "语义分割",
+      "深度学习"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "AI+遥感算法开发",
+      "全栈开发",
+      "代码规范",
+      "异步编程",
+      "原型链",
+      "HTTP/HTTPS协议"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 0.83,
+     "typical_level": "熟悉",
+     "top": [
+      "数学建模",
+      "数据质量判断",
+      "大数据相关方向",
+      "数据分析",
+      "空间数据处理、转换"
+     ]
+    },
+    {
+     "domain": "地质",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.8,
+     "typical_level": "掌握",
+     "top": [
+      "水文系统开发",
+      "水文模型模拟",
+      "外业工作经验",
+      "测量技能",
+      "控制测量",
+      "测量平差"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.25,
+     "typical_level": "",
+     "top": [
+      "项目实施",
+      "系统工程落地与项目全流程交付",
+      "需求理解、拆解与分析能力"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文档编写",
+      "科研课题申报书编写",
+      "技术文档编写",
+      "报告编写"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "农业农村行业政策、指导意见及标准规范",
+      "4G/5G/IMS网络核心网架构和业务流程",
+      "核心网各接口信令",
+      "信息安全知识",
+      "计算机、网络安全防护与检测技术",
+      "载荷系统基本原理与设计方法"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "前后端开发、联调与功能交付",
+      "DOM",
+      "AJAX",
+      "WebGIS项目开发"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语听说读写能力"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "地图可视化"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "二三维地图渲染"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "气溶胶-云的相互作用及气候效应"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.4,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.29,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.15,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.15,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.08,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "产品经理": {
+   "group": "产品与运营",
+   "jd_count": 60,
+   "jd_with_requirements": 30,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.57
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.23
+    },
+    {
+     "value": "不限",
+     "share": 0.2
+    }
+   ],
+   "majors": [
+    {
+     "value": "计算机",
+     "share": 0.4
+    },
+    {
+     "value": "人工智能",
+     "share": 0.23
+    },
+    {
+     "value": "软件工程",
+     "share": 0.23
+    },
+    {
+     "value": "自动化",
+     "share": 0.17
+    },
+    {
+     "value": "产品设计",
+     "share": 0.13
+    },
+    {
+     "value": "电子信息",
+     "share": 0.13
+    },
+    {
+     "value": "信息管理",
+     "share": 0.13
+    },
+    {
+     "value": "工业设计",
+     "share": 0.1
+    },
+    {
+     "value": "市场营销",
+     "share": 0.1
+    },
+    {
+     "value": "数据科学",
+     "share": 0.07
+    }
+   ],
+   "certificates": [
+    {
+     "value": "期货从业资格证",
+     "share": 0.07
+    },
+    {
+     "value": "英语6级",
+     "share": 0.03
+    },
+    {
+     "value": "英语四级及以上",
+     "share": 0.03
+    },
+    {
+     "value": "英语四级",
+     "share": 0.03
+    },
+    {
+     "value": "CET-4",
+     "share": 0.03
+    },
+    {
+     "value": "英语CET-4及以上",
+     "share": 0.03
+    },
+    {
+     "value": "英语CET-6及以上",
+     "share": 0.03
+    },
+    {
+     "value": "英语CET-4",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "AI 应用",
+     "share": 0.3,
+     "tier": "常见",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "AI工具",
+      "机器学习模型训练",
+      "Prompt Engineering",
+      "RAG",
+      "知识图谱",
+      "Agent"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.27,
+     "tier": "常见",
+     "required_share": 0.62,
+     "typical_level": "熟练",
+     "top": [
+      "Figma",
+      "墨刀",
+      "Axure",
+      "原型设计",
+      "CAD",
+      "SolidWorks"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.2,
+     "tier": "常见",
+     "required_share": 0.17,
+     "typical_level": "熟练",
+     "top": [
+      "Python",
+      "预测算法",
+      "遗传算法",
+      "C++",
+      "Linux Shell",
+      "AI编程/办公助手"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 0.25,
+     "typical_level": "掌握",
+     "top": [
+      "SQL",
+      "MySQL",
+      "SQL Server",
+      "Oracle"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "PPT",
+      "Office",
+      "核心工具与软件",
+      "文档"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 0.25,
+     "typical_level": "熟练",
+     "top": [
+      "数据分析",
+      "问卷/访谈工具",
+      "Excel"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "CCD/CMOS工业相机",
+      "镜头",
+      "LED光源",
+      "传感器",
+      "图纸",
+      "Pro-E"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "掌握",
+     "top": [
+      "PRD撰写",
+      "产品需求文档（PRD）",
+      "文案写作"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "数据看板"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "管理学",
+     "share": 0.4,
+     "tier": "常见",
+     "required_share": 0.75,
+     "typical_level": "熟悉",
+     "top": [
+      "需求分析",
+      "业务理解能力",
+      "分析能力",
+      "业务梳理",
+      "功能定义",
+      "PRD输出"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.33,
+     "tier": "常见",
+     "required_share": 0.6,
+     "typical_level": "精通",
+     "top": [
+      "竞品分析",
+      "用户研究",
+      "线上营销",
+      "用户需求分析",
+      "ToB政企项目对接",
+      "产品管理"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.27,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "大模型",
+      "大语言模型",
+      "AIGC",
+      "智能体",
+      "AI产品效果评估体系",
+      "图像处理基本知识"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 0.71,
+     "typical_level": "",
+     "top": [
+      "数据分析",
+      "网络数据分析",
+      "数据洞察"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.2,
+     "tier": "常见",
+     "required_share": 0.5,
+     "typical_level": "熟悉",
+     "top": [
+      "项目调研",
+      "需求调研",
+      "建筑设计",
+      "工程施工",
+      "调研",
+      "市场调研"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "文档撰写",
+      "需求规格文档撰写",
+      "公文写作"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "产品原型设计",
+      "交互原型设计",
+      "交互设计",
+      "原型验证"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.33,
+     "typical_level": "了解",
+     "top": [
+      "财务信息系统",
+      "财务管理",
+      "财税政策"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "跨部门协作流程",
+      "跨产品线协作",
+      "沟通与协调能力"
+     ]
+    },
+    {
+     "domain": "金融投资",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "了解",
+     "top": [
+      "金融基础知识",
+      "金融监管",
+      "证券/期货交易系统",
+      "异常交易监控",
+      "资产管理",
+      "证券/期货交易业务及交易系统（柜台、行情）"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "系统运维",
+      "原理图/PCB",
+      "无线协议"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "BOM",
+      "供应商",
+      "试产量产",
+      "板材、面板类产品认知"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "AI基础知识",
+      "鲲鹏/昇腾等国产化算力生态",
+      "AI技术发展趋势"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "期货公司合规管理",
+      "合规内控"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "结构"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "可靠性测试"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.63,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.47,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.47,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.43,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.43,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.33,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.2,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.13,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.07,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "用户与内容运营": {
+   "group": "产品与运营",
+   "jd_count": 60,
+   "jd_with_requirements": 29,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.76
+    },
+    {
+     "value": "不限",
+     "share": 0.24
+    }
+   ],
+   "majors": [
+    {
+     "value": "市场营销",
+     "share": 0.38
+    },
+    {
+     "value": "电子商务",
+     "share": 0.17
+    },
+    {
+     "value": "国际贸易",
+     "share": 0.17
+    },
+    {
+     "value": "广告",
+     "share": 0.17
+    },
+    {
+     "value": "广告学",
+     "share": 0.14
+    },
+    {
+     "value": "物流管理",
+     "share": 0.1
+    },
+    {
+     "value": "计算机",
+     "share": 0.1
+    },
+    {
+     "value": "新闻传播",
+     "share": 0.1
+    },
+    {
+     "value": "网络与新媒体",
+     "share": 0.07
+    },
+    {
+     "value": "工商管理",
+     "share": 0.07
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语四级",
+     "share": 0.1
+    },
+    {
+     "value": "英语CET-4",
+     "share": 0.03
+    },
+    {
+     "value": "PMP",
+     "share": 0.03
+    },
+    {
+     "value": "CAPM",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "数据处理与分析",
+     "share": 0.24,
+     "tier": "常见",
+     "required_share": 0.86,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "数据分析",
+      "小红书创作者中心"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.24,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "小红书",
+      "抖音",
+      "新媒体运营",
+      "Shopify",
+      "Google Keyword Planner",
+      "新榜"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "剪映",
+      "PR",
+      "短视频剪辑",
+      "音视频内容独立产出",
+      "AE",
+      "Premiere"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟练",
+     "top": [
+      "AI工具",
+      "AI辅助研究、内容生成、数据整理与复盘",
+      "AI",
+      "AI作图工具"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "图文编辑",
+      "内容排版",
+      "音视频内容独立产出",
+      "135编辑器"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Word",
+      "PowerPoint",
+      "PPT"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "AI产品",
+      "AI应用"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟练",
+     "top": [
+      "Power BI",
+      "数据看板",
+      "BI"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "了解",
+     "top": [
+      "SQL"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Python"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "SAP",
+      "ERP系统"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "市场运营",
+     "share": 0.52,
+     "tier": "核心",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "电商运营",
+      "品牌定位与整合营销活动",
+      "网感",
+      "客户画像分析",
+      "冷启动触达",
+      "商务洽谈"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.24,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "本地化翻译",
+      "语言润色",
+      "英语读写能力",
+      "文档撰写",
+      "文字表达",
+      "信息采编整合"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.24,
+     "tier": "常见",
+     "required_share": 0.86,
+     "typical_level": "精通",
+     "top": [
+      "数据分析",
+      "数据复盘",
+      "数据整理",
+      "数据统计与复盘",
+      "数据分析方法",
+      "店铺分析"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "",
+     "top": [
+      "跨部门项目协作",
+      "社团外联",
+      "活动策划推进"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "工程施工物资特性",
+      "供应商管理",
+      "选品",
+      "订单管理",
+      "供应链运营"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟练",
+     "top": [
+      "英语听说读写",
+      "AIGC",
+      "AI应用",
+      "Token"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "AIGC工作流",
+      "手搓智能体"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "绘画基础",
+      "拍摄"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "竞品调研"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "数据库原理"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "成本控制"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "熟悉",
+     "top": [
+      "IPD",
+      "敏捷",
+      "项目管理"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.41,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.34,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.34,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.34,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.14,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.1,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "游戏运营": {
+   "group": "产品与运营",
+   "jd_count": 47,
+   "jd_with_requirements": 34,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.59
+    },
+    {
+     "value": "不限",
+     "share": 0.29
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.09
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "理工科专业",
+     "share": 0.09
+    },
+    {
+     "value": "计算机",
+     "share": 0.09
+    },
+    {
+     "value": "数字媒体",
+     "share": 0.09
+    },
+    {
+     "value": "数学物理系",
+     "share": 0.06
+    },
+    {
+     "value": "软件",
+     "share": 0.06
+    },
+    {
+     "value": "美术",
+     "share": 0.06
+    },
+    {
+     "value": "理工科类",
+     "share": 0.03
+    },
+    {
+     "value": "计算机相关专业",
+     "share": 0.03
+    },
+    {
+     "value": "物理",
+     "share": 0.03
+    },
+    {
+     "value": "数学",
+     "share": 0.03
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语CET4级或者以上",
+     "share": 0.06
+    },
+    {
+     "value": "日语能力考试·JLPT1级",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "AI 应用",
+     "share": 0.18,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟练",
+     "top": [
+      "AI工具",
+      "视频生成类AI工具"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "office",
+      "思维导图类软件",
+      "Visio",
+      "WPS",
+      "办公软件",
+      "各种工具软件"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 0.25,
+     "typical_level": "熟悉",
+     "top": [
+      "Axure",
+      "PS",
+      "视频剪辑",
+      "图片处理",
+      "图片软件"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "YY",
+      "QT",
+      "虎牙",
+      "斗鱼",
+      "X",
+      "Discord"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "数据分析",
+      "Excel"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "主流游戏引擎",
+      "脚本或编程"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "Unity"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "市场运营",
+     "share": 0.59,
+     "tier": "核心",
+     "required_share": 0.8,
+     "typical_level": "熟悉",
+     "top": [
+      "竞品分析",
+      "广告变现基础逻辑",
+      "二次元文化",
+      "二次元玩家群体",
+      "游戏版本优化",
+      "游戏直播运营"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.35,
+     "tier": "常见",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "数据分析",
+      "数学建模",
+      "数值设计",
+      "数据解读和分析能力",
+      "运营数据分析及统计方式",
+      "数据解读能力"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 0.8,
+     "typical_level": "熟悉",
+     "top": [
+      "游戏行业发展动态",
+      "行业生态与发展趋势",
+      "游戏项目开发和发行各环节",
+      "游戏行业",
+      "欧洲军事史",
+      "军事历史"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 0.8,
+     "typical_level": "精通",
+     "top": [
+      "文字功底",
+      "内容策划",
+      "游戏拆解/攻略撰写/文案创作/视频制作",
+      "精通某一外语，如英语、韩语、日语、阿拉伯语等",
+      "文学功底",
+      "文史知识"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 0.6,
+     "typical_level": "熟悉",
+     "top": [
+      "游戏系统策划",
+      "执行策划",
+      "系统策划",
+      "游戏拆解分析",
+      "游戏设计",
+      "游戏策划"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "外语能力",
+      "AI融入设计流程"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "程序、TD 或技术美术相关背景",
+      "GameJam、游戏开发类社团或比赛",
+      "游戏开发",
+      "程序、TD 或技术美术"
+     ]
+    },
+    {
+     "domain": "经济学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "数学基础"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.65,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.62,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.62,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.53,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.47,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.15,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "UI与视觉设计": {
+   "group": "产品与运营",
+   "jd_count": 60,
+   "jd_with_requirements": 48,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.71
+    },
+    {
+     "value": "不限",
+     "share": 0.19
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.06
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.04
+    }
+   ],
+   "majors": [
+    {
+     "value": "视觉传达",
+     "share": 0.23
+    },
+    {
+     "value": "平面设计",
+     "share": 0.12
+    },
+    {
+     "value": "美术",
+     "share": 0.1
+    },
+    {
+     "value": "工业设计",
+     "share": 0.1
+    },
+    {
+     "value": "视觉传达设计",
+     "share": 0.06
+    },
+    {
+     "value": "设计",
+     "share": 0.06
+    },
+    {
+     "value": "数字媒体",
+     "share": 0.06
+    },
+    {
+     "value": "动画",
+     "share": 0.06
+    },
+    {
+     "value": "数字媒体艺术",
+     "share": 0.06
+    },
+    {
+     "value": "设计相关专业",
+     "share": 0.04
+    }
+   ],
+   "certificates": [],
+   "skills": [
+    {
+     "domain": "设计",
+     "share": 0.79,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Figma",
+      "Photoshop",
+      "PS",
+      "AI",
+      "Illustrator",
+      "AE"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.33,
+     "tier": "常见",
+     "required_share": 0.56,
+     "typical_level": "熟悉",
+     "top": [
+      "Midjourney",
+      "Stable Diffusion",
+      "PyTorch",
+      "Cursor",
+      "Codex",
+      "ClaudeCode"
+     ]
+    },
+    {
+     "domain": "三维与图形",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 0.25,
+     "typical_level": "掌握",
+     "top": [
+      "3D",
+      "Blender",
+      "Rhino",
+      "Keyshot",
+      "SketchUp",
+      "三维建模"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "熟悉",
+     "top": [
+      "Python",
+      "Qt",
+      "C# WinForms/WPF",
+      "JavaFX",
+      "Java",
+      "C"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "AI辅助设计",
+      "AI视频、AI图像等创作工具",
+      "Ai绘图工具"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "Windows",
+      "Unix",
+      "Windows基础办公软件"
+     ]
+    },
+    {
+     "domain": "Web 开发",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "HTML",
+      "CSS"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "Oracle",
+      "SQL server"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "EXCEL",
+      "PQ"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "飞书文档"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "设计",
+     "share": 0.65,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "人机交互原则",
+      "平面设计",
+      "UI界面设计",
+      "色彩搭配",
+      "UI设计原则",
+      "美术功底"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.27,
+     "tier": "常见",
+     "required_share": 0.85,
+     "typical_level": "掌握",
+     "top": [
+      "用户体验设计",
+      "品牌VI",
+      "用户体验设计基本原则",
+      "用户研究",
+      "产品分析",
+      "电商、外卖、本地生活等交易类业务"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.6,
+     "typical_level": "",
+     "top": [
+      "文案编辑及优化",
+      "文案策划",
+      "英文理解能力",
+      "视频脚本撰写",
+      "营销文案优化",
+      "英文阅读能力"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "",
+     "top": [
+      "生成式AI相关项目经验（如LLM、Diffusion等）",
+      "顶会论文或竞赛获奖经历",
+      "VibeCoding",
+      "AI辅助设计"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "软件工程基本流程",
+      "嵌入式系统",
+      "实时操作系统（如VxWorks、Linux RT）",
+      "软件测试流程",
+      "测试工具",
+      "项目开发经验"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "4G/5G/IMS网络核心网架构和业务流程",
+      "核心网各接口信令",
+      "信息安全知识",
+      "计算机、网络安全防护与检测技术"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据分析"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语读写能力"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "AI生成图片版权风险"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "跨境电商物流头程、尾程各类费用及产生逻辑"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "财务基础知识"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "国际化项目经历",
+      "实习经历"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.6,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.42,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.35,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.15,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.15,
+     "tier": "个别",
+     "judge": "简历可判断"
+    }
+   ]
+  },
+  "市场营销": {
+   "group": "市场与销售",
+   "jd_count": 60,
+   "jd_with_requirements": 32,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.53
+    },
+    {
+     "value": "不限",
+     "share": 0.38
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.09
+    }
+   ],
+   "majors": [
+    {
+     "value": "市场营销",
+     "share": 0.34
+    },
+    {
+     "value": "机械",
+     "share": 0.09
+    },
+    {
+     "value": "工商管理",
+     "share": 0.09
+    },
+    {
+     "value": "市场营销类",
+     "share": 0.09
+    },
+    {
+     "value": "国际贸易",
+     "share": 0.09
+    },
+    {
+     "value": "电子商务",
+     "share": 0.06
+    },
+    {
+     "value": "英语",
+     "share": 0.06
+    },
+    {
+     "value": "机械类",
+     "share": 0.06
+    },
+    {
+     "value": "视觉传达设计",
+     "share": 0.03
+    },
+    {
+     "value": "新闻传播",
+     "share": 0.03
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语六级",
+     "share": 0.06
+    },
+    {
+     "value": "英语CET-6",
+     "share": 0.03
+    },
+    {
+     "value": "C1驾照",
+     "share": 0.03
+    },
+    {
+     "value": "德语欧标B2水平的相关证书",
+     "share": 0.03
+    },
+    {
+     "value": "专八",
+     "share": 0.03
+    },
+    {
+     "value": "专四",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.31,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Word",
+      "办公软件",
+      "PPT",
+      "office办公软件",
+      "办公室工作软件",
+      "相关软件"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "视频剪辑",
+      "绘图排版软件",
+      "图文排版",
+      "Canva",
+      "剪映",
+      "做图"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "数据统计分析技术"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文档撰写",
+      "文案编辑",
+      "微信公众号编辑及运营"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "新媒体平台",
+      "微信",
+      "小红书",
+      "抖音"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "活动策划"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AI工具"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "市场运营",
+     "share": 0.53,
+     "tier": "核心",
+     "required_share": 0.59,
+     "typical_level": "熟悉",
+     "top": [
+      "销售",
+      "政府/国企项目对接",
+      "本地客户资源",
+      "国内外主流社媒",
+      "市场经验",
+      "教培行业经验"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "文字功底",
+      "公文写作",
+      "文案编辑和撰写",
+      "内容策略与规划",
+      "中英文帖文撰写",
+      "英语或德语听说读写"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 0.83,
+     "typical_level": "熟悉",
+     "top": [
+      "市场调研",
+      "信息检索",
+      "高企等科技项目申报流程",
+      "考研政策及流程",
+      "教育行业",
+      "考研"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据分析",
+      "归纳分析",
+      "统计能力"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "英语口语",
+      "沟通能力",
+      "交际技巧",
+      "服务意识",
+      "学习能力",
+      "团队合作"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "管理",
+      "公务员考试"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "法律知识",
+      "相关规定和政策"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "熟悉",
+     "top": [
+      "工程类招投标流程"
+     ]
+    },
+    {
+     "domain": "人力资源",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "教育培训"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.72,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.5,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.47,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.41,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.41,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.22,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.16,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "影响力",
+     "share": 0.06,
+     "tier": "个别",
+     "judge": "简历可判断"
+    }
+   ]
+  },
+  "销售": {
+   "group": "市场与销售",
+   "jd_count": 60,
+   "jd_with_requirements": 29,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.38
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.31
+    },
+    {
+     "value": "不限",
+     "share": 0.28
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "市场营销",
+     "share": 0.31
+    },
+    {
+     "value": "工商管理",
+     "share": 0.1
+    },
+    {
+     "value": "机械",
+     "share": 0.1
+    },
+    {
+     "value": "国际贸易",
+     "share": 0.1
+    },
+    {
+     "value": "医学",
+     "share": 0.07
+    },
+    {
+     "value": "自动化",
+     "share": 0.07
+    },
+    {
+     "value": "电子",
+     "share": 0.03
+    },
+    {
+     "value": "计算机",
+     "share": 0.03
+    },
+    {
+     "value": "通信",
+     "share": 0.03
+    },
+    {
+     "value": "软件",
+     "share": 0.03
+    }
+   ],
+   "certificates": [
+    {
+     "value": "C1驾照",
+     "share": 0.03
+    },
+    {
+     "value": "四六级",
+     "share": 0.03
+    },
+    {
+     "value": "CET6",
+     "share": 0.03
+    },
+    {
+     "value": "相关基础水平证书",
+     "share": 0.03
+    },
+    {
+     "value": "证券从业资格考试",
+     "share": 0.03
+    },
+    {
+     "value": "基金从业资格考试",
+     "share": 0.03
+    },
+    {
+     "value": "英语专业需专四达标",
+     "share": 0.03
+    },
+    {
+     "value": "英语六级425分及以上或同等更高外语成绩",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Office办公软件",
+      "驾驶",
+      "英语",
+      "西语",
+      "第二外语",
+      "办公软件"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "市场运营",
+     "share": 0.41,
+     "tier": "常见",
+     "required_share": 0.92,
+     "typical_level": "熟悉",
+     "top": [
+      "销售工作经验",
+      "业务资源",
+      "销售模式及销售工作职能",
+      "医疗器械销售",
+      "产品知识与销售技巧",
+      "政企项目销售逻辑"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 0.75,
+     "typical_level": "熟悉",
+     "top": [
+      "国际海运物流行业运作模式",
+      "工控产品（电机、驱动器、PLC等）",
+      "商务谈判"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "政策理解能力",
+      "新能源电力行业从事经验",
+      "移动通信网络的技术发展及全程全网概念"
+     ]
+    },
+    {
+     "domain": "GIS 遥感",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "遥感、水利信息化行业新技术、新趋势"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语水平"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "项目运作"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.86,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.59,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.59,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.48,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.28,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.07,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.07,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "影响力",
+     "share": 0.03,
+     "tier": "个别",
+     "judge": "简历可判断"
+    }
+   ]
+  },
+  "人力资源": {
+   "group": "职能",
+   "jd_count": 60,
+   "jd_with_requirements": 29,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.38
+    },
+    {
+     "value": "不限",
+     "share": 0.31
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.14
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.14
+    },
+    {
+     "value": "博士及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "人力资源管理",
+     "share": 0.28
+    },
+    {
+     "value": "人力资源",
+     "share": 0.28
+    },
+    {
+     "value": "心理学",
+     "share": 0.28
+    },
+    {
+     "value": "工商管理",
+     "share": 0.24
+    },
+    {
+     "value": "管理类",
+     "share": 0.1
+    },
+    {
+     "value": "管理学",
+     "share": 0.07
+    },
+    {
+     "value": "公共事业管理",
+     "share": 0.03
+    },
+    {
+     "value": "劳动社会与保障",
+     "share": 0.03
+    },
+    {
+     "value": "人力资源相关专业",
+     "share": 0.03
+    },
+    {
+     "value": "新闻传播学",
+     "share": 0.03
+    }
+   ],
+   "certificates": [
+    {
+     "value": "国家健将级运动员等级证书",
+     "share": 0.03
+    },
+    {
+     "value": "英语CET-6级",
+     "share": 0.03
+    },
+    {
+     "value": "英语四级",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.45,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "办公软件",
+      "Office办公软件",
+      "信息化系统",
+      "OFFICE",
+      "Word",
+      "Office"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "表格数据"
+     ]
+    },
+    {
+     "domain": "人力资源",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟练",
+     "top": [
+      "招聘平台",
+      "主流招聘平台"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "抖音",
+      "小红书",
+      "快上就行"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "人力资源",
+     "share": 0.59,
+     "tier": "核心",
+     "required_share": 0.76,
+     "typical_level": "熟悉",
+     "top": [
+      "招聘",
+      "国家劳动法规、法律及政策",
+      "人力资源基本逻辑",
+      "制度梳理",
+      "流程优化",
+      "生产制造业人力资源管理各个职能模块"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "人力数据分析",
+      "数据分析",
+      "数据处理",
+      "基础数据分析能力"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "熟悉",
+     "top": [
+      "企业管理知识",
+      "党建知识"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "了解",
+     "top": [
+      "中央党纪党规",
+      "劳动人事政策法规"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文字功底"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "雇主品牌经验"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文档管理"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "学生会",
+      "外联"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.83,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.45,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.41,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.34,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.31,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.17,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "影响力",
+     "share": 0.07,
+     "tier": "个别",
+     "judge": "简历可判断"
+    }
+   ]
+  },
+  "财务会计": {
+   "group": "职能",
+   "jd_count": 60,
+   "jd_with_requirements": 32,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.44
+    },
+    {
+     "value": "不限",
+     "share": 0.44
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.06
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.06
+    }
+   ],
+   "majors": [
+    {
+     "value": "会计",
+     "share": 0.34
+    },
+    {
+     "value": "财务管理",
+     "share": 0.31
+    },
+    {
+     "value": "会计学",
+     "share": 0.16
+    },
+    {
+     "value": "审计",
+     "share": 0.12
+    },
+    {
+     "value": "财务相关专业",
+     "share": 0.12
+    },
+    {
+     "value": "财务",
+     "share": 0.12
+    },
+    {
+     "value": "财务类",
+     "share": 0.03
+    },
+    {
+     "value": "法务会计",
+     "share": 0.03
+    },
+    {
+     "value": "法律",
+     "share": 0.03
+    },
+    {
+     "value": "经济学",
+     "share": 0.03
+    }
+   ],
+   "certificates": [
+    {
+     "value": "CET-4",
+     "share": 0.06
+    },
+    {
+     "value": "初级会计职称",
+     "share": 0.06
+    },
+    {
+     "value": "会计从业资格证",
+     "share": 0.06
+    },
+    {
+     "value": "英语CET4>425",
+     "share": 0.03
+    },
+    {
+     "value": "英语四级",
+     "share": 0.03
+    },
+    {
+     "value": "基金从业资格",
+     "share": 0.03
+    },
+    {
+     "value": "证券从业资格",
+     "share": 0.03
+    },
+    {
+     "value": "中级会计",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.34,
+     "tier": "常见",
+     "required_share": 0.91,
+     "typical_level": "熟练",
+     "top": [
+      "办公软件",
+      "英语口语",
+      "计算机应用能力",
+      "WORD",
+      "常用办公软件",
+      "计算机操作技能"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.31,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "财务软件",
+      "金蝶",
+      "会计软件",
+      "报税软件",
+      "开票软件",
+      "用友"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.25,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "EXCEL",
+      "数据分析",
+      "Excel函数",
+      "常用函数（如VLOOKUP、数据透视表等）"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "SAP",
+      "ERP软件",
+      "ERP",
+      "ERP系统"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "财务会计",
+     "share": 0.56,
+     "tier": "核心",
+     "required_share": 0.83,
+     "typical_level": "熟悉",
+     "top": [
+      "企业会计准则",
+      "固定资产管理",
+      "进出口财务",
+      "会计核算",
+      "财务分析",
+      "税法"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "数据分析",
+      "数据分析能力",
+      "数据分析处理",
+      "业务收入的确认和计量",
+      "数据处理能力"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "成本核算",
+      "成本分析",
+      "标准成本核算",
+      "价差分析",
+      "成本账务处理",
+      "料工费归集分摊"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.12,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "税务法规",
+      "财税基础法规",
+      "财税法规",
+      "国内财税基础法规"
+     ]
+    },
+    {
+     "domain": "审计",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "审计"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文字功底"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "问题解决"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "英语听说读写能力"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.69,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.53,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.5,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.31,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.28,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.25,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.22,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.16,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.09,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "审计": {
+   "group": "职能",
+   "jd_count": 60,
+   "jd_with_requirements": 45,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.71
+    },
+    {
+     "value": "不限",
+     "share": 0.22
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.04
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.02
+    }
+   ],
+   "majors": [
+    {
+     "value": "审计",
+     "share": 0.36
+    },
+    {
+     "value": "财务管理",
+     "share": 0.33
+    },
+    {
+     "value": "会计",
+     "share": 0.27
+    },
+    {
+     "value": "审计学",
+     "share": 0.18
+    },
+    {
+     "value": "会计学",
+     "share": 0.16
+    },
+    {
+     "value": "财务",
+     "share": 0.11
+    },
+    {
+     "value": "财政学",
+     "share": 0.09
+    },
+    {
+     "value": "金融",
+     "share": 0.07
+    },
+    {
+     "value": "法学",
+     "share": 0.07
+    },
+    {
+     "value": "统计",
+     "share": 0.04
+    }
+   ],
+   "certificates": [
+    {
+     "value": "CPA",
+     "share": 0.09
+    },
+    {
+     "value": "初级会计职称",
+     "share": 0.04
+    },
+    {
+     "value": "初级会计师",
+     "share": 0.04
+    },
+    {
+     "value": "雅思6.5",
+     "share": 0.02
+    },
+    {
+     "value": "英语6级",
+     "share": 0.02
+    },
+    {
+     "value": "托福90分及以上",
+     "share": 0.02
+    },
+    {
+     "value": "英语四级",
+     "share": 0.02
+    },
+    {
+     "value": "中级职称(职业资格)及以上",
+     "share": 0.02
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.51,
+     "tier": "核心",
+     "required_share": 0.96,
+     "typical_level": "熟练",
+     "top": [
+      "办公软件",
+      "Office办公软件",
+      "OFFICE",
+      "PPT",
+      "Word",
+      "计算机"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.16,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "函数运用技巧"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟练",
+     "top": [
+      "Python"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "财务核算软件",
+      "财务软件"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "SQL"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "Power BI"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "了解",
+     "top": [
+      "ERP系统"
+     ]
+    },
+    {
+     "domain": "审计",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "审计软件"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "财务会计",
+     "share": 0.38,
+     "tier": "常见",
+     "required_share": 0.59,
+     "typical_level": "熟悉",
+     "top": [
+      "企业会计准则",
+      "财税领域",
+      "CPA",
+      "ACCA",
+      "CGA",
+      "财务知识体系"
+     ]
+    },
+    {
+     "domain": "审计",
+     "share": 0.2,
+     "tier": "常见",
+     "required_share": 0.89,
+     "typical_level": "了解",
+     "top": [
+      "审计",
+      "稽核审计",
+      "审计程序的目的",
+      "审计基本操作流程",
+      "事务所实习审计经验",
+      "内控制度、流程、风险矩阵等的持续优化和完善"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 0.83,
+     "typical_level": "熟悉",
+     "top": [
+      "政策法规",
+      "相关规定和政策",
+      "国家财经法规",
+      "合同管理",
+      "财税法规"
+     ]
+    },
+    {
+     "domain": "金融投资",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "评估",
+      "商业银行各项业务",
+      "私募基金、证券行业法律法规及监管要求",
+      "基金募集、备案、运作全流程"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "咨询",
+      "信息管理"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数理功底",
+      "数据整理",
+      "逻辑分析"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文字表达能力"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "沟通协调能力"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "计算机科学"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "制造业成本核算逻辑与业务流程"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.02,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "熟悉",
+     "top": [
+      "招投标流程"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "团队协作",
+     "share": 0.64,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.6,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.6,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.53,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.07,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.02,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "行政文秘": {
+   "group": "职能",
+   "jd_count": 60,
+   "jd_with_requirements": 26,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.46
+    },
+    {
+     "value": "不限",
+     "share": 0.27
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.27
+    }
+   ],
+   "majors": [
+    {
+     "value": "行政管理",
+     "share": 0.31
+    },
+    {
+     "value": "文秘",
+     "share": 0.23
+    },
+    {
+     "value": "工商管理",
+     "share": 0.12
+    },
+    {
+     "value": "人力资源",
+     "share": 0.08
+    },
+    {
+     "value": "新闻",
+     "share": 0.04
+    },
+    {
+     "value": "中文",
+     "share": 0.04
+    },
+    {
+     "value": "生物医药",
+     "share": 0.04
+    },
+    {
+     "value": "人力资源相关专业",
+     "share": 0.04
+    },
+    {
+     "value": "公共管理",
+     "share": 0.04
+    },
+    {
+     "value": "行政",
+     "share": 0.04
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语六级",
+     "share": 0.04
+    },
+    {
+     "value": "驾照",
+     "share": 0.04
+    },
+    {
+     "value": "CET-6",
+     "share": 0.04
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.81,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Word",
+      "Office办公软件",
+      "办公软件",
+      "Office",
+      "常用办公软件",
+      "PowerPoint"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.27,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "EXCEL"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "文档排版"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "PS"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "写作与内容",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 0.8,
+     "typical_level": "",
+     "top": [
+      "文字功底",
+      "材料撰写",
+      "学术相关材料撰写",
+      "排版与校对",
+      "英语可作为工作语言",
+      "基础中英互译"
+     ]
+    },
+    {
+     "domain": "协同组织",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "商务行政",
+      "档案整理"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "档案管理",
+      "文档管理"
+     ]
+    },
+    {
+     "domain": "人力资源",
+     "share": 0.08,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "了解",
+     "top": [
+      "行政、人事类相关实习经验",
+      "劳动合同",
+      "社保基础常识",
+      "人事工作经验",
+      "校学生会干部经验"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "物资采管"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据处理与分析"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "了解",
+     "top": [
+      "文化传媒行业"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "行政办公基本流程"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "销售跟单",
+      "售后客户"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "语言表达"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.85,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.73,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.54,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.42,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.31,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.15,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "法务": {
+   "group": "职能",
+   "jd_count": 55,
+   "jd_with_requirements": 30,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.43
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.33
+    },
+    {
+     "value": "不限",
+     "share": 0.2
+    },
+    {
+     "value": "博士及以上",
+     "share": 0.03
+    }
+   ],
+   "majors": [
+    {
+     "value": "法学",
+     "share": 0.57
+    },
+    {
+     "value": "法律",
+     "share": 0.17
+    },
+    {
+     "value": "审计学",
+     "share": 0.1
+    },
+    {
+     "value": "会计学",
+     "share": 0.1
+    },
+    {
+     "value": "法学类",
+     "share": 0.1
+    },
+    {
+     "value": "财务管理",
+     "share": 0.07
+    },
+    {
+     "value": "法学相关专业",
+     "share": 0.07
+    },
+    {
+     "value": "国际法",
+     "share": 0.07
+    },
+    {
+     "value": "经济法",
+     "share": 0.07
+    },
+    {
+     "value": "法律相关专业",
+     "share": 0.07
+    }
+   ],
+   "certificates": [
+    {
+     "value": "法律职业资格证书",
+     "share": 0.03
+    },
+    {
+     "value": "大学英语四级",
+     "share": 0.03
+    },
+    {
+     "value": "法律职业资格证书（A证）",
+     "share": 0.03
+    },
+    {
+     "value": "国家统一法律职业资格考试（A 证）",
+     "share": 0.03
+    },
+    {
+     "value": "法律职业资格考试",
+     "share": 0.03
+    },
+    {
+     "value": "国家统一法律职业资格考试或同等资格考试",
+     "share": 0.03
+    },
+    {
+     "value": "国家统一法律职业资格考试",
+     "share": 0.03
+    },
+    {
+     "value": "语言类相关证书",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.23,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Office办公软件",
+      "办公软件",
+      "Word",
+      "Office 办公软件",
+      "Office",
+      "英语"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "WIPO",
+      "USPTO",
+      "智慧芽"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "Excel"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "英语读写"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "财务审计工具"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "熟练",
+     "top": [
+      "AI工具"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "法律",
+     "share": 0.53,
+     "tier": "核心",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "公司法",
+      "合同法",
+      "民法典",
+      "IP审查",
+      "IP检索",
+      "平台IP规则"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "法律文书写作",
+      "文字写作能力",
+      "制度撰写",
+      "文字表达能力"
+     ]
+    },
+    {
+     "domain": "人力资源",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "劳动法",
+      "劳动法律法规",
+      "劳动合同法"
+     ]
+    },
+    {
+     "domain": "审计",
+     "share": 0.1,
+     "tier": "个别",
+     "required_share": 0.67,
+     "typical_level": "熟悉",
+     "top": [
+      "风险识别",
+      "国家审计法规",
+      "内部控制规范",
+      "审计工作流程",
+      "内部审计项目",
+      "经营审计"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "逻辑分析能力",
+      "商务谈判潜质",
+      "企业日常管理知识"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "",
+     "top": [
+      "财务审计",
+      "财务"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "数据分析"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.67,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.47,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.43,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.4,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.33,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.3,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.27,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.2,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.17,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "采购": {
+   "group": "职能",
+   "jd_count": 60,
+   "jd_with_requirements": 31,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.55
+    },
+    {
+     "value": "不限",
+     "share": 0.32
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.06
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.06
+    }
+   ],
+   "majors": [
+    {
+     "value": "物流管理",
+     "share": 0.19
+    },
+    {
+     "value": "电气",
+     "share": 0.16
+    },
+    {
+     "value": "机械",
+     "share": 0.16
+    },
+    {
+     "value": "工商管理",
+     "share": 0.16
+    },
+    {
+     "value": "采购管理",
+     "share": 0.13
+    },
+    {
+     "value": "电子",
+     "share": 0.1
+    },
+    {
+     "value": "供应链",
+     "share": 0.1
+    },
+    {
+     "value": "国际贸易",
+     "share": 0.06
+    },
+    {
+     "value": "材料",
+     "share": 0.06
+    },
+    {
+     "value": "供应链管理",
+     "share": 0.06
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语四级",
+     "share": 0.06
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.29,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Office办公软件",
+      "Office",
+      "办公软件",
+      "办公自动化软件",
+      "PowerPoint"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "ERP系统"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "采购供应链",
+     "share": 0.48,
+     "tier": "常见",
+     "required_share": 0.8,
+     "typical_level": "熟悉",
+     "top": [
+      "商务谈判",
+      "供应市场",
+      "供应商开发、选择、评估流程",
+      "谈判技能",
+      "风险管理能力",
+      "常用物料性能"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.19,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据处理能力",
+      "数字分析",
+      "数据整理",
+      "数据分析能力",
+      "数据分析",
+      "基础数据分析能力"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.16,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "成本意识",
+      "搜集及成本分析能力",
+      "成本核算",
+      "成本知识"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "电子料、标准件、电气件、控制件等品牌及产品",
+      "市场信息搜集",
+      "客户对接"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "合同合规",
+      "法务知识"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "总结报告",
+      "报告能力"
+     ]
+    },
+    {
+     "domain": "经济学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "市场经济理论知识"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "问题解决能力"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "汇报总结"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "掌握",
+     "top": [
+      "基础光学和光通讯光器件知识",
+      "研磨、抛光、镀膜等光学冷加工工艺及常用光学性能指标"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语听说读写能力"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.52,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.45,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.32,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.29,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.19,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.13,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.03,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "物流供应链": {
+   "group": "职能",
+   "jd_count": 60,
+   "jd_with_requirements": 34,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.5
+    },
+    {
+     "value": "不限",
+     "share": 0.38
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.06
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.06
+    }
+   ],
+   "majors": [
+    {
+     "value": "物流管理",
+     "share": 0.41
+    },
+    {
+     "value": "供应链管理",
+     "share": 0.32
+    },
+    {
+     "value": "国际贸易",
+     "share": 0.18
+    },
+    {
+     "value": "国际经济与贸易",
+     "share": 0.09
+    },
+    {
+     "value": "数据统计学",
+     "share": 0.09
+    },
+    {
+     "value": "工业工程",
+     "share": 0.09
+    },
+    {
+     "value": "物流",
+     "share": 0.06
+    },
+    {
+     "value": "物流工程",
+     "share": 0.06
+    },
+    {
+     "value": "交通运输",
+     "share": 0.06
+    },
+    {
+     "value": "工商管理",
+     "share": 0.06
+    }
+   ],
+   "certificates": [
+    {
+     "value": "英语 CET-4 及以上",
+     "share": 0.09
+    },
+    {
+     "value": "英语6级",
+     "share": 0.06
+    },
+    {
+     "value": "英语CET-4",
+     "share": 0.03
+    },
+    {
+     "value": "英语四级",
+     "share": 0.03
+    },
+    {
+     "value": "大学英语四级（CET-4）",
+     "share": 0.03
+    },
+    {
+     "value": "英语CET-4及以上",
+     "share": 0.03
+    },
+    {
+     "value": "大学英语四六级证书",
+     "share": 0.03
+    },
+    {
+     "value": "销售师(一级、二级)",
+     "share": 0.03
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.32,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Office办公软件",
+      "办公软件",
+      "英语",
+      "计算机操作",
+      "office办公软件",
+      "Office"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.24,
+     "tier": "常见",
+     "required_share": 0.88,
+     "typical_level": "熟悉",
+     "top": [
+      "ERP",
+      "WMS",
+      "ERP软件",
+      "物流管理系统",
+      "物流使用平台",
+      "供应链分析"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.15,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "数据处理",
+      "EXCEL"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "掌握",
+     "top": [
+      "Python"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.5,
+     "typical_level": "掌握",
+     "top": [
+      "Tableau",
+      "Power BI",
+      "BI"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "英语"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AI及数字化工具"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "掌握",
+     "top": [
+      "SQL"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "采购供应链",
+     "share": 0.38,
+     "tier": "常见",
+     "required_share": 0.54,
+     "typical_level": "熟悉",
+     "top": [
+      "国内电商仓储物流经历",
+      "供应商管理",
+      "物料计划",
+      "物流流程",
+      "仓储运作",
+      "货代行业工作经验"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.21,
+     "tier": "常见",
+     "required_share": 0.86,
+     "typical_level": "",
+     "top": [
+      "数据分析",
+      "数据统计",
+      "数据、AI及数字化工具解决问题"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "进出口贸易流程及相关法规",
+      "法律法规"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语作为工作语言"
+     ]
+    },
+    {
+     "domain": "成本分析",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "成本管控"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "项目管理"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "流程思维和文档撰写"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.03,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "运营"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.65,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.5,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.41,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.38,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.35,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.35,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.32,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.24,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.03,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "金融投资": {
+   "group": "金融与咨询",
+   "jd_count": 38,
+   "jd_with_requirements": 22,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.45
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.32
+    },
+    {
+     "value": "不限",
+     "share": 0.23
+    }
+   ],
+   "majors": [
+    {
+     "value": "金融",
+     "share": 0.27
+    },
+    {
+     "value": "经济",
+     "share": 0.27
+    },
+    {
+     "value": "人工智能",
+     "share": 0.14
+    },
+    {
+     "value": "法学",
+     "share": 0.14
+    },
+    {
+     "value": "保险",
+     "share": 0.14
+    },
+    {
+     "value": "金融科技",
+     "share": 0.14
+    },
+    {
+     "value": "计算机",
+     "share": 0.14
+    },
+    {
+     "value": "金融学",
+     "share": 0.09
+    },
+    {
+     "value": "金融工程",
+     "share": 0.09
+    },
+    {
+     "value": "投资学",
+     "share": 0.09
+    }
+   ],
+   "certificates": [
+    {
+     "value": "证券从业资格考试",
+     "share": 0.14
+    },
+    {
+     "value": "国家法律职业资格考试",
+     "share": 0.09
+    },
+    {
+     "value": "基金从业资格考试",
+     "share": 0.09
+    },
+    {
+     "value": "CPA",
+     "share": 0.05
+    },
+    {
+     "value": "证券行业专业人员水平评价测试",
+     "share": 0.05
+    },
+    {
+     "value": "CFA",
+     "share": 0.05
+    },
+    {
+     "value": "法律职业资格",
+     "share": 0.05
+    },
+    {
+     "value": "FRM",
+     "share": 0.05
+    }
+   ],
+   "skills": [
+    {
+     "domain": "数据处理与分析",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "Excel",
+      "Hadoop",
+      "Spark",
+      "Hive",
+      "Flink"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "办公软件"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "大模型",
+      "提示词工程",
+      "RAG",
+      "Agent",
+      "TensorFlow",
+      "PyTorch"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Axure",
+      "Figma",
+      "墨刀"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "Python",
+      "C++",
+      "Java"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "金融投资",
+     "share": 0.27,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "投资分析",
+      "项目尽调",
+      "风险评估",
+      "投后管理",
+      "股票",
+      "基金"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "财务建模",
+      "财务预测"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据与文字能力",
+      "口头表达能力",
+      "公文写作能力"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "数据建模理论与方法",
+      "数据分析能力"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "行业研究",
+      "撰写研究报告",
+      "撰写调研报告"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "大模型微调",
+      "性能优化",
+      "评测"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.05,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "三会运作"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "责任心",
+     "share": 0.73,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.59,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.55,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.45,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.41,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.23,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.18,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.05,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "咨询与研究": {
+   "group": "金融与咨询",
+   "jd_count": 29,
+   "jd_with_requirements": 18,
+   "degree": [
+    {
+     "value": "硕士及以上",
+     "share": 0.33
+    },
+    {
+     "value": "不限",
+     "share": 0.28
+    },
+    {
+     "value": "本科及以上",
+     "share": 0.28
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.11
+    }
+   ],
+   "majors": [
+    {
+     "value": "市场营销",
+     "share": 0.17
+    },
+    {
+     "value": "金融学",
+     "share": 0.11
+    },
+    {
+     "value": "经济学",
+     "share": 0.11
+    },
+    {
+     "value": "工商管理",
+     "share": 0.11
+    },
+    {
+     "value": "审计",
+     "share": 0.11
+    },
+    {
+     "value": "计算机软件硬件",
+     "share": 0.06
+    },
+    {
+     "value": "机器人",
+     "share": 0.06
+    },
+    {
+     "value": "教育学",
+     "share": 0.06
+    },
+    {
+     "value": "航空航天工程",
+     "share": 0.06
+    },
+    {
+     "value": "产业经济",
+     "share": 0.06
+    }
+   ],
+   "certificates": [
+    {
+     "value": "ACCA",
+     "share": 0.06
+    },
+    {
+     "value": "CPA",
+     "share": 0.06
+    },
+    {
+     "value": "ESG",
+     "share": 0.06
+    }
+   ],
+   "skills": [
+    {
+     "domain": "数据处理与分析",
+     "share": 0.33,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Excel",
+      "数据分析工具",
+      "Excel高级函数",
+      "数字化工具"
+     ]
+    },
+    {
+     "domain": "通用办公",
+     "share": 0.22,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "PPT",
+      "Word",
+      "办公软件",
+      "PowerPoint"
+     ]
+    },
+    {
+     "domain": "金融投资",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "Wind",
+      "Bloomberg"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "AI大模型",
+      "AI"
+     ]
+    },
+    {
+     "domain": "数据库",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "行业数据库"
+     ]
+    },
+    {
+     "domain": "BI 可视化",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "图文可视化工具"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AI"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "写作与内容",
+     "share": 0.28,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "文字功底",
+      "写作能力",
+      "文字输出",
+      "文字撰写",
+      "内容总结",
+      "文案输出"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.28,
+     "tier": "常见",
+     "required_share": 0.6,
+     "typical_level": "熟悉",
+     "top": [
+      "行业研究",
+      "产业认知",
+      "商业航天全产业链",
+      "研究方法和思路",
+      "行研/咨询实习经验"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.22,
+     "tier": "常见",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "数据分析",
+      "数据分析能力",
+      "分析建模",
+      "数据整理"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.17,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "英语或日语的交流能力",
+      "管理",
+      "管理咨询",
+      "战略管理",
+      "方案梳理"
+     ]
+    },
+    {
+     "domain": "金融投资",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "金融理论基础",
+      "金融模型和估值方法",
+      "经济金融理论知识"
+     ]
+    },
+    {
+     "domain": "财务会计",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "财税服务或咨询工作",
+      "财税信息整合"
+     ]
+    },
+    {
+     "domain": "经济学",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "了解",
+     "top": [
+      "自贸港利好政策"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "资源运营"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "表达能力"
+     ]
+    },
+    {
+     "domain": "审计",
+     "share": 0.06,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "风险控制"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.83,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.72,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.67,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.61,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.44,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.39,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.33,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.22,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.11,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.11,
+     "tier": "个别",
+     "judge": "简历可判断"
+    }
+   ]
+  },
+  "管理培训生": {
+   "group": "综合",
+   "jd_count": 60,
+   "jd_with_requirements": 23,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.48
+    },
+    {
+     "value": "不限",
+     "share": 0.39
+    },
+    {
+     "value": "硕士及以上",
+     "share": 0.13
+    }
+   ],
+   "majors": [
+    {
+     "value": "金融",
+     "share": 0.17
+    },
+    {
+     "value": "工商管理",
+     "share": 0.17
+    },
+    {
+     "value": "经济",
+     "share": 0.13
+    },
+    {
+     "value": "财会",
+     "share": 0.13
+    },
+    {
+     "value": "法律",
+     "share": 0.13
+    },
+    {
+     "value": "土木工程",
+     "share": 0.13
+    },
+    {
+     "value": "人力资源管理",
+     "share": 0.09
+    },
+    {
+     "value": "理工类",
+     "share": 0.09
+    },
+    {
+     "value": "市场营销",
+     "share": 0.09
+    },
+    {
+     "value": "工程管理",
+     "share": 0.09
+    }
+   ],
+   "certificates": [
+    {
+     "value": "证券行业专业人员水平评价测试",
+     "share": 0.09
+    },
+    {
+     "value": "期货从业资格",
+     "share": 0.04
+    },
+    {
+     "value": "证券从业资格",
+     "share": 0.04
+    },
+    {
+     "value": "基金从业资格",
+     "share": 0.04
+    },
+    {
+     "value": "CET4及以上",
+     "share": 0.04
+    },
+    {
+     "value": "特许金融分析师（CFA）",
+     "share": 0.04
+    },
+    {
+     "value": "司法考试",
+     "share": 0.04
+    },
+    {
+     "value": "注册会计师（CPA）",
+     "share": 0.04
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "WPS",
+      "英语口语"
+     ]
+    },
+    {
+     "domain": "编程开发",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "DCS系统"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "SPC"
+     ]
+    },
+    {
+     "domain": "AI 应用",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "AI及数字化工具"
+     ]
+    },
+    {
+     "domain": "设计",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "剪映",
+      "PR"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "市场运营",
+     "share": 0.13,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "营销技巧",
+      "需求分析",
+      "客户服务",
+      "短视频平台规则",
+      "美妆短视频创作逻辑",
+      "客户开发与沟通"
+     ]
+    },
+    {
+     "domain": "行业研究",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "市场研究",
+      "生产设备状态检查"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "5S规定",
+      "作业许可程序",
+      "商业意识"
+     ]
+    },
+    {
+     "domain": "采购供应链",
+     "share": 0.09,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "供应链与制造运营",
+      "面料-拉链匹配",
+      "订单处理"
+     ]
+    },
+    {
+     "domain": "其他",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "AI实习经验"
+     ]
+    },
+    {
+     "domain": "金融投资",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "方案设计",
+      "综合金融服务",
+      "风险管理"
+     ]
+    },
+    {
+     "domain": "法律",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "合规与反洗钱"
+     ]
+    },
+    {
+     "domain": "环境工程",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "化学品操作规定"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "数据、AI及数字化工具解决问题"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "学习成长",
+     "share": 0.65,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "沟通表达",
+     "share": 0.57,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.48,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.43,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.26,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.22,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.04,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  },
+  "教师": {
+   "group": "综合",
+   "jd_count": 60,
+   "jd_with_requirements": 28,
+   "degree": [
+    {
+     "value": "本科及以上",
+     "share": 0.46
+    },
+    {
+     "value": "不限",
+     "share": 0.43
+    },
+    {
+     "value": "专科及以上",
+     "share": 0.11
+    }
+   ],
+   "majors": [
+    {
+     "value": "英语",
+     "share": 0.11
+    },
+    {
+     "value": "英语教育",
+     "share": 0.07
+    },
+    {
+     "value": "理工科相关专业",
+     "share": 0.07
+    },
+    {
+     "value": "动物学",
+     "share": 0.04
+    },
+    {
+     "value": "神经生物学",
+     "share": 0.04
+    },
+    {
+     "value": "以及相关专业",
+     "share": 0.04
+    },
+    {
+     "value": "生态学",
+     "share": 0.04
+    },
+    {
+     "value": "水生生物学",
+     "share": 0.04
+    },
+    {
+     "value": "植物学",
+     "share": 0.04
+    },
+    {
+     "value": "生物物理学",
+     "share": 0.04
+    }
+   ],
+   "certificates": [
+    {
+     "value": "教师资格证",
+     "share": 0.18
+    },
+    {
+     "value": "普通话二级乙等及其以上等级",
+     "share": 0.11
+    },
+    {
+     "value": "高级中学教师资格证书",
+     "share": 0.11
+    },
+    {
+     "value": "托福≥100",
+     "share": 0.04
+    },
+    {
+     "value": "专八",
+     "share": 0.04
+    },
+    {
+     "value": "雅思≥7",
+     "share": 0.04
+    },
+    {
+     "value": "小学英语教师资格证",
+     "share": 0.04
+    },
+    {
+     "value": "大学英语六级",
+     "share": 0.04
+    }
+   ],
+   "skills": [
+    {
+     "domain": "通用办公",
+     "share": 0.14,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "PPT",
+      "电脑及多媒体教学设备",
+      "电脑设备",
+      "WORD"
+     ]
+    },
+    {
+     "domain": "数据处理与分析",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟练",
+     "top": [
+      "EXCEL"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "",
+     "top": [
+      "硬笔书法",
+      "板书"
+     ]
+    }
+   ],
+   "business": [
+    {
+     "domain": "其他",
+     "share": 0.18,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "课程设置",
+      "专业理论功底",
+      "实践能力",
+      "初高中化学教材",
+      "考点重难点",
+      "化学方程式"
+     ]
+    },
+    {
+     "domain": "管理学",
+     "share": 0.11,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "专业理论功底",
+      "实践能力",
+      "课程设置"
+     ]
+    },
+    {
+     "domain": "写作与内容",
+     "share": 0.07,
+     "tier": "个别",
+     "required_share": 1.0,
+     "typical_level": "熟悉",
+     "top": [
+      "英语基础",
+      "词汇、语法、听说读写能力",
+      "中小学英语教材和考点",
+      "教学或家教经验",
+      "英语教学"
+     ]
+    },
+    {
+     "domain": "市场运营",
+     "share": 0.04,
+     "tier": "个别",
+     "required_share": 0.0,
+     "typical_level": "",
+     "top": [
+      "销售"
+     ]
+    }
+   ],
+   "qualities": [
+    {
+     "quality": "沟通表达",
+     "share": 0.68,
+     "tier": "核心",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "责任心",
+     "share": 0.61,
+     "tier": "核心",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "团队协作",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "主动性",
+     "share": 0.36,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "学习成长",
+     "share": 0.32,
+     "tier": "常见",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "执行力",
+     "share": 0.21,
+     "tier": "常见",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "逻辑思维",
+     "share": 0.18,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "创新能力",
+     "share": 0.18,
+     "tier": "个别",
+     "judge": "需面试考察"
+    },
+    {
+     "quality": "严谨细致",
+     "share": 0.18,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "影响力",
+     "share": 0.11,
+     "tier": "个别",
+     "judge": "简历可判断"
+    },
+    {
+     "quality": "抗压能力",
+     "share": 0.07,
+     "tier": "个别",
+     "judge": "需面试考察"
+    }
+   ]
+  }
+ }
+}

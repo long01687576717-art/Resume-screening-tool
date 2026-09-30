@@ -1,0 +1,19 @@
+# 密钥
+.env
+.streamlit/secrets.toml
+
+# 简历相关（真实简历绝不放进项目；分析缓存 30 天自动删除，也不上传）
+resumes/
+.cache/
+jobs/*_筛选结果.csv
+
+# 内部文档：含取自已删除真实简历的例子（已换化名，仍不上传）；公开的是 docs/开发说明.md 和 CLAUDE.md
+docs/设计记录.md
+docs/预期结果.md
+
+# 爬取的原始 JD 和下载的中间文件
+data/
+tools/.rankings_download/
+tools/.companies_download/
+
+__pycache__/

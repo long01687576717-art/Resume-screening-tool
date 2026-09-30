@@ -1,0 +1,58 @@
+{
+ "说明": "行业头部机构，手工整理（2026-09-30）。按品牌关键词匹配，覆盖子公司和分所（如“德勤华永会计师事务所”“北京字节跳动科技有限公司”）。exclude 用来排除名称相近的其他公司（如“京东方”不是京东）。头部券商取 2025 年营业收入前 10（来源：21 经济网据年报整理）。 内资会计师事务所取 2022、2024 年度中注协综合评价排名均在前 12 的内资所，档位为知名平台（tier 字段）。",
+ "industries": {
+  "会计师事务所": {"tier": "头部平台", "firms": [
+   {"name": "普华永道", "keywords": ["普华永道", "PwC", "PricewaterhouseCoopers"]},
+   {"name": "德勤", "keywords": ["德勤", "Deloitte"]},
+   {"name": "安永", "keywords": ["安永", "Ernst & Young", "EY"]},
+   {"name": "毕马威", "keywords": ["毕马威", "KPMG"]}
+  ]},
+  "咨询": {"tier": "头部平台", "firms": [
+   {"name": "麦肯锡", "keywords": ["麦肯锡", "McKinsey"]},
+   {"name": "波士顿咨询", "keywords": ["波士顿咨询", "BCG", "Boston Consulting"]},
+   {"name": "贝恩", "keywords": ["贝恩", "Bain"]},
+   {"name": "埃森哲", "keywords": ["埃森哲", "Accenture"]},
+   {"name": "罗兰贝格", "keywords": ["罗兰贝格", "Roland Berger"]},
+   {"name": "科尔尼", "keywords": ["科尔尼", "Kearney"]}
+  ]},
+  "互联网": {"tier": "头部平台", "firms": [
+   {"name": "字节跳动", "keywords": ["字节跳动", "抖音", "ByteDance"]},
+   {"name": "腾讯", "keywords": ["腾讯", "Tencent"]},
+   {"name": "阿里巴巴", "keywords": ["阿里巴巴", "阿里云", "淘宝", "天猫", "蚂蚁集团", "蚂蚁科技", "菜鸟", "Alibaba"]},
+   {"name": "美团", "keywords": ["美团", "Meituan"]},
+   {"name": "京东", "keywords": ["京东"], "exclude": ["京东方"]},
+   {"name": "百度", "keywords": ["百度", "Baidu"]},
+   {"name": "拼多多", "keywords": ["拼多多", "寻梦信息", "PDD"]},
+   {"name": "快手", "keywords": ["快手", "Kuaishou"]},
+   {"name": "网易", "keywords": ["网易", "NetEase"]},
+   {"name": "小米", "keywords": ["小米科技", "小米通讯", "小米集团", "小米汽车", "Xiaomi"]},
+   {"name": "华为", "keywords": ["华为", "Huawei"]}
+  ]},
+  "金融": {"tier": "头部平台", "firms": [
+   {"name": "中信证券", "keywords": ["中信证券"]},
+   {"name": "国泰海通", "keywords": ["国泰海通", "国泰君安", "海通证券"]},
+   {"name": "华泰证券", "keywords": ["华泰证券", "华泰联合证券"]},
+   {"name": "广发证券", "keywords": ["广发证券"]},
+   {"name": "中金公司", "keywords": ["中金公司", "中国国际金融"]},
+   {"name": "中国银河", "keywords": ["中国银河证券", "银河证券"]},
+   {"name": "招商证券", "keywords": ["招商证券"]},
+   {"name": "中信建投", "keywords": ["中信建投"]},
+   {"name": "申万宏源", "keywords": ["申万宏源"]},
+   {"name": "东方证券", "keywords": ["东方证券"]},
+   {"name": "高盛", "keywords": ["高盛", "Goldman Sachs"]},
+   {"name": "摩根士丹利", "keywords": ["摩根士丹利", "Morgan Stanley"]},
+   {"name": "摩根大通", "keywords": ["摩根大通", "J.P. Morgan", "JPMorgan"]},
+   {"name": "瑞银", "keywords": ["瑞银", "UBS"]}
+  ]},
+  "会计师事务所（内资）": {"tier": "知名平台", "firms": [
+   {"name": "立信", "keywords": ["立信"]},
+   {"name": "天健", "keywords": ["天健"]},
+   {"name": "容诚", "keywords": ["容诚"]},
+   {"name": "信永中和", "keywords": ["信永中和"]},
+   {"name": "致同", "keywords": ["致同"]},
+   {"name": "天职国际", "keywords": ["天职国际"]},
+   {"name": "大华", "keywords": ["大华"]},
+   {"name": "中审众环", "keywords": ["中审众环"]}
+  ]}
+ }
+}
