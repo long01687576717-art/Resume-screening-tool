@@ -26,6 +26,7 @@ from matching import jd, match, overview
 from matching.jd_extract import QUALITIES, RESUME_JUDGEABLE
 from modules.base import ModuleResult
 from modules.experience import LEVEL_NAMES
+from parser.file_reader import IMAGE_SUFFIXES, pdf_pages, read_file
 from report import screening
 from report.formatter import DISCLAIMER, format_report
 from ui import style as ui
@@ -61,6 +62,10 @@ QUEUE_STYLE = {   # 颜色固定：绿 = 先看，蓝 = 其次，灰 = 后看，
     "需人工查看": ("violet", "文件解析异常，请直接打开原文件"),
 }
 GRADE_MARK = {"实证": "●", "自述 / 课程": "◐", "没体现": "○"}
+# HR 在完整分析里标记的决定；只存在这次打开的网页里，刷新就没有了，靠导出表格留存
+DECISIONS = ("通过", "待定", "淘汰")
+DECISION_BADGE = {"通过": ":green-badge[✓ 通过]", "待定": ":blue-badge[待定]", "淘汰": ":gray-badge[✕ 淘汰]"}
+VIEWS = ("阅读队列", "总览")
 
 
 @st.cache_resource
@@ -182,8 +187,11 @@ def _load_demo():
     """载入预先生成的虚构简历分析结果和一份确认好的岗位要求，不需要 Key、不调用 AI。"""
     state = st.session_state
     analyses = json.loads((DEMO_DIR / "analyses.json").read_text(encoding="utf-8"))
+    samples = {p.name: p for p in RESUME_SAMPLES}   # 演示的原简历就是示例文件夹里的虚构简历
     for a in analyses:
         a["results"] = [ModuleResult(r["title"], [tuple(i) for i in r["items"]], r["notes"]) for r in a["results"]]
+        if a["name"] in samples:
+            a["data"] = samples[a["name"]].read_bytes()
         state.analyses[f"demo:{a['name']}"] = a
     state.selected = [f"demo:{a['name']}" for a in analyses]
     job = json.loads((DEMO_DIR / "job.json").read_text(encoding="utf-8"))
@@ -394,14 +402,14 @@ def _analyze(items, kb, llm):
                 path = Path(tmp) / k[:8] / name
                 path.parent.mkdir()
                 path.write_bytes(data)
-                futures[pool.submit(analyzer.run_modules, path, context)] = (k, name)
+                futures[pool.submit(analyzer.run_modules, path, context)] = (k, name, data)
             for n, future in enumerate(as_completed(futures), 1):
-                k, name = futures[future]
+                k, name, data = futures[future]
                 try:
                     results, profile = future.result()
                     note = profile["parse"]["source"] if profile["parse"]["source"] != "文字" else None
                     cache[k] = {"name": name, "profile": profile, "results": results, "note": note,
-                                "report": format_report(name, results, note)}
+                                "report": format_report(name, results, note), "data": data}   # 原文件只留在网页内存里
                 except Exception as e:   # 单份失败不影响其他简历
                     cache[k] = {"name": name, "error": str(e)}
                 bar.progress(n / len(todo), text=f"正在分析 {n} / {len(todo)} 份")
@@ -412,6 +420,8 @@ def _analyze(items, kb, llm):
 # ---------- ③ 结果 ----------
 
 def step_results(kb):
+    """有岗位要求时默认看阅读队列，也能切到总览；没有就只有总览。
+    每个人在完整分析里标记 通过 / 待定 / 淘汰，标完自动打开下一位没处理的人。"""
     state = st.session_state
     keys = state.get("selected")
     if not keys:
@@ -423,19 +433,40 @@ def step_results(kb):
             st.error(f"无法分析：{a['name']}：{a['error']}")
     profiles = [a["profile"] for a in items if "profile" in a]
     reports = {a["name"]: a for a in items if "report" in a}   # 文件名 → 分析结果（完整分析用）
-    tab1, tab2 = st.tabs(["总览", "阅读队列"])
-    with tab1:
-        _overview(profiles, reports, kb)
-    with tab2:
+    decisions = state.setdefault("decisions", {})
+
+    c1, c2 = st.columns([3, 1], vertical_alignment="center")
+    with c1:
         if state.get("req"):
-            _queues(profiles, reports, kb)
+            view = st.segmented_control("视图", VIEWS, default=VIEWS[0], required=True, key="view",
+                                        label_visibility="collapsed")
         else:
-            ui.empty_state("需要岗位要求", "在「岗位要求」里导入并确认 JD 后显示")
+            view = VIEWS[1]
+            b1, b2 = st.columns([4, 1], vertical_alignment="center")
+            b1.caption("导入岗位要求后，可以按岗位排出阅读顺序")
+            if b2.button("去导入", width="stretch"):
+                state.goto = PAGES[0]
+                st.rerun()
+    done = sum(name in decisions for name in reports)
+    c2.markdown(f"<div style='text-align:right;color:#6B7280;font-size:14px'>已处理 {done} / {len(reports)} 人</div>",
+                unsafe_allow_html=True)
+    if "done_toast" in state:
+        st.toast(state.pop("done_toast"))
+
+    if view == VIEWS[0]:
+        order, why = _queues(profiles, reports, kb)
+    else:
+        order, why = _overview(profiles, reports, kb)
+    target = state.pop("open_report", None)
+    if target in reports:
+        _report_dialog(target, reports[target], order, why.get(target))
 
 
 def _overview(profiles, reports, kb):
+    """返回 (阅读顺序, {文件名: 这一行})，给"下一份"和"为什么在这里"用。"""
     state = st.session_state
     req = state.get("req")
+    decisions = state.decisions
     options = [d for d in overview.DIMENSIONS if d != "岗位匹配" or req]
     c1, c2 = st.columns([3, 2])
     dims = c1.multiselect("分层依据", options, default=list(overview.DEFAULT_DIMENSIONS), key="ov_dims",
@@ -459,10 +490,11 @@ def _overview(profiles, reports, kb):
             f"{text}：{len(ranked)} 人符合" + (f"，{len(failed)} 人不符合（见表格下方）" if failed else ""))
 
     if ranked:
-        columns = ["层", "简历", "为什么", *dims,
+        columns = ["层", "简历", "决定", "为什么", *dims,
                    *[c for c in screening.OVERVIEW_COLUMNS if c not in dims and (c != "岗位匹配" or req)], "待确认"]
         table = pd.DataFrame([{**{c: r.get(c, "") for c in columns}, "简历": Path(r["文件"]).stem,
-                               "待确认": "；".join(r["待确认"])} for r in ranked], columns=columns)
+                               "决定": decisions.get(r["文件"], ""), "待确认": "；".join(r["待确认"])} for r in ranked],
+                             columns=columns)
         # 按层交替底色：底色相同、连在一起的是同一层，层内不分先后
         shade = lambda row: ["background-color: #F7F8FA" if row["层"] % 2 == 0 else ""] * len(row)
         layers = ranked[-1]["层"]
@@ -470,28 +502,26 @@ def _overview(profiles, reports, kb):
         st.markdown(f"**{len(ranked)} 人 · {layers} 层**", help=f"{screening.LAYER_RULE}。点选一行查看完整分析。")
         if len(ranked) >= 4 and first * 2 > len(ranked):
             st.caption(f"第 1 层有 {first} 人，可以减少分层依据")
+        # 每次打开完整分析后换一个表格编号，清掉选中状态，同一行可以再次点开
         event = st.dataframe(table.style.apply(shade, axis=1), hide_index=True, on_select="rerun",
-                             selection_mode="single-row", key="ov_table",
+                             selection_mode="single-row", key=f"ov_table{state.get('ov_table_id', 0)}",
                              column_config={"层": st.column_config.NumberColumn(width="small"),
+                                            "决定": st.column_config.TextColumn(width="small"),
                                             "为什么": st.column_config.TextColumn(width="medium"),
                                             **{d: st.column_config.TextColumn(f"★ {d}") for d in dims}})
         rows = event.selection.rows if event else []
         if rows:
-            name = ranked[rows[0]]["文件"]
-            with st.container(border=True):
-                st.subheader(f"{Path(name).stem} 的完整分析")
-                if name in reports:
-                    _render_report(reports[name])
-                else:
-                    st.caption("没有报告")
+            state.open_report = ranked[rows[0]]["文件"]
+            state.ov_table_id = state.get("ov_table_id", 0) + 1
     if failed:
         with st.expander(f":orange[硬性要求不符 {len(failed)} 人]"):
             for r in failed:
                 st.markdown(f"- **{Path(r['文件']).stem}**：{'；'.join(r['不符'])}")
     for r in abnormal:
         st.warning(f"{r['文件']}：{'；'.join(r['解析异常'])}，请直接打开原文件查看", icon="⚠️")
-    st.download_button("导出 CSV", screening.overview_csv(ranked, failed, abnormal).encode("utf-8-sig"),
+    st.download_button("导出 CSV", screening.overview_csv(ranked, failed, abnormal, decisions).encode("utf-8-sig"),
                        file_name="简历总览.csv", mime="text/csv", key="ov_csv", icon=":material/download:")
+    return [r["文件"] for r in ranked], {r["文件"]: ("总览", r) for r in ranked}
 
 
 def _split(text):
@@ -499,6 +529,7 @@ def _split(text):
 
 
 def _queues(profiles, reports, kb):
+    """返回 (阅读顺序, {文件名: 筛选结果})，给"下一份"和"为什么在这里"用。"""
     req = st.session_state.req
     results, hints = match.screen(profiles, req, kb)
     cols = st.columns(len(match.QUEUES))
@@ -508,10 +539,12 @@ def _queues(profiles, reports, kb):
         st.caption(h)
     st.caption("● 做过　◐ 自述 / 课程　○ 没体现")
 
+    order = []
     for queue in match.QUEUES:
         group = [r for r in results if r["队列"] == queue]
         if not group:
             continue
+        order += [r["文件"] for r in group]
         color, meaning = QUEUE_STYLE[queue]
         st.markdown(f"#### :{color}-badge[{queue}] {len(group)} 人",
                     help=meaning + ("；按证据强弱排列" if queue in screening.RANKED else ""))
@@ -524,8 +557,9 @@ def _queues(profiles, reports, kb):
                 for i, r in enumerate(group):
                     _card(r, reports, f"{queue}{i}")
 
-    st.download_button("导出 CSV", screening.csv_text(results).encode("utf-8-sig"),
+    st.download_button("导出 CSV", screening.csv_text(results, st.session_state.decisions).encode("utf-8-sig"),
                        file_name=f"{_safe(req['岗位'])}_筛选结果.csv", mime="text/csv", icon=":material/download:")
+    return order, {r["文件"]: ("阅读队列", r) for r in results}
 
 
 def _card(r, reports, key):
@@ -533,30 +567,71 @@ def _card(r, reports, key):
         c1, c2 = st.columns([5, 1], vertical_alignment="center")
         name = Path(r["文件"]).stem
         chips = "　".join(f"{GRADE_MARK[a['grade']]} {a['name']}" for a in r["最看重"])
-        c1.markdown(f"**{name}**　　<span style='color:#6B7280'>{chips}</span>", unsafe_allow_html=True)
+        badge = DECISION_BADGE.get(st.session_state.decisions.get(r["文件"]), "")
+        c1.markdown(f"**{name}**　{badge}　<span style='color:#6B7280'>{chips}</span>", unsafe_allow_html=True)
         if c2.button("完整分析", key=f"open_{key}", disabled=r["文件"] not in reports):
-            _report_dialog(r["文件"], reports[r["文件"]])
-        for f in r["硬条件不符"]:
-            st.markdown(f":orange[硬条件不符：{f}]")
-        for reason in r["解析"]:
-            st.markdown(f":violet[解析异常：{reason}，请直接打开原文件]")
-        for m in r["做过类似的事"]:
-            st.markdown(f"✔ **做过类似的事**：职责「{screening.short(m['duty'], 26)}」  \n"
-                        f"<span style='color:#6B7280'>↳ {m['where']}（{m['context']}·{LEVEL_NAMES[m['level']]}）"
-                        f"“{screening.short(m['text'], 60)}”</span>", unsafe_allow_html=True)
-        proven = [a for a in r["最看重"] if a["grade"] != "没体现"]
-        if proven:
-            st.markdown("**最看重的能力**：" + "；".join(screening.ability_text(a) for a in proven))
-        if r["加分"]:
-            st.markdown("**加分**：" + "、".join(r["加分"]))
-        if r["电话问题"]:
-            st.markdown("**电话初筛可以问**  \n" + "  \n".join(f"{i}. {q}" for i, q in enumerate(r["电话问题"], 1)))
+            st.session_state.open_report = r["文件"]
+        _queue_detail(r)
 
 
-@st.dialog("完整分析", width="large")
-def _report_dialog(name, analysis):
-    st.subheader(Path(name).stem)
-    _render_report(analysis)
+def _queue_detail(r):
+    """阅读队列里一个人的理由：卡片上和完整分析的"为什么在这里"共用。"""
+    for f in r["硬条件不符"]:
+        st.markdown(f":orange[硬条件不符：{f}]")
+    for reason in r["解析"]:
+        st.markdown(f":violet[解析异常：{reason}，请直接打开原文件]")
+    for m in r["做过类似的事"]:
+        st.markdown(f"✔ **做过类似的事**：职责「{screening.short(m['duty'], 26)}」  \n"
+                    f"<span style='color:#6B7280'>↳ {m['where']}（{m['context']}·{LEVEL_NAMES[m['level']]}）"
+                    f"“{screening.short(m['text'], 60)}”</span>", unsafe_allow_html=True)
+    proven = [a for a in r["最看重"] if a["grade"] != "没体现"]
+    if proven:
+        st.markdown("**最看重的能力**：" + "；".join(screening.ability_text(a) for a in proven))
+    if r["加分"]:
+        st.markdown("**加分**：" + "、".join(r["加分"]))
+    if r["电话问题"]:
+        st.markdown("**电话初筛可以问**  \n" + "  \n".join(f"{i}. {q}" for i, q in enumerate(r["电话问题"], 1)))
+
+
+def _overview_detail(r):
+    """总览里一个人的位置和各项情况。"""
+    st.markdown(f"**第 {r['层']} 层**　{_md(r['为什么'])}")
+    for c in screening.OVERVIEW_COLUMNS:
+        if r.get(c):
+            c1, c2 = st.columns([1, 5])
+            c1.markdown(f"**{c}**")
+            c2.markdown(_md(r[c]))
+    if r["待确认"]:
+        st.warning("待确认：" + "；".join(r["待确认"]), icon="⚠️")
+
+
+@st.dialog("完整分析", width="large", on_dismiss="rerun")
+def _report_dialog(name, analysis, order, why):
+    state = st.session_state
+    current = state.decisions.get(name)
+    cols = st.columns([4, 1, 1, 1, 1.3], vertical_alignment="center")
+    cols[0].subheader(Path(name).stem)
+    for col, decision in zip(cols[1:4], DECISIONS):
+        if col.button(decision, type="primary" if current == decision else "secondary", width="stretch",
+                      key=f"decide_{decision}"):
+            state.decisions[name] = decision
+            _open_next(name, order)
+    if cols[4].button("下一份", icon=":material/arrow_forward:", width="stretch", key="next_report"):
+        _open_next(name, order)
+    _render_report(analysis, why)
+
+
+def _open_next(name, order):
+    """打开当前列表里、排在这个人后面的下一位还没处理的人；后面没有了就从头找。"""
+    state = st.session_state
+    left = [n for n in order if n != name and n not in state.decisions]
+    after = order[order.index(name) + 1:] if name in order else []
+    nxt = next((n for n in after if n in left), left[0] if left else None)
+    if nxt:
+        state.open_report = nxt
+    else:
+        state.done_toast = "这个列表里的人都处理完了"
+    st.rerun()
 
 
 # ---------- 完整分析的显示（只改显示方式，内容和命令行的文字报告完全相同） ----------
@@ -565,10 +640,12 @@ def _report_dialog(name, analysis):
 SUMMARY_CARDS = (("教育背景", "院校层次", "学历与院校"), ("教育背景", "学业表现", "学业表现"),
                  ("实习经历", "工作深度", "实习做到"), ("项目与技能", "项目深度", "项目做到"),
                  ("项目与技能", "技能深度", "技能深度"))
+LAST_MODULES = ("基本信息",)   # 籍贯、现居城市等和能力无关，放在最后，避免先入为主
 
 
-def _render_report(analysis):
-    """顶部摘要卡片 + 按模块分标签页；需要核实的提示用黄色提示框放在每页最上面；最后一页是纯文字版，方便复制。"""
+def _render_report(analysis, why=None):
+    """顶部摘要卡片 + 分页：为什么在这里 → 各模块（基本信息放最后）→ 原简历 → 纯文字版。
+    需要核实的提示用黄色提示框放在每页最上面；纯文字版方便复制。"""
     results = analysis.get("results")
     if not results:
         st.code(analysis.get("report", "（没有报告）"), language=None, wrap_lines=True)
@@ -580,9 +657,19 @@ def _render_report(analysis):
         with col.container(border=True):
             st.caption(name)
             st.markdown(f"**{_md(_headline(values.get((module, label), '—')))}**")
+    results = [r for r in results if r.title not in LAST_MODULES] + [r for r in results if r.title in LAST_MODULES]
     # 需要核实的提示用黄色提示框；"不代表素质高低"这类说明文字不是问题，放在页面底部
     warnings = {id(r): [n for n in r.notes if not _is_explanation(n)] for r in results}
-    tabs = st.tabs([r.title + (f"（⚠ {len(warnings[id(r)])}）" if warnings[id(r)] else "") for r in results] + ["纯文字版"])
+    titles = [r.title + (f"（⚠ {len(warnings[id(r)])}）" if warnings[id(r)] else "") for r in results]
+    tabs = st.tabs((["为什么在这里"] if why else []) + titles + ["原简历", "纯文字版"])
+    if why:
+        with tabs[0]:
+            kind, row = why
+            if kind == "阅读队列":
+                _queue_detail(row)
+            else:
+                _overview_detail(row)
+        tabs = tabs[1:]
     for tab, r in zip(tabs, results):
         with tab:
             for note in warnings[id(r)]:
@@ -596,9 +683,34 @@ def _render_report(analysis):
             for note in r.notes:
                 if _is_explanation(note):
                     st.caption(_md(note))
+    with tabs[-2]:
+        _original(analysis)
     with tabs[-1]:
         st.code(analysis["report"], language=None, wrap_lines=True)
     st.caption(DISCLAIMER)
+
+
+def _original(analysis):
+    """原简历：PDF 逐页显示成图片，图片直接显示，Word / TXT 显示读出来的文字。只在内存里处理。"""
+    data, name = analysis.get("data"), analysis["name"]
+    if not data:
+        st.caption("没有原文件，重新上传后可以查看")
+        return
+    suffix = Path(name).suffix.lower()
+    try:
+        if suffix == ".pdf":
+            for page in pdf_pages(data):
+                st.image(page, width="stretch")
+        elif suffix in IMAGE_SUFFIXES:
+            st.image(data, width="stretch")
+        else:
+            with tempfile.TemporaryDirectory() as tmp:
+                path = Path(tmp) / name
+                path.write_bytes(data)
+                text, _ = read_file(path)
+            st.code(text, language=None, wrap_lines=True)
+    except Exception as e:
+        st.caption(f"原文件无法显示：{e}")
 
 
 def _is_explanation(note):

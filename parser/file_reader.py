@@ -1,4 +1,5 @@
 """读取简历文件，统一转成纯文本。支持 PDF（含扫描件）、Word（.docx）、TXT 和图片。"""
+import io
 import logging
 import unicodedata
 from pathlib import Path
@@ -41,6 +42,13 @@ def read_file(path):
     if not text:
         raise ValueError("文件中没有识别到文字")
     return text, note
+
+
+
+def pdf_pages(data, resolution=110):
+    """把 PDF 的每一页转成图片（网页"原简历"里显示用）；只在内存里处理，不写硬盘。"""
+    with pdfplumber.open(io.BytesIO(data)) as pdf:
+        return [page.to_image(resolution=resolution).original for page in pdf.pages]
 
 
 # 部分 Word / PDF 导出工具会把常用字存成"部首字符"（如"硕⼠"里的⼠是 U+2F20，不是汉字"士"），

@@ -8,7 +8,7 @@ from modules.experience import LEVEL_NAMES
 NOTE = "说明：队列只决定阅读顺序，不代表录用建议；没写的能力只是排在后面，不等于不具备。"
 COMPLIANCE = "合规：性别、年龄、民族、籍贯、婚育、政治面貌未作为筛选条件。"
 RANKED = ("优先看", "值得看", "可以后看")
-CSV_HEADER = ["队列", "简历", "做过类似的事", "最看重的能力", "加分项", "硬条件不符", "电话初筛问题", "解析异常"]
+CSV_HEADER = ["队列", "简历", "决定", "做过类似的事", "最看重的能力", "加分项", "硬条件不符", "电话初筛问题", "解析异常"]
 
 
 def text_report(req, results, hints, failed):
@@ -53,13 +53,15 @@ def ability_text(a):
     return f"{a['name']} {a['grade']}（{a['where']}·{a['context'] or '未注明'}{depth}{similar}）"
 
 
-def csv_text(results):
-    """返回 CSV 文字；保存时用 utf-8-sig 编码，Excel 直接打开不乱码。"""
+def csv_text(results, decisions=None):
+    """返回 CSV 文字；保存时用 utf-8-sig 编码，Excel 直接打开不乱码。
+    decisions：{文件名: 通过 / 待定 / 淘汰}，网页里 HR 标记的决定；命令行没有，这一列留空。"""
+    decisions = decisions or {}
     buf = io.StringIO()
     w = csv.writer(buf)
     w.writerow(CSV_HEADER)
     for r in results:
-        w.writerow([r["队列"], r["文件"],
+        w.writerow([r["队列"], r["文件"], decisions.get(r["文件"], ""),
                     "\n".join(f"{m['where']}（{LEVEL_NAMES[m['level']]}）：{short(m['text'], 40)}（共同：{'、'.join(m['hits'])}）"
                               for m in r["做过类似的事"]),
                     "\n".join(ability_text(a) for a in r["最看重"]),
@@ -93,11 +95,12 @@ def overview_text(ranked, failed, abnormal, dims):
     return "\n".join(lines)
 
 
-def overview_csv(ranked, failed, abnormal):
+def overview_csv(ranked, failed, abnormal, decisions=None):
+    decisions = decisions or {}
     buf = io.StringIO()
     w = csv.writer(buf)
-    w.writerow(["层", "简历", "为什么", *OVERVIEW_COLUMNS, "待确认", "硬性要求不符", "解析异常"])
+    w.writerow(["层", "简历", "决定", "为什么", *OVERVIEW_COLUMNS, "待确认", "硬性要求不符", "解析异常"])
     for r in ranked + failed + abnormal:
-        w.writerow([r.get("层", ""), r["文件"], r.get("为什么", ""), *[r.get(c, "") for c in OVERVIEW_COLUMNS],
+        w.writerow([r.get("层", ""), r["文件"], decisions.get(r["文件"], ""), r.get("为什么", ""), *[r.get(c, "") for c in OVERVIEW_COLUMNS],
                     "；".join(r["待确认"]), "；".join(r["不符"]), "；".join(r["解析异常"])])
     return buf.getvalue()
