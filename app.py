@@ -323,7 +323,8 @@ def _analyze(items, kb, llm):
                 try:
                     results, profile = future.result()
                     note = profile["parse"]["source"] if profile["parse"]["source"] != "文字" else None
-                    cache[k] = {"name": name, "profile": profile, "report": format_report(name, results, note)}
+                    cache[k] = {"name": name, "profile": profile, "results": results, "note": note,
+                                "report": format_report(name, results, note)}
                 except Exception as e:   # 单份失败不影响其他简历
                     cache[k] = {"name": name, "error": str(e)}
                 bar.progress(n / len(todo), text=f"正在分析 {n} / {len(todo)} 份")
@@ -345,7 +346,7 @@ def step_results(kb):
         if "error" in a:
             st.error(f"无法分析：{a['name']}：{a['error']}")
     profiles = [a["profile"] for a in items if "profile" in a]
-    reports = {a["name"]: a["report"] for a in items if "report" in a}
+    reports = {a["name"]: a for a in items if "report" in a}   # 文件名 → 分析结果（完整分析用）
     tab1, tab2 = st.tabs(["📊 总览排序", "🎯 阅读队列（需要岗位要求）"])
     with tab1:
         _overview(profiles, reports, kb)
@@ -404,8 +405,11 @@ def _overview(profiles, reports, kb):
         if rows:
             name = ranked[rows[0]]["文件"]
             with st.container(border=True):
-                st.markdown(f"**{Path(name).stem} 的完整分析**")
-                st.code(reports.get(name, "（没有报告）"), language=None, wrap_lines=True)
+                st.subheader(f"{Path(name).stem} 的完整分析")
+                if name in reports:
+                    _render_report(reports[name])
+                else:
+                    st.caption("没有报告")
     if failed:
         with st.expander(f":orange[硬性要求不符 {len(failed)} 人]"):
             for r in failed:
@@ -477,10 +481,114 @@ def _card(r, reports, key):
             st.markdown("**电话初筛可以问**  \n" + "  \n".join(f"{i}. {q}" for i, q in enumerate(r["电话问题"], 1)))
 
 
-@st.dialog("完整分析报告", width="large")
-def _report_dialog(name, report):
-    st.caption(name)
-    st.code(report, language=None, wrap_lines=True)
+@st.dialog("完整分析", width="large")
+def _report_dialog(name, analysis):
+    st.subheader(Path(name).stem)
+    _render_report(analysis)
+
+
+# ---------- 完整分析的显示（只改显示方式，内容和命令行的文字报告完全相同） ----------
+
+# 顶部摘要卡片：(模块, 报告里的标签, 卡片名称)
+SUMMARY_CARDS = (("教育背景", "院校层次", "学历与院校"), ("教育背景", "学业表现", "学业表现"),
+                 ("实习经历", "工作深度", "实习做到"), ("项目与技能", "项目深度", "项目做到"),
+                 ("项目与技能", "技能深度", "技能深度"))
+
+
+def _render_report(analysis):
+    """顶部摘要卡片 + 按模块分标签页；需要核实的提示用黄色提示框放在每页最上面；最后一页是纯文字版，方便复制。"""
+    results = analysis.get("results")
+    if not results:
+        st.code(analysis.get("report", "（没有报告）"), language=None, wrap_lines=True)
+        return
+    if analysis.get("note"):
+        st.caption(f"文字来源：{analysis['note']}")
+    values = {(r.title, label): value for r in results for label, value in r.items if label}
+    for col, (module, label, name) in zip(st.columns(len(SUMMARY_CARDS)), SUMMARY_CARDS):
+        with col.container(border=True):
+            st.caption(name)
+            st.markdown(f"**{_md(_headline(values.get((module, label), '—')))}**")
+    # 需要核实的提示用黄色提示框；"不代表素质高低"这类说明文字不是问题，放在页面底部
+    warnings = {id(r): [n for n in r.notes if not _is_explanation(n)] for r in results}
+    tabs = st.tabs([r.title + (f"（⚠ {len(warnings[id(r)])}）" if warnings[id(r)] else "") for r in results] + ["纯文字版"])
+    for tab, r in zip(tabs, results):
+        with tab:
+            for note in warnings[id(r)]:
+                st.warning(_md(note), icon="⚠️")
+            blocks = _blocks(r.items)
+            if blocks:
+                _summary_rows(blocks[0])
+            for block in blocks[1:]:
+                with st.container(border=True):
+                    _entry_rows(block)
+            for note in r.notes:
+                if _is_explanation(note):
+                    st.caption(_md(note))
+    with tabs[-1]:
+        st.code(analysis["report"], language=None, wrap_lines=True)
+    st.caption(DISCLAIMER)
+
+
+def _is_explanation(note):
+    """说明文字（解释怎么读结果），不是需要核实的问题。"""
+    return note.startswith("以上是")
+
+
+def _headline(value):
+    """摘要卡片只放结论："硕士 · 双非第一梯队（华东政法大学，按……折算）" → "硕士 · 双非第一梯队"；短括号保留（"中（独立负责）"）。"""
+    first = value.split("｜")[0].strip()
+    head, _, rest = first.partition("（")
+    return first if not rest or len(rest) <= 10 else head.strip()
+
+
+def _blocks(items):
+    """按空行把一个模块分成几块：第一块是维度摘要，后面每块是一段经历；标签为空的行接在上一行下面。"""
+    blocks, rows = [], []
+    for label, value in items:
+        if not label and not value:
+            if rows:
+                blocks.append(rows)
+            rows = []
+        elif not label and rows:
+            rows[-1][1].append(value)
+        else:
+            rows.append((label, [value]))
+    if rows:
+        blocks.append(rows)
+    return blocks
+
+
+def _summary_rows(rows):
+    for label, lines in rows:
+        c1, c2 = st.columns([1, 5])
+        c1.markdown(f"**{_md(label)}**")
+        c2.markdown(_md(lines[0]))
+        for line in lines[1:]:
+            c2.caption(_md(_tidy(line)))
+
+
+def _entry_rows(rows):
+    """一段经历：第一行作标题，其余是细节。"""
+    (label, lines), rest = rows[0], rows[1:]
+    st.markdown(f"**{_md(label)}**　{_md(lines[0])}")
+    for line in lines[1:]:
+        st.caption(_md(_tidy(line)))
+    for label, lines in rest:
+        st.markdown(f"{_md(label)}：{_md(lines[0])}" if label else _md(lines[0]))
+        for line in lines[1:]:
+            st.caption(_md(_tidy(line)))
+
+
+def _tidy(line):
+    """去掉文字报告里用来对齐的全角空格，"└"换成箭头。"""
+    return line.strip("　 ").replace("└ ", "↳ ").replace("└", "↳ ")
+
+
+def _md(text):
+    """网页用 Markdown 显示，报告原文里的 * _ ~ $ 等符号要转义，否则会变成加粗、删除线或公式。"""
+    for ch in "\\`*_~$[]<>|#":
+        text = text.replace(ch, "\\" + ch)
+    return text
 
 
 main()

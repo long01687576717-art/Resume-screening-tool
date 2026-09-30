@@ -17,3 +17,6 @@ tools/.rankings_download/
 tools/.companies_download/
 
 __pycache__/
+
+# Claude Code 本地工作目录（云端任务等自动生成）
+.claude/
