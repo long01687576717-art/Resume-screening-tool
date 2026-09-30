@@ -241,6 +241,9 @@ def _set_draft(req, warnings):
     st.session_state.req = None
 
 
+NO_LEVEL = "未写"      # 表格下拉框里空值会显示成英文 None，用中文代替
+
+
 def _edit_form(kb):
     """把工具对 JD 的理解做成表单让 HR 改；改完经过和 txt 文件相同的读取、核对流程。"""
     state = st.session_state
@@ -267,11 +270,11 @@ def _edit_form(kb):
                                          "可以在最后一行添加 JD 没写但你们看重的能力。")
         reqs = st.data_editor(
             pd.DataFrame([{"名称": r["名称"], "类别": "基础要求" if r["基础要求"] else ("必须" if r["必须"] else "加分"),
-                           "程度": r["程度"], "领域": r["领域"]} for r in base["要求"]]),
+                           "程度": r["程度"] or NO_LEVEL, "领域": r["领域"] or ""} for r in base["要求"]]),
             column_config={"名称": st.column_config.TextColumn(required=True),
                            "类别": st.column_config.SelectboxColumn(options=KINDS, required=True, default="加分"),
-                           "程度": st.column_config.SelectboxColumn(options=["", "了解", "熟悉", "掌握", "熟练", "精通"]),
-                           "领域": st.column_config.TextColumn(disabled=True, help="由能力词典自动归类")},
+                           "程度": st.column_config.SelectboxColumn(options=[NO_LEVEL, "了解", "熟悉", "掌握", "熟练", "精通"], default=NO_LEVEL),
+                           "领域": st.column_config.TextColumn(disabled=True, default="", help="由能力词典自动归类")},
             hide_index=True, num_rows="dynamic", key=f"reqs{fid}")
         names = [n for n, k in zip(reqs["名称"], reqs["类别"]) if isinstance(n, str) and n.strip() and k != "基础要求"]
         top = st.multiselect("最看重（最多 3 项）", names, help="决定阅读顺序，按选择的先后",
@@ -291,7 +294,7 @@ def _edit_form(kb):
             pd.DataFrame([{"类型": c["类型"], "内容": c["值"], "必须": c["必须"]} for c in base["补充条件"]],
                          columns=["类型", "内容", "必须"]),
             column_config={"类型": st.column_config.SelectboxColumn(options=list(jd.EXTRA_TYPES), required=True),
-                           "内容": st.column_config.TextColumn(help="院校：211 及以上 / 实习：有 或 某方向 / 证书：CPA"),
+                           "内容": st.column_config.TextColumn(default="", help="院校：211 及以上 / 实习：有 或 某方向 / 证书：CPA"),
                            "必须": st.column_config.CheckboxColumn(default=False)},
             hide_index=True, num_rows="dynamic", key=f"extras{fid}")
 
@@ -323,7 +326,7 @@ def _form_to_req(base, degree, duties, reqs, top, majors, majors_must, certs, ce
         if not isinstance(name, str) or not name.strip():
             continue
         r = dict(old.get(name.strip()) or {"名称": name.strip(), "类型": "技能", "领域": "", "参考岗位占比": None, "来源": "HR 添加"})
-        r.update({"程度": level if isinstance(level, str) else "", "必须": kind == "必须", "基础要求": kind == "基础要求"})
+        r.update({"程度": level if isinstance(level, str) and level != NO_LEVEL else "", "必须": kind == "必须", "基础要求": kind == "基础要求"})
         requirements.append(r)
     return {**base,
             "门槛": {**base["门槛"], "学历": degree},
