@@ -82,6 +82,8 @@ python screen.py 导入 samples/jd/数据分析工程师.txt
 python screen.py 筛选 jobs/数据分析工程师.txt samples samples/test/dev
 ```
 
+**测试**：`pip install -r requirements-dev.txt` 后运行 `python tests/test_job_form.py`（网页岗位要求表单的回归测试，需要 Microsoft Edge），说明见 [开发说明 · 测试](docs/开发说明.md)。
+
 ## 公开部署
 
 可以部署到 Streamlit Community Cloud（从 GitHub 仓库直接部署）。部署时在 Secrets 里设置 `PUBLIC_DEMO = "1"` 打开**公开模式**：
@@ -104,7 +106,7 @@ python screen.py 筛选 jobs/数据分析工程师.txt samples samples/test/dev
 
 - **逐字比对**：职责和能力按字面比较，同一件事换一种说法就对不上（JD 写"数据模型"、简历写"建模"），字面巧合又会误中（"清洗实验器皿"对上"数据清洗"）。虚构测试集已证实。改进方案"工作活动表"（把 JD 职责整理成约 100 项标准活动，AI 把两边都归到表里，再由代码比较）已设计，暂缓实施。
 - **速度**：每份简历 5 次 AI 调用并行，长简历约 13～20 秒，目标是单份 ≤10 秒、100 份 ≤3 分钟。
-- **尚无自动回归测试**：目前靠虚构简历人工对照原文核对。
+- **自动测试还很少**：只有网页岗位要求表单的回归测试；分析规则靠虚构简历人工对照原文核对。
 - **只写年份的时间**（如"2014–2024"）目前算不出任期。
 
 ## 项目结构
@@ -123,6 +125,7 @@ knowledge/          知识库：院校排名、公司名单、竞赛目录、能
 report/             文字报告、筛选理由、CSV
 tools/              每年更新名单、爬取和统计校招 JD 的脚本
 samples/            虚构样例简历、测试集和测试用 JD
+tests/              网页回归测试（Playwright + Edge）
 docs/开发说明.md     规则、关键决定、已知局限和进度
 ```
 

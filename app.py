@@ -253,11 +253,13 @@ NO_LEVEL = "未写"      # 表格下拉框里空值会显示成英文 None，用
 
 
 def _edit_form(kb):
-    """把工具对 JD 的理解做成表单让 HR 改；改完经过和 txt 文件相同的读取、核对流程。"""
+    """把工具对 JD 的理解做成表单让 HR 改；改完经过和 txt 文件相同的读取、核对流程。
+    用 st.form：填写过程中不刷新页面，点「确认岗位要求」才一起生效。
+    否则表格里每改一格就整页刷新，和表格下拉框的关闭动作撞在一起时，页面会报 removeChild 错误。"""
     state = st.session_state
     base = state.draft
     fid = state.form_id
-    with st.container(border=True):
+    with st.form(f"job_form{fid}", border=True, enter_to_submit=False):
         refs = "、".join(f"{r['岗位']}（相似度{r['相似度']}）" for r in base["参考岗位"]) or "知识库里没有相近岗位"
         st.subheader(base["岗位"], help=f"参考岗位：{refs}。以下内容都可以修改，改完点最下面的「确认」。")
 
@@ -285,7 +287,8 @@ def _edit_form(kb):
                            "领域": st.column_config.TextColumn(disabled=True, default="", help="由能力词典自动归类")},
             hide_index=True, num_rows="dynamic", key=f"reqs{fid}")
         names = [n for n, k in zip(reqs["名称"], reqs["类别"]) if isinstance(n, str) and n.strip() and k != "基础要求"]
-        top = st.multiselect("最看重（最多 3 项）", names, help="决定阅读顺序，按选择的先后",
+        top = st.multiselect("最看重（最多 3 项）", names,
+                             help="决定阅读顺序，按选择的先后。表格里新加的能力，点一次「确认岗位要求」后才出现在这里",
                              default=[n for n in base["最看重"] if n in names], max_selections=3, key=f"top{fid}")
 
         c1, c2 = st.columns(2)
@@ -311,14 +314,15 @@ def _edit_form(kb):
         req, warnings = jd.apply_text(base, text, kb)
         for w in state.draft_warnings + warnings:
             st.warning(w)
-        if st.button("确认岗位要求", type="primary", disabled=not req["最看重"]):
-            _save_job(req, original=False)
-            state.req = req
-            st.toast("岗位要求已确认" if PUBLIC else "岗位要求已确认，并保存到 jobs/ 文件夹")
+        if st.form_submit_button("确认岗位要求", type="primary"):
+            if req["最看重"]:
+                _save_job(req, original=False)
+                state.req = req
+                st.toast("岗位要求已确认" if PUBLIC else "岗位要求已确认，并保存到 jobs/ 文件夹")
         if not req["最看重"]:
-            st.caption("请至少选择 1 项「最看重」")
+            st.caption("请至少选择 1 项「最看重」，再点确认")
         elif state.get("req") == req:
-            st.success("已确认")
+            st.success("已确认（再修改的话，改完重新点确认）")
 
 
 def _list_input(col, label, value, fid):

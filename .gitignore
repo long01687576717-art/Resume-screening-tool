@@ -18,5 +18,8 @@ tools/.companies_download/
 
 __pycache__/
 
+# 测试失败截图
+tests/output/
+
 # Claude Code 本地工作目录（云端任务等自动生成）
 .claude/

@@ -53,6 +53,7 @@ tools/                  update_rankings.py、update_companies.py 每年更新；
                         build_job_profiles.py 统计通用岗位画像
 jobs/                   导入 JD 后生成的岗位要求文件
 data/                   爬到的原始 JD（不上传）
+tests/                  网页回归测试（Playwright + Edge，公开模式启动，不需要 Key）
 samples/                虚构样例；samples/test/ 虚构测试集（dev 开发集、holdout 检验集）；samples/jd/ 测试用 JD（24365 公开岗位）
 docs/                   开发说明.md（公开：规则、决定、进度）；设计记录.md、预期结果.md（仅本地，不上传）
 ```
@@ -72,6 +73,7 @@ python tools/build_demo.py                    # 重新生成"看演示"用的虚
 python tools/crawl_jd.py [--only 岗位]         # 爬取校招 JD（有缓存，可断点续爬）
 python tools/build_job_profiles.py            # 用 flash 提取 JD 并统计岗位画像（有缓存）
 python setup_key.py                            # 配置 API Key 和模型
+python tests/test_job_form.py                 # 网页岗位要求表单回归测试（Edge 无头；先 pip install -r requirements-dev.txt）
 python tools/update_rankings.py / update_companies.py   # 每年更新排名、公司名单
 ```
 
