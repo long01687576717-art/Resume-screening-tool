@@ -14,8 +14,8 @@ IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 SUPPORTED_SUFFIXES = {".pdf", ".docx", ".txt"} | IMAGE_SUFFIXES
 SCANNED_PAGE_CHARS = 20  # PDF 某页提取到的文字少于这个数时，视为扫描页，改用图片识别
 PDF_RENDER_DPI = 200     # 扫描页做图片识别时的分辨率
-PAGE_IMAGE_WIDTH = 1460  # "原简历"显示 PDF 页面的目标宽度（像素）
-PAGE_DPI_MIN, PAGE_DPI_MAX = 150, 200
+PAGE_IMAGE_WIDTH = 2920  # "原简历"显示 PDF 页面的渲染宽度（像素）：显示宽度的 2 倍，150%、200% 缩放的屏幕也清晰
+PAGE_DPI_MIN, PAGE_DPI_MAX = 300, 400
 # PDF 字体信息不完整时 pdfminer 会输出大量警告，不影响文字提取
 logging.getLogger("pdfminer").setLevel(logging.ERROR)
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
@@ -66,8 +66,9 @@ def _clean(text):
 
 def pdf_pages(data):
     """把 PDF 的每一页转成图片（网页"原简历"里显示用）；只在内存里处理，不写硬盘。
-    每页按 1460 像素宽渲染（Streamlit 显示图片的最大宽度，再宽会被它缩小一次），
-    分辨率限制在 150～200 DPI：A4 约 176 DPI、Letter 约 172 DPI。原来固定 110 DPI，放大后文字发虚。"""
+    每页按 2920 像素宽渲染（2 倍图），分辨率限制在 300～400 DPI：A4 约 353 DPI，每页约 0.2 秒。
+    网页显示区域约 1150 像素宽，150% 缩放的屏幕要 1700 多个物理像素、200% 要 2300 左右，渲染宽度必须高于这个数，
+    否则浏览器拉伸发虚。显示时要把图片实际宽度传给 st.image，否则 Streamlit 会先把它缩到 1460。"""
     with pdfplumber.open(io.BytesIO(data)) as pdf:
         return [page.to_image(resolution=_page_dpi(page)).original for page in pdf.pages]
 

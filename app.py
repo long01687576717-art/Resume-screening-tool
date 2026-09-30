@@ -9,6 +9,7 @@
 - "看演示"读 demo/ 里预先生成的虚构简历结果，不需要 Key、不调用 AI（python tools/build_demo.py 生成）
 """
 import hashlib
+import io
 import json
 import mimetypes
 import os
@@ -19,6 +20,7 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 from openai import OpenAI, OpenAIError
+from PIL import Image
 
 import main as analyzer
 from knowledge.kb import KnowledgeBase
@@ -27,7 +29,7 @@ from matching import jd, match, overview
 from matching.jd_extract import QUALITIES, RESUME_JUDGEABLE
 from modules.base import ModuleResult
 from modules.experience import LEVEL_NAMES
-from parser.file_reader import IMAGE_SUFFIXES, pdf_pages, read_bytes
+from parser.file_reader import IMAGE_SUFFIXES, PAGE_IMAGE_WIDTH, pdf_pages, read_bytes
 from report import screening
 from report.formatter import DISCLAIMER, format_report
 from ui import style as ui
@@ -730,17 +732,19 @@ def _original(analysis):
         st.caption(NO_ORIGINAL)
         return
     suffix = Path(name).suffix.lower()
-    # 网页里的图片最宽 1460 像素；要放大看细节，下载原文件用本机阅读器打开（文件在内存里，不写硬盘）
+    # 要看最清楚的：图片右上角的全屏按钮，或下载原文件用本机软件打开（文件在内存里，不写硬盘）
     st.download_button("下载原文件", data, file_name=name, key=f"download_{name}", on_click="ignore",
                        mime=mimetypes.guess_type(name)[0] or "application/octet-stream",
                        icon=":material/download:", help="看原始清晰度：用本机的 PDF / 图片 / Word 软件打开")
     try:
-        # 按原尺寸显示、只缩不放（不再拉伸到弹窗宽度）；PDF 页面用 PNG，JPEG 压缩会让文字边缘发虚
+        # 宽度传图片实际像素数：不传的话 Streamlit 会先把图缩到 1460 像素，2 倍图就白做了；
+        # 浏览器再按弹窗宽度缩小显示（只缩不放）。PDF 页面用 PNG，JPEG 压缩会让文字边缘发虚
         if suffix == ".pdf":
             for page in pdf_pages(data):
-                st.image(page, width="content", output_format="PNG")
+                st.image(page, width=page.width, output_format="PNG")
         elif suffix in IMAGE_SUFFIXES:
-            st.image(data, width="content")
+            width = Image.open(io.BytesIO(data)).width
+            st.image(data, width=min(width, PAGE_IMAGE_WIDTH))     # 手机拍的大图按 2 倍图宽度封顶
         else:
             st.code(read_bytes(name, data), language=None, wrap_lines=True)
     except Exception as e:

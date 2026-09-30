@@ -3,7 +3,7 @@
 两者共用同一套 TXT 解码、Word 遍历和收尾处理；这个测试防止以后只改了其中一边。
 覆盖：samples/ 里的虚构 TXT 和 Word、一份现场生成的复杂 Word（合并单元格、表格套表格、
 多种样式、文本框）、TXT 的各种编码（含现有读取器读不好的 UTF-16、GB18030，要求两边"错得一样"）。
-另外检查 pdf_pages（"原简历"里 PDF 转图片）的清晰度：A4 / Letter 渲染成 1460 像素宽，小页面分辨率不超过 200 DPI。
+另外检查 pdf_pages（"原简历"里 PDF 转图片）的清晰度：A4 / Letter 渲染成 2920 像素宽（2 倍图），小页面分辨率不超过 400 DPI。
 
 用法（在项目根目录）：python tests/test_file_reader.py      也可以用 pytest 运行
 不需要浏览器、API Key；生成的文件放在系统临时目录，结束后自动删除。全部通过退出码 0，否则 1。
@@ -21,7 +21,7 @@ from docx.oxml import parse_xml               # noqa: E402
 from docx.shared import RGBColor              # noqa: E402
 from PIL import Image                         # noqa: E402
 
-from parser.file_reader import PAGE_IMAGE_WIDTH, pdf_pages, read_bytes, read_file   # noqa: E402
+from parser.file_reader import PAGE_DPI_MAX, PAGE_IMAGE_WIDTH, pdf_pages, read_bytes, read_file   # noqa: E402
 
 SAMPLE_TEXT = "张三（虚构样例）\n教育：某某大学 统计学\n技能：Python、SQL\n生僻字：𠀀 喆 昇"
 ENCODINGS = {
@@ -118,7 +118,7 @@ def _pdf(width_pt, height_pt):
 def _check_pdf_pages():
     out = []
     for label, size, expect in (("A4", (595, 842), PAGE_IMAGE_WIDTH), ("Letter", (612, 792), PAGE_IMAGE_WIDTH),
-                                ("小页面 A6（封顶 200 DPI）", (298, 420), round(298 * 200 / 72))):
+                                (f"小页面 A6（封顶 {PAGE_DPI_MAX} DPI）", (298, 420), round(298 * PAGE_DPI_MAX / 72))):
         width = pdf_pages(_pdf(*size))[0].size[0]
         out.append((f"PDF 转图片 {label}：宽 {expect} 像素左右", abs(width - expect) <= 2, "", f"实际宽 {width}"))
     return out
