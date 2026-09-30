@@ -1,0 +1,87 @@
+/* 简历初筛助手的页面样式（只管外观，不影响任何判断）。
+   为了在 Streamlit 升级后不失效，只用两类选择器：
+   1. 自己起名、rs- 开头的 class（写在 ui/style.py 生成的 HTML 里）；
+   2. .st-key-rs_xxx：给 st.container(key="rs_xxx") 起 key 后 Streamlit 自动加的 class（官方文档写明的用法）。
+   不写 Streamlit 内部的 data-testid / emotion 类名。颜色尽量用半透明，深色主题下也能看。 */
+
+/* 唯一一处用了 Streamlit 内部标识：缩小页面顶部默认留白。以后版本改名的话只是留白变回原样，不影响使用。 */
+[data-testid="stMainBlockContainer"] { padding-top: 2.5rem; }
+
+/* ---------- 顶部品牌区 ---------- */
+.st-key-rs_hero {
+  background: linear-gradient(180deg, rgba(31, 79, 209, 0.07) 0%, rgba(31, 79, 209, 0.015) 100%);
+  border: 1px solid rgba(31, 79, 209, 0.14);
+  border-radius: 16px;
+  padding: 26px 32px 22px;
+}
+.rs-brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 15px; }
+.rs-brand svg { flex: none; }
+.rs-tag {
+  font-size: 12px; font-weight: 500; padding: 1px 9px; border-radius: 999px;
+  border: 1px solid rgba(128, 128, 128, 0.32); opacity: 0.8;
+}
+.rs-h1 {
+  font-size: clamp(26px, 3.1vw, 38px); line-height: 1.22; font-weight: 700;
+  letter-spacing: -0.01em; margin: 16px 0 8px;
+}
+.rs-lead { font-size: 16.5px; line-height: 1.7; opacity: 0.78; max-width: 46em; margin-bottom: 4px; }
+.rs-stats {
+  display: flex; flex-wrap: wrap; gap: 10px 36px; margin-top: 6px; padding-top: 14px;
+  border-top: 1px solid rgba(128, 128, 128, 0.18);
+}
+.rs-stat b { display: block; font-size: 22px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 1.3; }
+.rs-stat span { font-size: 13px; opacity: 0.68; }
+.rs-link { font-size: 15px; font-weight: 500; text-decoration: none; }
+
+/* ---------- 三步进度条 ---------- */
+.rs-stepper { display: flex; gap: 12px; margin: 4px 0 10px; }
+.rs-step {
+  flex: 1; display: flex; align-items: center; gap: 12px; padding: 12px 16px;
+  border: 1px solid rgba(128, 128, 128, 0.2); border-radius: 12px;
+  text-decoration: none !important; color: inherit !important;
+}
+.rs-step:hover { border-color: rgba(31, 79, 209, 0.45); }
+.rs-dot {
+  flex: none; width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700; border: 1.5px solid rgba(128, 128, 128, 0.45); opacity: 0.85;
+}
+.rs-step.done .rs-dot { background: #1F4FD1; border-color: #1F4FD1; color: #FFFFFF; opacity: 1; }
+.rs-step.now { border-color: rgba(31, 79, 209, 0.55); background: rgba(31, 79, 209, 0.05); }
+.rs-step.now .rs-dot { border-color: #1F4FD1; color: #1F4FD1; opacity: 1; }
+.rs-step b { display: block; font-size: 15px; font-weight: 600; }
+.rs-step small { font-size: 13px; opacity: 0.68; }
+
+/* ---------- 每一步的标题 ---------- */
+.rs-sec { display: flex; align-items: center; gap: 12px; scroll-margin-top: 70px; }
+.rs-num {
+  flex: none; width: 30px; height: 30px; border-radius: 9px; background: rgba(31, 79, 209, 0.1); color: #1F4FD1;
+  display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 15px;
+}
+.rs-sec-title { font-size: 22px; font-weight: 700; }
+.rs-sec-sub { font-size: 14px; opacity: 0.68; margin: 2px 0 0 42px; line-height: 1.6; }
+
+/* ---------- 三个步骤的卡片 ---------- */
+.st-key-rs_step_job, .st-key-rs_step_resumes, .st-key-rs_step_results { border-radius: 14px; padding: 8px 12px; }
+
+/* ---------- 空状态 ---------- */
+.rs-empty {
+  text-align: center; padding: 34px 16px; border: 1.5px dashed rgba(128, 128, 128, 0.3); border-radius: 12px;
+}
+.rs-empty .rs-empty-icon { font-size: 30px; }
+.rs-empty b { display: block; font-size: 16px; margin: 6px 0 4px; }
+.rs-empty span { font-size: 14px; opacity: 0.7; }
+
+/* ---------- 页脚 ---------- */
+.rs-footer {
+  margin-top: 28px; padding-top: 14px; border-top: 1px solid rgba(128, 128, 128, 0.18);
+  font-size: 13px; opacity: 0.68; line-height: 1.8;
+}
+
+/* ---------- 窄屏（手机、分屏） ---------- */
+@media (max-width: 720px) {
+  .st-key-rs_hero { padding: 18px 16px 16px; }
+  .rs-stepper { flex-direction: column; gap: 8px; }
+  .rs-stats { gap: 8px 22px; }
+  .rs-stat b { font-size: 18px; }
+  .rs-sec-sub { margin-left: 0; }
+}

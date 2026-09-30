@@ -28,6 +28,7 @@ from modules.base import ModuleResult
 from modules.experience import LEVEL_NAMES
 from report import screening
 from report.formatter import DISCLAIMER, format_report
+from ui import style as ui
 
 ROOT = Path(__file__).resolve().parent
 def _public_mode():
@@ -144,34 +145,64 @@ def _sidebar():
     return state.get("api_key")
 
 
+ABOUT = "**简历初筛助手**：给一批校招简历（有 JD 更好），告诉 HR 先看谁、为什么。仅辅助阅读，不作为录用依据。"
+
+
 def main():
-    st.set_page_config(page_title="简历初筛助手", page_icon="📋", layout="wide")
-    st.title("📋 简历初筛助手")
-    st.caption("上传一批简历，按你关心的几项排序，快速决定**先看谁**；有岗位 JD 的话，还能看出谁做过这个岗位要做的事。"
-               "工具只决定阅读顺序，不打分、不替你做录用决定。")
+    st.set_page_config(page_title="简历初筛助手 · 先看谁、为什么", page_icon="📋", layout="wide",
+                       menu_items={"About": ABOUT})
+    ui.inject_css()
     kb = knowledge()
     api_key = _sidebar()
     llm, jd_llm = _clients(api_key)
     state = st.session_state
     state.setdefault("analyses", {})
-    _demo_bar(kb)
+    _hero()
+    _trust_strip()
     if not llm:
         st.info("在左侧「设置」里填写 DeepSeek 的 API Key 后，可以分析自己的简历和 JD；没有 Key 可以先点上面的「看演示」。", icon="👈")
     _progress_bar()
-    st.divider()
-    step_job(kb, jd_llm)
-    st.divider()
-    step_resumes(kb, llm)
-    st.divider()
-    step_results(kb)
+    with st.container(border=True, key="rs_step_job"):
+        step_job(kb, jd_llm)
+    with st.container(border=True, key="rs_step_resumes"):
+        step_resumes(kb, llm)
+    with st.container(border=True, key="rs_step_results"):
+        step_results(kb)
+    ui.footer(DISCLAIMER.lstrip("※ "))
 
 
-def _demo_bar(kb):
+def _hero():
+    """顶部品牌区：一句话说清价值 + 最显眼的「看演示」。分析过简历后收成一行，把地方让给结果。"""
+    compact = bool(st.session_state.get("selected"))
+    with st.container(key="rs_hero"):
+        ui.brand("校招版")
+        if not compact:
+            ui.headline("一批校招简历，先看谁、为什么",
+                        "上传一批简历，按你关心的几项排序，快速决定<b>先看谁</b>；有岗位 JD 的话，还能看出谁做过这个岗位要做的事。"
+                        "每个人都附上简历里的证据；工具只决定阅读顺序，不打分、不替你做录用决定。")
+        _demo_bar()
+        if not compact:
+            ui.stats([("7 个", "分析模块，每份简历一份报告"), ("28 类", "校招常见岗位画像"),
+                      ("1596 份", "公开校招 JD 统计而来"), ("0 个", "总分：只给证据和理由")])
+
+
+def _trust_strip():
+    """隐私与合规的几句要点，平静地放在一行；详细说明在左侧「设置 → 隐私」。"""
+    with st.container(horizontal=True, gap="small"):
+        st.badge("不保存简历，关掉页面就消失" if PUBLIC else f"AI 提取结果只存本机，{RESUME_CACHE_DAYS} 天自动删除",
+                 icon=":material/lock:", color="gray")
+        st.badge("手机号、邮箱、身份证号不发给 AI", icon=":material/visibility_off:", color="gray")
+        st.badge("不按性别、年龄等筛选", icon=":material/balance:", color="gray")
+        st.badge("只排阅读顺序，不做录用决定", icon=":material/person_check:", color="gray")
+
+
+def _demo_bar():
     """看演示：载入预先生成的虚构简历分析结果和一份确认好的岗位要求，不需要 Key、不调用 AI。"""
     if not (DEMO_DIR / "analyses.json").exists():
         return
-    c1, c2 = st.columns([1, 3], vertical_alignment="center")
-    if c1.button("🎬 看演示", help="11 份虚构简历 + 一份数据分析岗位要求，不需要 API Key、不花钱"):
+    c1, c2 = st.columns([1, 4], vertical_alignment="center")
+    if c1.button("🎬 看演示", type="primary", width="stretch",
+                 help="11 份虚构简历 + 一份数据分析岗位要求，不需要 API Key、不花钱"):
         state = st.session_state
         analyses = json.loads((DEMO_DIR / "analyses.json").read_text(encoding="utf-8"))
         for a in analyses:
@@ -182,25 +213,33 @@ def _demo_bar(kb):
         _set_draft(job, [])
         state.req = job
         state.demo_loaded = True
+        st.rerun()        # 重新画一遍页面，顶部品牌区收成一行、进度条打勾（只影响显示）
     c2.caption("✅ 已载入演示：11 份虚构简历 + 岗位要求「数据分析工程师」，直接看下面第 ③ 步。"
                if st.session_state.get("demo_loaded") else
                "没有简历或 API Key？载入 11 份虚构简历的分析结果和一份岗位要求，完整体验总览分层、阅读队列和完整分析。")
+    if not st.session_state.get("selected"):
+        with c2:
+            ui.link("或者直接上传自己的简历 ↓", "step-resumes")
 
 
 def _progress_bar():
+    """三步进度：已完成的打勾，当前该做的一步高亮；点击跳到对应步骤。"""
     state = st.session_state
-    marks = ["✅" if state.get("req") else "➖", "✅" if state.get("selected") else "⬜", "✅" if state.get("selected") else "⬜"]
-    cols = st.columns(3)
-    for col, mark, name in zip(cols, marks, ("① 岗位要求（可选）", "② 上传简历并分析", "③ 排序和阅读队列")):
-        col.markdown(f"{mark} **{name}**")
+    req, keys = state.get("req"), state.get("selected")
+    ui.stepper([
+        ("step-job", "岗位要求（可选）", f"已确认：{req['岗位']}" if req else "可跳过，不影响总览排序", "done" if req else "todo"),
+        ("step-resumes", "上传简历并分析", f"已分析 {len(keys)} 份" if keys else "上传后点「开始分析」", "done" if keys else "now"),
+        ("step-results", "排序和阅读队列", ("查看总览和阅读队列" if req else "查看总览排序") if keys else "分析完成后出现",
+         "now" if keys else "todo"),
+    ])
 
 
 # ---------- ① 岗位要求 ----------
 
 def step_job(kb, llm):
     state = st.session_state
-    st.header("① 岗位要求（可选）")
-    st.caption("不导入 JD 也可以直接上传简历，按学校、实践经历、技能等排序；导入并确认 JD 后，还能按「岗位匹配」排序、看阅读队列和理由。")
+    ui.section(1, "岗位要求（可选）", "不导入 JD 也可以直接上传简历，按学校、实践经历、技能等排序；"
+               "导入并确认 JD 后，还能按「岗位匹配」排序、看阅读队列和理由。", "step-job")
     source = st.segmented_control("JD 来源", ["粘贴新的 JD", "打开已保存的岗位"], default="粘贴新的 JD",
                                   label_visibility="collapsed")
     if source == "打开已保存的岗位":
@@ -363,7 +402,7 @@ def _safe(name):
 
 def step_resumes(kb, llm):
     state = st.session_state
-    st.header("② 简历")
+    ui.section(2, "简历", "支持 PDF、Word（.docx）、TXT 和图片，可一次选多份。", "step-resumes")
     c1, c2 = st.columns([3, 2])
     uploads = c1.file_uploader("上传简历（可多选）", type=UPLOAD_TYPES, accept_multiple_files=True,
                                help="支持 PDF、Word（.docx）、TXT 和图片")
@@ -421,10 +460,11 @@ def _analyze(items, kb, llm):
 
 def step_results(kb):
     state = st.session_state
-    st.header("③ 排序和阅读队列")
+    ui.section(3, "排序和阅读队列", "总览不需要 JD；确认了岗位要求的话，还有阅读队列和理由。", "step-results")
     keys = state.get("selected")
     if not keys:
-        st.caption("分析完简历后，这里会给出排序总览；确认了岗位要求的话，还有阅读队列。")
+        ui.empty_state("📊", "还没有结果",
+                       "分析完简历后，这里会给出排序总览；确认了岗位要求的话，还有阅读队列。没有简历可以先点页面顶部的「看演示」。")
         return
     items = [state.analyses[k] for k in keys]
     for a in items:
@@ -475,7 +515,7 @@ def _overview(profiles, reports, kb):
         table = pd.DataFrame([{**{c: r.get(c, "") for c in columns}, "简历": Path(r["文件"]).stem,
                                "待确认": "；".join(r["待确认"])} for r in ranked], columns=columns)
         # 按层交替底色：底色相同、连在一起的是同一层，层内不分先后
-        shade = lambda row: ["background-color: #F4F6FA" if row["层"] % 2 == 0 else ""] * len(row)
+        shade = lambda row: ["background-color: #F5F7FA" if row["层"] % 2 == 0 else ""] * len(row)
         layers = ranked[-1]["层"]
         first = sum(r["层"] == 1 for r in ranked)
         st.caption(f"共 {len(ranked)} 人，分成 {layers} 层。{screening.LAYER_RULE}。点选一行，下方显示这个人的完整分析。")
@@ -515,7 +555,7 @@ def _queues(profiles, reports, kb):
     results, hints = match.screen(profiles, req, kb)
     cols = st.columns(len(match.QUEUES))
     for col, queue in zip(cols, match.QUEUES):
-        col.metric(queue, f"{sum(r['队列'] == queue for r in results)} 人")
+        col.metric(f":{QUEUE_STYLE[queue][0]}-badge[{queue}]", f"{sum(r['队列'] == queue for r in results)} 人", border=True)
     for h in hints:
         st.info(h, icon="💡")
     st.caption("证据强度：● 在实习 / 项目 / 校园经历里做过　◐ 只在技能栏自述或学过课程　○ 简历没体现（不等于不会）")
