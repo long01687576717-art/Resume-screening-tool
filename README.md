@@ -82,7 +82,7 @@ python screen.py 导入 samples/jd/数据分析工程师.txt
 python screen.py 筛选 jobs/数据分析工程师.txt samples samples/test/dev
 ```
 
-**测试**：`python tests/test_file_reader.py`（文件读取：读内存和读文件结果一致，不需要浏览器）；`pip install -r requirements-dev.txt` 后运行 `python tests/test_job_form.py`（网页岗位要求表单，需要 Microsoft Edge）。说明见 [开发说明 · 测试](docs/开发说明.md)。
+**测试**：`python tests/test_file_reader.py`（文件读取：读内存和读文件结果一致，不需要浏览器）；`pip install -r requirements-dev.txt` 后运行 `python tests/test_job_form.py`（网页岗位要求表单；**需要本机安装 Microsoft Edge**，测试用它的无头模式，不另外下载浏览器）。说明见 [开发说明 · 测试](docs/开发说明.md)。
 
 ## 公开部署
 

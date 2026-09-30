@@ -10,6 +10,7 @@
 """
 import hashlib
 import json
+import mimetypes
 import os
 import tempfile
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -729,12 +730,17 @@ def _original(analysis):
         st.caption(NO_ORIGINAL)
         return
     suffix = Path(name).suffix.lower()
+    # 网页里的图片最宽 1460 像素；要放大看细节，下载原文件用本机阅读器打开（文件在内存里，不写硬盘）
+    st.download_button("下载原文件", data, file_name=name, key=f"download_{name}", on_click="ignore",
+                       mime=mimetypes.guess_type(name)[0] or "application/octet-stream",
+                       icon=":material/download:", help="看原始清晰度：用本机的 PDF / 图片 / Word 软件打开")
     try:
+        # 按原尺寸显示、只缩不放（不再拉伸到弹窗宽度）；PDF 页面用 PNG，JPEG 压缩会让文字边缘发虚
         if suffix == ".pdf":
             for page in pdf_pages(data):
-                st.image(page, width="stretch")
+                st.image(page, width="content", output_format="PNG")
         elif suffix in IMAGE_SUFFIXES:
-            st.image(data, width="stretch")
+            st.image(data, width="content")
         else:
             st.code(read_bytes(name, data), language=None, wrap_lines=True)
     except Exception as e:

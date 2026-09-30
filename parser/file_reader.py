@@ -13,7 +13,9 @@ from parser.ocr import LOW_CONFIDENCE, ocr_image
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png", ".bmp", ".webp"}
 SUPPORTED_SUFFIXES = {".pdf", ".docx", ".txt"} | IMAGE_SUFFIXES
 SCANNED_PAGE_CHARS = 20  # PDF 某页提取到的文字少于这个数时，视为扫描页，改用图片识别
-PDF_RENDER_DPI = 200
+PDF_RENDER_DPI = 200     # 扫描页做图片识别时的分辨率
+PAGE_IMAGE_WIDTH = 1460  # "原简历"显示 PDF 页面的目标宽度（像素）
+PAGE_DPI_MIN, PAGE_DPI_MAX = 150, 200
 # PDF 字体信息不完整时 pdfminer 会输出大量警告，不影响文字提取
 logging.getLogger("pdfminer").setLevel(logging.ERROR)
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
@@ -62,10 +64,16 @@ def _clean(text):
     return text
 
 
-def pdf_pages(data, resolution=110):
-    """把 PDF 的每一页转成图片（网页"原简历"里显示用）；只在内存里处理，不写硬盘。"""
+def pdf_pages(data):
+    """把 PDF 的每一页转成图片（网页"原简历"里显示用）；只在内存里处理，不写硬盘。
+    每页按 1460 像素宽渲染（Streamlit 显示图片的最大宽度，再宽会被它缩小一次），
+    分辨率限制在 150～200 DPI：A4 约 176 DPI、Letter 约 172 DPI。原来固定 110 DPI，放大后文字发虚。"""
     with pdfplumber.open(io.BytesIO(data)) as pdf:
-        return [page.to_image(resolution=resolution).original for page in pdf.pages]
+        return [page.to_image(resolution=_page_dpi(page)).original for page in pdf.pages]
+
+
+def _page_dpi(page):
+    return min(PAGE_DPI_MAX, max(PAGE_DPI_MIN, PAGE_IMAGE_WIDTH * 72 / float(page.width)))
 
 
 # 部分 Word / PDF 导出工具会把常用字存成"部首字符"（如"硕⼠"里的⼠是 U+2F20，不是汉字"士"），
