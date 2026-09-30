@@ -49,7 +49,7 @@ class BasicInfoModule(Module):
         result.add("籍贯", hometown or "未注明")
         result.add("现居城市", residence or "未注明")
         result.add("学校所在地", "、".join(school_cities) + ("（部分由 AI 补充）" if ai_filled else "") if school_cities else "未知")
-        result.add("应聘地点", f"{job_city}（{job_source}）" if job_city else "未指定（可用 --city 参数指定）")
+        result.add("应聘地点", f"{job_city}（{job_source}）" if job_city else "未指定")
 
         if job_city and hometown and not _same_place(hometown, job_city):
             same_province = kb.province_of(hometown) and kb.province_of(hometown) == kb.province_of(job_city)

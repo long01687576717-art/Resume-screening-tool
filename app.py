@@ -92,160 +92,118 @@ def _clients(api_key):
     return state._clients
 
 
-def _sidebar():
-    """AI 服务设置和隐私操作。返回网页里输入的 API Key（没有输入则为 None，用本机 .env 里的）。"""
+def _settings():
+    """右上角「设置」里的内容：API Key 和隐私。返回网页里输入的 API Key。"""
     state = st.session_state
     saved = not PUBLIC and bool(read_env_file().get("DEEPSEEK_API_KEY") or os.environ.get("DEEPSEEK_API_KEY"))
-    with st.sidebar:
-        st.header("⚙️ 设置")
-        st.subheader("AI 服务（DeepSeek）")
-        if state.get("api_key"):
-            st.success("正在使用本次输入的 API Key", icon="🔑")
-        elif saved:
-            st.success("正在使用本机保存的 API Key", icon="🔑")
+    st.markdown("**AI 服务**", help="使用 DeepSeek 提取简历和 JD 里的事实；判断由规则完成。"
+                + ("Key 只在这个页面里使用，不会保存到服务器。" if PUBLIC else "Key 默认只在这个页面里使用，勾选才保存到本机。"))
+    st.caption("已连接" if state.get("api_key") or saved else "未设置 API Key")
+    key = st.text_input("API Key", type="password", placeholder="sk-…", key="key_input", label_visibility="collapsed")
+    remember = False if PUBLIC else st.checkbox("保存到本机", key="key_remember")
+    if st.button("连接", disabled=not key.strip(), width="stretch"):
+        try:
+            OpenAI(api_key=key.strip(), base_url=BASE_URL, timeout=20).models.list()
+        except OpenAIError:
+            # 不把接口返回的原始信息显示出来：里面可能带着部分 Key
+            st.error("连接失败")
         else:
-            st.warning("还没有 API Key，请在下面填写" + ("；没有 Key 也可以先看演示" if PUBLIC else ""), icon="🔑")
-        with st.expander("填写 / 更换 API Key", expanded=not (saved or state.get("api_key"))):
-            key = st.text_input("API Key", type="password", placeholder="sk-…", key="key_input",
-                                help="在 DeepSeek 开放平台（platform.deepseek.com）创建")
-            remember = False if PUBLIC else st.checkbox("保存到本机（写入 .env，下次不用再填）", key="key_remember")
-            if st.button("测试并使用", disabled=not key.strip()):
-                try:
-                    OpenAI(api_key=key.strip(), base_url=BASE_URL, timeout=20).models.list()
-                except OpenAIError:
-                    # 不把接口返回的原始信息显示出来：里面可能带着部分 Key
-                    st.error("连接失败：Key 无效，或网络连不上 DeepSeek")
-                else:
-                    state.api_key = key.strip()
-                    if remember:
-                        save_env({"DEEPSEEK_API_KEY": key.strip()})
-                    state.pop("key_input", None)
-                    st.rerun()
-            st.caption("只在这次打开的页面里使用，关闭页面就会忘记，不会保存到服务器。" if PUBLIC else
-                       "默认只在这次打开的页面里使用，关闭页面就会忘记；勾选才会保存到本机。Key 不会显示在页面上。")
-
-        st.subheader("隐私")
-        if PUBLIC:
-            st.caption("本站不保存简历和分析结果：上传的文件分析完立即删除，结果只在你这个页面里，关掉就消失。"
-                       "简历会用你的 Key 发送给 DeepSeek 提取信息，手机号、邮箱、身份证号发送前已去掉。"
-                       "**请不要上传未经本人同意的简历。**")
-            if st.button("清除本页的分析结果"):
-                for k in ("analyses", "selected", "req", "draft"):
-                    state.pop(k, None)
-                st.success("已清除")
-        else:
-            st.caption(f"上传的简历文件分析完立即删除；AI 从简历里提取的内容缓存在本机，**{RESUME_CACHE_DAYS} 天后自动删除**。"
-                       "手机号、邮箱、身份证号在发送给 AI 前已去掉。")
-            if st.button("立即清除所有简历缓存"):
-                n = clear_resume_cache()
-                st.cache_resource.clear()        # 内存里的分析结果也一起清掉
-                for k in ("analyses", "selected"):
-                    state.pop(k, None)
-                st.success(f"已清除 {n} 份简历缓存和本页的分析结果")
+            state.api_key = key.strip()
+            if remember:
+                save_env({"DEEPSEEK_API_KEY": key.strip()})
+            state.pop("key_input", None)
+            st.rerun()
+    st.divider()
+    st.markdown("**隐私**", help=("本站不保存简历和分析结果，关掉页面就消失；手机号、邮箱、身份证号不发给 AI。请不要上传未经本人同意的简历。"
+                                  if PUBLIC else f"上传的文件分析完即删除；AI 提取的内容缓存在本机，{RESUME_CACHE_DAYS} 天后自动删除；"
+                                                 "手机号、邮箱、身份证号不发给 AI。"))
+    if st.button("清除分析结果", width="stretch"):
+        if not PUBLIC:
+            clear_resume_cache()
+            st.cache_resource.clear()
+        for k in ("analyses", "selected", "req", "draft", "demo_loaded"):
+            state.pop(k, None)
+        st.rerun()
     return state.get("api_key")
+
+
+PAGES = ("岗位要求", "简历", "结果")
+FOOTER = ("仅辅助阅读，不作为录用依据", "没写 ≠ 不会", "不按性别、年龄等筛选",
+          "本站不保存简历" if PUBLIC else f"本机缓存 {RESUME_CACHE_DAYS} 天自动删除")
 
 
 ABOUT = "**简历初筛助手**：给一批校招简历（有 JD 更好），告诉 HR 先看谁、为什么。仅辅助阅读，不作为录用依据。"
 
 
 def main():
-    st.set_page_config(page_title="简历初筛助手 · 先看谁、为什么", page_icon="📋", layout="wide",
-                       menu_items={"About": ABOUT})
+    st.set_page_config(page_title="简历初筛助手", page_icon="📋", layout="wide",
+                       initial_sidebar_state="collapsed", menu_items={"About": ABOUT})
     ui.inject_css()
     kb = knowledge()
-    api_key = _sidebar()
-    llm, jd_llm = _clients(api_key)
     state = st.session_state
     state.setdefault("analyses", {})
-    _hero()
-    _trust_strip()
-    if not llm:
-        st.info("在左侧「设置」里填写 DeepSeek 的 API Key 后，可以分析自己的简历和 JD；没有 Key 可以先点上面的「看演示」。", icon="👈")
-    _progress_bar()
-    with st.container(border=True, key="rs_step_job"):
+    if "goto" in state:                  # 看演示、分析完成后跳到对应页面（要在切换控件画出来之前设置）
+        state.page = state.pop("goto")
+    state.setdefault("page", PAGES[1])
+
+    with st.container(key="rs_topbar"):
+        c1, c2 = st.columns([8, 1], vertical_alignment="center")
+        with c1:
+            ui.brand()
+        with c2.popover("设置", icon=":material/settings:", width="stretch"):
+            api_key = _settings()
+    llm, jd_llm = _clients(api_key)
+
+    if not state.get("selected"):
+        _hero()
+    page = st.segmented_control("页面", PAGES, key="page", label_visibility="collapsed") or PAGES[1]
+    if page == PAGES[0]:
         step_job(kb, jd_llm)
-    with st.container(border=True, key="rs_step_resumes"):
+    elif page == PAGES[1]:
         step_resumes(kb, llm)
-    with st.container(border=True, key="rs_step_results"):
+    else:
         step_results(kb)
-    ui.footer(DISCLAIMER.lstrip("※ "))
+    ui.footer(FOOTER)
 
 
 def _hero():
-    """顶部品牌区：一句话说清价值 + 最显眼的「看演示」。分析过简历后收成一行，把地方让给结果。"""
-    compact = bool(st.session_state.get("selected"))
+    """首屏：一句标题、一句副标题、两个按钮。分析过简历后不再显示。"""
     with st.container(key="rs_hero"):
-        ui.brand("校招版")
-        if not compact:
-            ui.headline("一批校招简历，先看谁、为什么",
-                        "上传一批简历，按你关心的几项排序，快速决定<b>先看谁</b>；有岗位 JD 的话，还能看出谁做过这个岗位要做的事。"
-                        "每个人都附上简历里的证据；工具只决定阅读顺序，不打分、不替你做录用决定。")
-        _demo_bar()
-        if not compact:
-            ui.stats([("7 个", "分析模块，每份简历一份报告"), ("28 类", "校招常见岗位画像"),
-                      ("1596 份", "公开校招 JD 统计而来"), ("0 个", "总分：只给证据和理由")])
+        ui.headline("一批校招简历，先看谁、为什么", "基于简历证据的阅读排序，不打分，只给理由。")
+        c1, c2, _ = st.columns([1, 1, 5])
+        if c1.button("看演示", type="primary", width="stretch", help="11 份虚构简历，无需 API Key"):
+            _load_demo()
+        if c2.button("上传简历", width="stretch"):
+            st.session_state.goto = PAGES[1]
+            st.rerun()
 
 
-def _trust_strip():
-    """隐私与合规的几句要点，平静地放在一行；详细说明在左侧「设置 → 隐私」。"""
-    with st.container(horizontal=True, gap="small"):
-        st.badge("不保存简历，关掉页面就消失" if PUBLIC else f"AI 提取结果只存本机，{RESUME_CACHE_DAYS} 天自动删除",
-                 icon=":material/lock:", color="gray")
-        st.badge("手机号、邮箱、身份证号不发给 AI", icon=":material/visibility_off:", color="gray")
-        st.badge("不按性别、年龄等筛选", icon=":material/balance:", color="gray")
-        st.badge("只排阅读顺序，不做录用决定", icon=":material/person_check:", color="gray")
-
-
-def _demo_bar():
-    """看演示：载入预先生成的虚构简历分析结果和一份确认好的岗位要求，不需要 Key、不调用 AI。"""
-    if not (DEMO_DIR / "analyses.json").exists():
-        return
-    c1, c2 = st.columns([1, 4], vertical_alignment="center")
-    if c1.button("🎬 看演示", type="primary", width="stretch",
-                 help="11 份虚构简历 + 一份数据分析岗位要求，不需要 API Key、不花钱"):
-        state = st.session_state
-        analyses = json.loads((DEMO_DIR / "analyses.json").read_text(encoding="utf-8"))
-        for a in analyses:
-            a["results"] = [ModuleResult(r["title"], [tuple(i) for i in r["items"]], r["notes"]) for r in a["results"]]
-            state.analyses[f"demo:{a['name']}"] = a
-        state.selected = [f"demo:{a['name']}" for a in analyses]
-        job = json.loads((DEMO_DIR / "job.json").read_text(encoding="utf-8"))
-        _set_draft(job, [])
-        state.req = job
-        state.demo_loaded = True
-        st.rerun()        # 重新画一遍页面，顶部品牌区收成一行、进度条打勾（只影响显示）
-    c2.caption("✅ 已载入演示：11 份虚构简历 + 岗位要求「数据分析工程师」，直接看下面第 ③ 步。"
-               if st.session_state.get("demo_loaded") else
-               "没有简历或 API Key？载入 11 份虚构简历的分析结果和一份岗位要求，完整体验总览分层、阅读队列和完整分析。")
-    if not st.session_state.get("selected"):
-        with c2:
-            ui.link("或者直接上传自己的简历 ↓", "step-resumes")
-
-
-def _progress_bar():
-    """三步进度：已完成的打勾，当前该做的一步高亮；点击跳到对应步骤。"""
+def _load_demo():
+    """载入预先生成的虚构简历分析结果和一份确认好的岗位要求，不需要 Key、不调用 AI。"""
     state = st.session_state
-    req, keys = state.get("req"), state.get("selected")
-    ui.stepper([
-        ("step-job", "岗位要求（可选）", f"已确认：{req['岗位']}" if req else "可跳过，不影响总览排序", "done" if req else "todo"),
-        ("step-resumes", "上传简历并分析", f"已分析 {len(keys)} 份" if keys else "上传后点「开始分析」", "done" if keys else "now"),
-        ("step-results", "排序和阅读队列", ("查看总览和阅读队列" if req else "查看总览排序") if keys else "分析完成后出现",
-         "now" if keys else "todo"),
-    ])
+    analyses = json.loads((DEMO_DIR / "analyses.json").read_text(encoding="utf-8"))
+    for a in analyses:
+        a["results"] = [ModuleResult(r["title"], [tuple(i) for i in r["items"]], r["notes"]) for r in a["results"]]
+        state.analyses[f"demo:{a['name']}"] = a
+    state.selected = [f"demo:{a['name']}" for a in analyses]
+    job = json.loads((DEMO_DIR / "job.json").read_text(encoding="utf-8"))
+    _set_draft(job, [])
+    state.req = job
+    state.demo_loaded = True
+    state.goto = PAGES[2]
+    st.rerun()
 
 
 # ---------- ① 岗位要求 ----------
 
 def step_job(kb, llm):
     state = st.session_state
-    ui.section(1, "岗位要求（可选）", "不导入 JD 也可以直接上传简历，按学校、实践经历、技能等排序；"
-               "导入并确认 JD 后，还能按「岗位匹配」排序、看阅读队列和理由。", "step-job")
     source = st.segmented_control("JD 来源", ["粘贴新的 JD", "打开已保存的岗位"], default="粘贴新的 JD",
                                   label_visibility="collapsed")
     if source == "打开已保存的岗位":
         saved = sorted(p for p in JOBS_DIR.glob("*.json"))
         if not saved:
-            st.info("还没有保存过岗位，请先粘贴一份 JD。")
+            st.caption("还没有保存过岗位")
             return
         pick = st.selectbox("已保存的岗位", [p.stem for p in saved])
         if st.button("打开"):
@@ -253,13 +211,11 @@ def step_job(kb, llm):
             _set_draft(req, warnings)
     else:
         c1, c2 = st.columns([3, 1])
-        c2.selectbox("没有 JD？用示例填入", ["—"] + [p.stem for p in JD_SAMPLES], key="jd_example", on_change=_fill_example)
+        c2.selectbox("示例 JD", ["—"] + [p.stem for p in JD_SAMPLES], key="jd_example", on_change=_fill_example)
         title = c1.text_input("职位名称", key="jd_title", placeholder="例如：数据分析工程师")
-        text = st.text_area("岗位 JD（岗位职责 + 任职要求）", key="jd_text", height=200,
-                            placeholder="把招聘网站上的岗位描述整段粘贴进来")
-        if not llm:
-            st.caption("解析新的 JD 需要 API Key；也可以在上面选「打开已保存的岗位」看示例岗位。")
-        if st.button("解析 JD", type="primary", disabled=not (llm and title.strip() and text.strip())):
+        text = st.text_area("岗位 JD", key="jd_text", height=200, placeholder="粘贴岗位职责和任职要求")
+        if st.button("解析 JD", type="primary", disabled=not (llm and title.strip() and text.strip()),
+                     help=None if llm else "需要在右上角「设置」里连接 API Key"):
             with st.spinner("正在理解 JD（首次约 20 秒）……"):
                 req = jd.parse(text, title.strip(), kb, llm)
             _save_job(req, original=True)
@@ -291,16 +247,15 @@ def _edit_form(kb):
     base = state.draft
     fid = state.form_id
     with st.container(border=True):
-        st.subheader(f"工具的理解：{base['岗位']}")
         refs = "、".join(f"{r['岗位']}（相似度{r['相似度']}）" for r in base["参考岗位"]) or "知识库里没有相近岗位"
-        st.caption(f"参考岗位：{refs}。以下内容可以直接修改，改完点最下面的「确认」。")
+        st.subheader(base["岗位"], help=f"参考岗位：{refs}。以下内容都可以修改，改完点最下面的「确认」。")
 
         c1, c2 = st.columns([1, 3])
         degree = c1.selectbox("学历门槛", DEGREE_OPTIONS, index=DEGREE_OPTIONS.index(base["门槛"]["学历"]), key=f"degree{fid}",
                               help="只按简历里写明的学历判断；推断出来的只会进「待确认」")
 
-        st.markdown("**岗位职责** — 用来找「做过类似事」的人")
-        st.caption("简历里同一句经历出现 2 个关键词，或 1 个少见的关键词且领域相同，就算做过。关键词用「、」分开；空泛的职责取消勾选。")
+        st.markdown("**岗位职责**", help="用来找「做过类似事」的人：简历里同一句经历出现 2 个关键词，或 1 个少见的关键词且领域相同，"
+                                         "就算做过。关键词用「、」分开；空泛的职责取消勾选。")
         duties = st.data_editor(
             pd.DataFrame([{"参与匹配": not d["空泛"], "职责": d["职责"], "关键词": "、".join(d["关键词"])} for d in base["职责"]]),
             column_config={"参与匹配": st.column_config.CheckboxColumn(width="small"),
@@ -308,8 +263,8 @@ def _edit_form(kb):
                            "关键词": st.column_config.TextColumn(width="medium")},
             hide_index=True, key=f"duties{fid}")
 
-        st.markdown("**能力要求**")
-        st.caption("「基础要求」是大多数岗位都写的（如 Office），区分不出人，不参与排序。可以在最后一行添加 JD 没写但你们看重的能力。")
+        st.markdown("**能力要求**", help="「基础要求」是大多数岗位都写的（如 Office），区分不出人，不参与排序。"
+                                         "可以在最后一行添加 JD 没写但你们看重的能力。")
         reqs = st.data_editor(
             pd.DataFrame([{"名称": r["名称"], "类别": "基础要求" if r["基础要求"] else ("必须" if r["必须"] else "加分"),
                            "程度": r["程度"], "领域": r["领域"]} for r in base["要求"]]),
@@ -319,7 +274,7 @@ def _edit_form(kb):
                            "领域": st.column_config.TextColumn(disabled=True, help="由能力词典自动归类")},
             hide_index=True, num_rows="dynamic", key=f"reqs{fid}")
         names = [n for n, k in zip(reqs["名称"], reqs["类别"]) if isinstance(n, str) and n.strip() and k != "基础要求"]
-        top = st.multiselect("最看重（按选择顺序，最多 3 项）— 决定阅读顺序", names,
+        top = st.multiselect("最看重（最多 3 项）", names, help="决定阅读顺序，按选择的先后",
                              default=[n for n in base["最看重"] if n in names], max_selections=3, key=f"top{fid}")
 
         c1, c2 = st.columns(2)
@@ -330,8 +285,8 @@ def _edit_form(kb):
             "素质", QUALITIES, default=[q["素质"] for q in base["素质"]], key=f"qualities{fid}",
             help=f"简历能看出的（{'、'.join(sorted(RESUME_JUDGEABLE))}）只用于排序参考；其余需面试考察")
 
-        st.markdown("**补充条件** — JD 没写、但你们看重的")
-        st.caption("默认算加分，勾选「必须」才当门槛。性别、年龄、婚育、籍贯等不能作为筛选条件，这里不提供。")
+        st.markdown("**补充条件**", help="JD 没写、但你们看重的。默认算加分，勾选「必须」才当门槛。"
+                                         "性别、年龄、婚育、籍贯等不能作为筛选条件，这里不提供。")
         extras = st.data_editor(
             pd.DataFrame([{"类型": c["类型"], "内容": c["值"], "必须": c["必须"]} for c in base["补充条件"]],
                          columns=["类型", "内容", "必须"]),
@@ -352,7 +307,7 @@ def _edit_form(kb):
         if not req["最看重"]:
             st.caption("请至少选择 1 项「最看重」")
         elif state.get("req") == req:
-            st.success("已确认。修改后需要重新点「确认」。")
+            st.success("已确认")
 
 
 def _list_input(col, label, value, fid):
@@ -402,29 +357,24 @@ def _safe(name):
 
 def step_resumes(kb, llm):
     state = st.session_state
-    ui.section(2, "简历", "支持 PDF、Word（.docx）、TXT 和图片，可一次选多份。", "step-resumes")
     c1, c2 = st.columns([3, 2])
-    uploads = c1.file_uploader("上传简历（可多选）", type=UPLOAD_TYPES, accept_multiple_files=True,
-                               help="支持 PDF、Word（.docx）、TXT 和图片")
+    uploads = c1.file_uploader("上传简历", type=UPLOAD_TYPES, accept_multiple_files=True,
+                               help="PDF、Word（.docx）、TXT 或图片，可多选")
     with c2:
-        use_samples = st.toggle(f"加入示例简历（虚构，{len(RESUME_SAMPLES)} 份）")
-        st.caption("隐私：本站不保存简历和分析结果，关掉页面就消失；请不要上传未经本人同意的简历。" if PUBLIC else
-                   f"隐私：发送给 AI 前会去掉手机号、邮箱、身份证号；上传的文件分析完即删除，"
-                   f"AI 提取的结果缓存在本机，{RESUME_CACHE_DAYS} 天后自动删除（左侧可随时清除）。")
+        use_samples = st.toggle(f"加入示例简历（{len(RESUME_SAMPLES)} 份，虚构）")
     items = [(f.name, f.getvalue()) for f in uploads or []]
     if use_samples:
         items += [(p.name, p.read_bytes()) for p in RESUME_SAMPLES]
 
     too_many = PUBLIC and len(items) > MAX_PUBLIC_UPLOADS
-    if st.button(f"开始分析 {len(items)} 份简历" if items else "开始分析", type="primary",
-                 disabled=not (items and llm) or too_many):
+    if st.button(f"开始分析 {len(items)} 份" if items else "开始分析", type="primary",
+                 disabled=not (items and llm) or too_many,
+                 help=None if llm else "需要在右上角「设置」里连接 API Key；也可以回到首页看演示"):
         state.selected = _analyze(items, kb, llm)
-    if not llm:
-        st.caption("分析简历需要 API Key（在左侧填写）；没有 Key 可以点页面上方的「看演示」。")
-    elif not items:
-        st.caption("请上传简历，或打开「加入示例简历」。")
-    elif too_many:
-        st.caption(f"在线版一次最多分析 {MAX_PUBLIC_UPLOADS} 份；份数多时请下载代码在自己电脑上运行。")
+        state.goto = PAGES[2]
+        st.rerun()
+    if too_many:
+        st.caption(f"在线版一次最多 {MAX_PUBLIC_UPLOADS} 份")
 
 
 def _analyze(items, kb, llm):
@@ -460,11 +410,9 @@ def _analyze(items, kb, llm):
 
 def step_results(kb):
     state = st.session_state
-    ui.section(3, "排序和阅读队列", "总览不需要 JD；确认了岗位要求的话，还有阅读队列和理由。", "step-results")
     keys = state.get("selected")
     if not keys:
-        ui.empty_state("📊", "还没有结果",
-                       "分析完简历后，这里会给出排序总览；确认了岗位要求的话，还有阅读队列。没有简历可以先点页面顶部的「看演示」。")
+        ui.empty_state("还没有结果", "上传并分析简历后显示")
         return
     items = [state.analyses[k] for k in keys]
     for a in items:
@@ -472,14 +420,14 @@ def step_results(kb):
             st.error(f"无法分析：{a['name']}：{a['error']}")
     profiles = [a["profile"] for a in items if "profile" in a]
     reports = {a["name"]: a for a in items if "report" in a}   # 文件名 → 分析结果（完整分析用）
-    tab1, tab2 = st.tabs(["📊 总览排序", "🎯 阅读队列（需要岗位要求）"])
+    tab1, tab2 = st.tabs(["总览", "阅读队列"])
     with tab1:
         _overview(profiles, reports, kb)
     with tab2:
         if state.get("req"):
             _queues(profiles, reports, kb)
         else:
-            st.info("在第 ① 步导入并确认岗位要求后，这里会按「谁做过这个岗位要做的事」给出阅读队列和理由。")
+            ui.empty_state("需要岗位要求", "在「岗位要求」里导入并确认 JD 后显示")
 
 
 def _overview(profiles, reports, kb):
@@ -487,27 +435,25 @@ def _overview(profiles, reports, kb):
     req = state.get("req")
     options = [d for d in overview.DIMENSIONS if d != "岗位匹配" or req]
     c1, c2 = st.columns([3, 2])
-    dims = c1.multiselect("分层依据（建议 2～3 项）", options, default=list(overview.DEFAULT_DIMENSIONS), key="ov_dims",
+    dims = c1.multiselect("分层依据", options, default=list(overview.DEFAULT_DIMENSIONS), key="ov_dims",
                           help="只有在所选每一项上都不比别人差、且至少一项更好，才排在前面；否则各有所长，放在同一层。"
                                "选择的先后不影响结果。「学历」更适合当门槛（在下面的硬性要求里设）；「岗位匹配」需要先确认岗位要求")
-    mode = c2.radio("学校层次看哪一段", overview.SCHOOL_MODES, horizontal=True, key="ov_mode",
+    mode = c2.radio("学校看哪一段", overview.SCHOOL_MODES, horizontal=True, key="ov_mode",
                     help="读过硕士的人有两段学校。先看的一段决定层次，另一段在相同时再比较")
-    with st.expander("硬性要求（只筛选，不排序）"):
+    with st.expander("硬性要求"):
         f1, f2, f3, f4 = st.columns(4)
         degree = f1.selectbox("最低学历", ["不限", *overview.DEGREES], key="ov_degree")
         school = f2.selectbox("院校层次", list(overview.SCHOOL_LIMITS), key="ov_school", help="按上面选的「看哪一段」判断")
-        majors = f3.text_input("专业包含（用「、」分开）", key="ov_major", placeholder="例如：统计、计算机")
-        certs = f4.text_input("证书（用「、」分开）", key="ov_cert", placeholder="例如：英语六级")
-        st.caption("不符合的单独列在表格下方；简历里没写要求的证书也算不符合。学历是推断的只标「待确认」，不会被排除。"
-                   "性别、年龄等不能作为筛选条件，这里不提供。")
+        majors = f3.text_input("专业包含", key="ov_major", placeholder="统计、计算机")
+        certs = f4.text_input("证书", key="ov_cert", placeholder="英语六级",
+                              help="只筛选、不排序。没写要求的证书算不符合；推断的学历只标「待确认」。不提供性别、年龄等条件。")
     filters = {"最低学历": degree, "院校": school, "专业": _split(majors), "证书": _split(certs)}
     ranked, failed, abnormal = overview.rank(profiles, dims, mode, filters, req, kb)
     # 设了硬性要求就在表格上方说清楚结果，不然不符合的人折叠在下面，看起来像"没反应"
     text = "；".join(f"{k}：{'、'.join(v) if isinstance(v, list) else v}" for k, v in filters.items() if v and v != "不限")
     if text:
         (st.warning if failed else st.success)(
-            f"硬性要求（{text}）：**{len(ranked)} 人符合**" + (f"，**{len(failed)} 人不符合**（列在表格下方）" if failed else "，全部符合"),
-            icon="🔎")
+            f"{text}：{len(ranked)} 人符合" + (f"，{len(failed)} 人不符合（见表格下方）" if failed else ""))
 
     if ranked:
         columns = ["层", "简历", "为什么", *dims,
@@ -515,12 +461,12 @@ def _overview(profiles, reports, kb):
         table = pd.DataFrame([{**{c: r.get(c, "") for c in columns}, "简历": Path(r["文件"]).stem,
                                "待确认": "；".join(r["待确认"])} for r in ranked], columns=columns)
         # 按层交替底色：底色相同、连在一起的是同一层，层内不分先后
-        shade = lambda row: ["background-color: #F5F7FA" if row["层"] % 2 == 0 else ""] * len(row)
+        shade = lambda row: ["background-color: #F7F8FA" if row["层"] % 2 == 0 else ""] * len(row)
         layers = ranked[-1]["层"]
         first = sum(r["层"] == 1 for r in ranked)
-        st.caption(f"共 {len(ranked)} 人，分成 {layers} 层。{screening.LAYER_RULE}。点选一行，下方显示这个人的完整分析。")
+        st.markdown(f"**{len(ranked)} 人 · {layers} 层**", help=f"{screening.LAYER_RULE}。点选一行查看完整分析。")
         if len(ranked) >= 4 and first * 2 > len(ranked):
-            st.info(f"第 1 层有 {first} / {len(ranked)} 人：勾选的项越多，各有所长的人就越多。想分得更清楚，可以减少到 2～3 项。", icon="💡")
+            st.caption(f"第 1 层有 {first} 人，可以减少分层依据")
         event = st.dataframe(table.style.apply(shade, axis=1), hide_index=True, on_select="rerun",
                              selection_mode="single-row", key="ov_table",
                              column_config={"层": st.column_config.NumberColumn(width="small"),
@@ -541,9 +487,8 @@ def _overview(profiles, reports, kb):
                 st.markdown(f"- **{Path(r['文件']).stem}**：{'；'.join(r['不符'])}")
     for r in abnormal:
         st.warning(f"{r['文件']}：{'；'.join(r['解析异常'])}，请直接打开原文件查看", icon="⚠️")
-    st.download_button("下载总览表格（CSV，Excel 可直接打开）", screening.overview_csv(ranked, failed, abnormal).encode("utf-8-sig"),
-                       file_name="简历总览.csv", mime="text/csv", key="ov_csv")
-    st.caption("档位来自简历里写明的证据：没写 ≠ 不会；通用素质是证据强度，不代表素质高低。" + screening.COMPLIANCE)
+    st.download_button("导出 CSV", screening.overview_csv(ranked, failed, abnormal).encode("utf-8-sig"),
+                       file_name="简历总览.csv", mime="text/csv", key="ov_csv", icon=":material/download:")
 
 
 def _split(text):
@@ -557,16 +502,16 @@ def _queues(profiles, reports, kb):
     for col, queue in zip(cols, match.QUEUES):
         col.metric(f":{QUEUE_STYLE[queue][0]}-badge[{queue}]", f"{sum(r['队列'] == queue for r in results)} 人", border=True)
     for h in hints:
-        st.info(h, icon="💡")
-    st.caption("证据强度：● 在实习 / 项目 / 校园经历里做过　◐ 只在技能栏自述或学过课程　○ 简历没体现（不等于不会）")
+        st.caption(h)
+    st.caption("● 做过　◐ 自述 / 课程　○ 没体现")
 
     for queue in match.QUEUES:
         group = [r for r in results if r["队列"] == queue]
         if not group:
             continue
         color, meaning = QUEUE_STYLE[queue]
-        st.markdown(f"### :{color}-badge[{queue}] {len(group)} 人")
-        st.caption(meaning + ("；按证据强弱排列" if queue in screening.RANKED else ""))
+        st.markdown(f"#### :{color}-badge[{queue}] {len(group)} 人",
+                    help=meaning + ("；按证据强弱排列" if queue in screening.RANKED else ""))
         # 前两个队列直接展开理由；后面的收起来，需要时再看
         if queue in ("优先看", "值得看"):
             for i, r in enumerate(group):
@@ -576,9 +521,8 @@ def _queues(profiles, reports, kb):
                 for i, r in enumerate(group):
                     _card(r, reports, f"{queue}{i}")
 
-    st.download_button("下载结果表格（CSV，Excel 可直接打开）", screening.csv_text(results).encode("utf-8-sig"),
-                       file_name=f"{_safe(req['岗位'])}_筛选结果.csv", mime="text/csv")
-    st.caption(f"{screening.NOTE}　{screening.COMPLIANCE}　{DISCLAIMER}")
+    st.download_button("导出 CSV", screening.csv_text(results).encode("utf-8-sig"),
+                       file_name=f"{_safe(req['岗位'])}_筛选结果.csv", mime="text/csv", icon=":material/download:")
 
 
 def _card(r, reports, key):

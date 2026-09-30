@@ -1,23 +1,20 @@
 [theme]
-# 配色说明见 docs/界面设计方案.md：一个主色（墨蓝）+ 中性灰，其余颜色只用于有固定含义的地方（阅读队列、提示）
+# 克制的企业级配色：近黑色主色 + 中性灰；彩色只用于有固定含义的地方（阅读队列、提示）
 base = "light"
-primaryColor = "#1F4FD1"
+primaryColor = "#111827"
 backgroundColor = "#FFFFFF"
-secondaryBackgroundColor = "#F5F7FA"
+secondaryBackgroundColor = "#F7F8FA"
 textColor = "#111827"
 font = "sans serif"
-headingFontWeights = [700, 700, 600, 600, 600, 600]
+headingFontWeights = [650, 650, 600, 600, 600, 600]
 baseRadius = "medium"
-borderColor = "#E4E7EC"
-dataframeBorderColor = "#E4E7EC"
-dataframeHeaderBackgroundColor = "#F5F7FA"
+borderColor = "#E6E8EC"
+dataframeBorderColor = "#EEF0F3"
+dataframeHeaderBackgroundColor = "#F7F8FA"
 showWidgetBorder = true
-linkColor = "#1F4FD1"
+linkColor = "#111827"
 linkUnderline = false
-metricValueFontSize = "1.75rem"
-
-[theme.sidebar]
-backgroundColor = "#F8FAFC"
+metricValueFontSize = "1.6rem"
 
 [client]
 # 访客看到的右上角菜单只保留查看相关的选项，不显示开发者选项
