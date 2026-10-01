@@ -83,6 +83,8 @@ QUANT_CHANGE = re.compile(r"(提升|提高|降低|减少|缩短|节省|节约|�
 # 本人角色是协助；"辅助""帮助"常用来说产品用途（"辅助 HR 自查"），不算
 ASSIST = re.compile(r"协助|配合")
 OWN = re.compile(r"独立|负责|主导|牵头")
+# 只写"参与"、没写本人做了什么：本人角色不明，第三方无从核实，和"协助"一样最高 1 级
+PARTICIPATE = re.compile(r"参与")
 DATE = re.compile(r"(?:19|20)\d{2}\s*[.\-/年]\s*\d{1,2}")
 
 
@@ -205,8 +207,8 @@ def build_duty(raw, source):
         level = 2
     if level == 2 and not (specifics or re.search(r"\d", body)):
         level = 1
-    # 协助类工作最高 L1
-    if ASSIST.search(body) and not OWN.search(body):
+    # 协助类工作、只写"参与"没写本人负责什么的，最高 L1
+    if (ASSIST.search(body) or PARTICIPATE.search(body)) and not OWN.search(body):
         level = 1
     return {"text": text, "level": level, "result": result}
 

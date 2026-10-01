@@ -53,7 +53,7 @@ tools/                  update_rankings.py、update_companies.py 每年更新；
                         build_job_profiles.py 统计通用岗位画像
 jobs/                   导入 JD 后生成的岗位要求文件
 data/                   爬到的原始 JD（不上传）
-tests/                  回归测试：test_file_reader（读内存 = 读文件）、test_job_form（网页表单，Playwright + Edge，公开模式，不需要 Key）
+tests/                  回归测试：test_file_reader（读内存 = 读文件）、test_duty_level（工作描述定级）、test_job_form（网页表单，Playwright + Edge，公开模式，不需要 Key）
 samples/                虚构样例；samples/test/ 虚构测试集（dev 开发集、holdout 检验集）；samples/jd/ 测试用 JD（24365 公开岗位）
 docs/                   开发说明.md（公开：规则、决定、进度）；设计记录.md、预期结果.md（仅本地，不上传）
 ```
@@ -74,6 +74,7 @@ python tools/crawl_jd.py [--only 岗位]         # 爬取校招 JD（有缓存�
 python tools/build_job_profiles.py            # 用 flash 提取 JD 并统计岗位画像（有缓存）
 python setup_key.py                            # 配置 API Key 和模型
 python tests/test_file_reader.py              # 文件读取回归测试：read_bytes 和 read_file 结果一致（不需要浏览器）
+python tests/test_duty_level.py               # 工作描述定级回归测试（不调用 AI）
 python tests/test_job_form.py                 # 网页岗位要求表单回归测试（Edge 无头；先 pip install -r requirements-dev.txt）
 python tools/update_rankings.py / update_companies.py   # 每年更新排名、公司名单
 ```
