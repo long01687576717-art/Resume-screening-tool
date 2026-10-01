@@ -21,5 +21,8 @@ __pycache__/
 # 测试失败截图
 tests/output/
 
+# 评分者交回的原始评分表（个人作答，只留本机；空白模板 评分表.csv 照常上传）
+samples/test/internship/评分表_*
+
 # Claude Code 本地工作目录（云端任务等自动生成）
 .claude/
