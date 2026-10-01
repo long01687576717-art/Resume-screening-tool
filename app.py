@@ -508,7 +508,9 @@ def _overview(profiles, reports, kb):
         shade = lambda row: ["background-color: #F7F8FA" if row["层"] % 2 == 0 else ""] * len(row)
         layers = ranked[-1]["层"]
         first = sum(r["层"] == 1 for r in ranked)
-        st.markdown(f"**{len(ranked)} 人 · {layers} 层**", help=f"{screening.LAYER_RULE}。点选一行查看完整分析。")
+        # 表头只算参与分层的人；需人工查看的不在表里，写明人数，免得和上传份数对不上
+        extra = f"　:gray[另有 {len(abnormal)} 人需人工查看（见下方）]" if abnormal else ""
+        st.markdown(f"**{len(ranked)} 人 · {layers} 层**{extra}", help=f"{screening.LAYER_RULE}。点选一行查看完整分析。")
         if len(ranked) >= 4 and first * 2 > len(ranked):
             st.caption(f"第 1 层有 {first} 人，可以减少分层依据")
         # 每次打开完整分析后换一个表格编号，清掉选中状态，同一行可以再次点开
